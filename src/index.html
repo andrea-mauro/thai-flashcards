@@ -1,0 +1,1087 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Thai Flashcards</title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            min-height: 100vh;
+            padding: 20px;
+        }
+
+        .container {
+            max-width: 1200px;
+            margin: 0 auto;
+        }
+
+        header {
+            text-align: center;
+            color: white;
+            margin-bottom: 30px;
+        }
+
+        header h1 {
+            font-size: 2.5rem;
+            margin-bottom: 10px;
+            text-shadow: 2px 2px 4px rgba(0,0,0,0.3);
+        }
+
+        header p {
+            font-size: 1.1rem;
+            opacity: 0.9;
+        }
+
+        .mode-selector {
+            display: flex;
+            justify-content: center;
+            gap: 15px;
+            margin-bottom: 25px;
+            flex-wrap: wrap;
+        }
+
+        .mode-btn {
+            padding: 12px 25px;
+            font-size: 1rem;
+            border: none;
+            border-radius: 25px;
+            cursor: pointer;
+            transition: all 0.3s ease;
+            font-weight: 600;
+        }
+
+        .mode-btn.active {
+            background: white;
+            color: #667eea;
+            transform: scale(1.05);
+        }
+
+        .mode-btn:not(.active) {
+            background: rgba(255,255,255,0.2);
+            color: white;
+        }
+
+        .mode-btn:hover {
+            transform: scale(1.05);
+        }
+
+        .category-filter {
+            display: flex;
+            justify-content: center;
+            gap: 10px;
+            margin-bottom: 25px;
+            flex-wrap: wrap;
+        }
+
+        .category-btn {
+            padding: 8px 16px;
+            font-size: 0.9rem;
+            border: 2px solid white;
+            border-radius: 20px;
+            cursor: pointer;
+            transition: all 0.3s ease;
+            background: transparent;
+            color: white;
+        }
+
+        .category-btn.active, .category-btn:hover {
+            background: white;
+            color: #667eea;
+        }
+
+        .stats-bar {
+            background: rgba(255,255,255,0.2);
+            border-radius: 15px;
+            padding: 15px 25px;
+            margin-bottom: 25px;
+            display: flex;
+            justify-content: space-around;
+            flex-wrap: wrap;
+            gap: 15px;
+            color: white;
+        }
+
+        .stat-item {
+            text-align: center;
+        }
+
+        .stat-value {
+            font-size: 1.8rem;
+            font-weight: bold;
+        }
+
+        .stat-label {
+            font-size: 0.85rem;
+            opacity: 0.9;
+        }
+
+        /* Flashcard Styles */
+        .flashcard-container {
+            display: grid;
+            grid-template-columns: repeat(auto-fill, minmax(300px, 1fr));
+            gap: 20px;
+            margin-bottom: 30px;
+        }
+
+        .flashcard {
+            perspective: 1000px;
+            height: 280px;
+            cursor: pointer;
+        }
+
+        .flashcard-inner {
+            position: relative;
+            width: 100%;
+            height: 100%;
+            transition: transform 0.6s;
+            transform-style: preserve-3d;
+        }
+
+        .flashcard.flipped .flashcard-inner {
+            transform: rotateY(180deg);
+        }
+
+        .flashcard-front, .flashcard-back {
+            position: absolute;
+            width: 100%;
+            height: 100%;
+            backface-visibility: hidden;
+            border-radius: 20px;
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+            align-items: center;
+            padding: 20px;
+            box-shadow: 0 10px 30px rgba(0,0,0,0.2);
+        }
+
+        .flashcard-front {
+            background: white;
+        }
+
+        .flashcard-back {
+            background: linear-gradient(135deg, #f5f7fa 0%, #c3cfe2 100%);
+            transform: rotateY(180deg);
+        }
+
+        .thai-text {
+            font-size: 2.5rem;
+            color: #c0392b;
+            margin-bottom: 15px;
+            text-align: center;
+        }
+
+        .card-number {
+            position: absolute;
+            top: 15px;
+            left: 15px;
+            background: #667eea;
+            color: white;
+            width: 35px;
+            height: 35px;
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-weight: bold;
+            font-size: 0.9rem;
+        }
+
+        .card-category {
+            position: absolute;
+            top: 15px;
+            right: 15px;
+            background: rgba(102, 126, 234, 0.2);
+            color: #667eea;
+            padding: 5px 12px;
+            border-radius: 15px;
+            font-size: 0.75rem;
+            font-weight: 600;
+        }
+
+        .english-text {
+            font-size: 1.2rem;
+            color: #2c3e50;
+            text-align: center;
+            margin-bottom: 10px;
+        }
+
+        .romanization {
+            font-size: 1.1rem;
+            color: #8e44ad;
+            font-style: italic;
+            margin-bottom: 15px;
+            text-align: center;
+        }
+
+        .audio-btn {
+            background: #27ae60;
+            color: white;
+            border: none;
+            width: 50px;
+            height: 50px;
+            border-radius: 50%;
+            cursor: pointer;
+            font-size: 1.3rem;
+            transition: all 0.3s ease;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+        }
+
+        .audio-btn:hover {
+            background: #219a52;
+            transform: scale(1.1);
+        }
+
+        .audio-btn.playing {
+            animation: pulse 1s infinite;
+        }
+
+        @keyframes pulse {
+            0%, 100% { transform: scale(1); }
+            50% { transform: scale(1.15); }
+        }
+
+        .difficulty-buttons {
+            display: flex;
+            gap: 10px;
+            margin-top: 15px;
+        }
+
+        .diff-btn {
+            padding: 8px 20px;
+            border: none;
+            border-radius: 20px;
+            cursor: pointer;
+            font-weight: 600;
+            transition: all 0.3s ease;
+        }
+
+        .diff-btn.easy {
+            background: #27ae60;
+            color: white;
+        }
+
+        .diff-btn.hard {
+            background: #e74c3c;
+            color: white;
+        }
+
+        .diff-btn:hover {
+            transform: scale(1.05);
+        }
+
+        /* Quiz Mode Styles */
+        .quiz-container {
+            max-width: 600px;
+            margin: 0 auto;
+            background: white;
+            border-radius: 20px;
+            padding: 40px;
+            box-shadow: 0 10px 40px rgba(0,0,0,0.3);
+        }
+
+        .quiz-question {
+            text-align: center;
+            margin-bottom: 30px;
+        }
+
+        .quiz-thai {
+            font-size: 3rem;
+            color: #c0392b;
+            margin-bottom: 20px;
+        }
+
+        .quiz-input {
+            width: 100%;
+            padding: 15px;
+            font-size: 1.2rem;
+            border: 3px solid #ddd;
+            border-radius: 10px;
+            margin-bottom: 20px;
+            text-align: center;
+        }
+
+        .quiz-input:focus {
+            outline: none;
+            border-color: #667eea;
+        }
+
+        .quiz-input.correct {
+            border-color: #27ae60;
+            background: #d5f5e3;
+        }
+
+        .quiz-input.incorrect {
+            border-color: #e74c3c;
+            background: #fadbd8;
+        }
+
+        .quiz-feedback {
+            text-align: center;
+            font-size: 1.3rem;
+            font-weight: bold;
+            margin-bottom: 20px;
+            min-height: 30px;
+        }
+
+        .quiz-feedback.correct {
+            color: #27ae60;
+        }
+
+        .quiz-feedback.incorrect {
+            color: #e74c3c;
+        }
+
+        .quiz-btn {
+            width: 100%;
+            padding: 15px;
+            font-size: 1.1rem;
+            border: none;
+            border-radius: 10px;
+            cursor: pointer;
+            font-weight: 600;
+            transition: all 0.3s ease;
+        }
+
+        .quiz-btn.check {
+            background: #667eea;
+            color: white;
+        }
+
+        .quiz-btn.next {
+            background: #27ae60;
+            color: white;
+            display: none;
+        }
+
+        .quiz-btn:hover {
+            transform: scale(1.02);
+        }
+
+        .quiz-hint {
+            text-align: center;
+            color: #7f8c8d;
+            font-size: 0.95rem;
+            margin-top: 15px;
+        }
+
+        .progress-bar {
+            width: 100%;
+            height: 10px;
+            background: #ecf0f1;
+            border-radius: 5px;
+            margin-bottom: 20px;
+            overflow: hidden;
+        }
+
+        .progress-fill {
+            height: 100%;
+            background: linear-gradient(90deg, #667eea, #764ba2);
+            transition: width 0.3s ease;
+        }
+
+        /* Controls */
+        .controls {
+            display: flex;
+            justify-content: center;
+            gap: 15px;
+            margin-bottom: 25px;
+            flex-wrap: wrap;
+        }
+
+        .control-btn {
+            padding: 10px 20px;
+            background: rgba(255,255,255,0.2);
+            color: white;
+            border: 2px solid white;
+            border-radius: 20px;
+            cursor: pointer;
+            transition: all 0.3s ease;
+            font-weight: 600;
+        }
+
+        .control-btn:hover {
+            background: white;
+            color: #667eea;
+        }
+
+        .shuffle-btn {
+            background: #f39c12;
+            border-color: #f39c12;
+        }
+
+        .shuffle-btn:hover {
+            color: white;
+        }
+
+        /* Responsive */
+        @media (max-width: 768px) {
+            header h1 {
+                font-size: 1.8rem;
+            }
+
+            .flashcard-container {
+                grid-template-columns: 1fr;
+            }
+
+            .thai-text {
+                font-size: 2rem;
+            }
+
+            .quiz-thai {
+                font-size: 2.5rem;
+            }
+        }
+
+        /* Toast notification */
+        .toast {
+            position: fixed;
+            bottom: 30px;
+            left: 50%;
+            transform: translateX(-50%) translateY(100px);
+            background: #2c3e50;
+            color: white;
+            padding: 15px 30px;
+            border-radius: 10px;
+            opacity: 0;
+            transition: all 0.3s ease;
+            z-index: 1000;
+        }
+
+        .toast.show {
+            transform: translateX(-50%) translateY(0);
+            opacity: 1;
+        }
+
+        /* Settings panel */
+        .settings-panel {
+            background: white;
+            border-radius: 15px;
+            padding: 20px;
+            margin-bottom: 25px;
+        }
+
+        .settings-panel h3 {
+            color: #2c3e50;
+            margin-bottom: 15px;
+        }
+
+        .setting-row {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            padding: 10px 0;
+            border-bottom: 1px solid #eee;
+        }
+
+        .setting-row:last-child {
+            border-bottom: none;
+        }
+
+        .toggle-switch {
+            position: relative;
+            width: 60px;
+            height: 30px;
+        }
+
+        .toggle-switch input {
+            opacity: 0;
+            width: 0;
+            height: 0;
+        }
+
+        .toggle-slider {
+            position: absolute;
+            cursor: pointer;
+            top: 0;
+            left: 0;
+            right: 0;
+            bottom: 0;
+            background-color: #ccc;
+            transition: 0.4s;
+            border-radius: 30px;
+        }
+
+        .toggle-slider:before {
+            position: absolute;
+            content: "";
+            height: 22px;
+            width: 22px;
+            left: 4px;
+            bottom: 4px;
+            background-color: white;
+            transition: 0.4s;
+            border-radius: 50%;
+        }
+
+        input:checked + .toggle-slider {
+            background-color: #667eea;
+        }
+
+        input:checked + .toggle-slider:before {
+            transform: translateX(30px);
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <header>
+            <h1>🇹🇭 Thai Flashcards</h1>
+            <p>Learn Thai vocabulary and phrases</p>
+        </header>
+
+        <div class="mode-selector">
+            <button class="mode-btn active" data-mode="flashcards">📇 Flashcards</button>
+            <button class="mode-btn" data-mode="quiz">✏️ Quiz Mode</button>
+        </div>
+
+        <div class="category-filter" id="categoryFilter">
+            <button class="category-btn active" data-category="all">All</button>
+            <button class="category-btn" data-category="introduction">Introduction</button>
+            <button class="category-btn" data-category="family">Family</button>
+            <button class="category-btn" data-category="routine">Daily Routine</button>
+            <button class="category-btn" data-category="technology">Technology</button>
+            <button class="category-btn" data-category="pets">Pets & Animals</button>
+            <button class="category-btn" data-category="kitchen">Kitchen</button>
+            <button class="category-btn" data-category="bathroom">Bathroom</button>
+            <button class="category-btn" data-category="travel">Travel</button>
+        </div>
+
+        <div class="stats-bar">
+            <div class="stat-item">
+                <div class="stat-value" id="totalCards">0</div>
+                <div class="stat-label">Total Cards</div>
+            </div>
+            <div class="stat-item">
+                <div class="stat-value" id="learnedCards">0</div>
+                <div class="stat-label">Learned</div>
+            </div>
+            <div class="stat-item">
+                <div class="stat-value" id="streakCount">0</div>
+                <div class="stat-label">Day Streak</div>
+            </div>
+            <div class="stat-item">
+                <div class="stat-value" id="accuracyRate">0%</div>
+                <div class="stat-label">Accuracy</div>
+            </div>
+        </div>
+
+        <div class="controls">
+            <button class="control-btn shuffle-btn" id="shuffleBtn">🔀 Shuffle</button>
+            <button class="control-btn" id="resetBtn">🔄 Reset Progress</button>
+            <button class="control-btn" id="settingsBtn">⚙️ Settings</button>
+        </div>
+
+        <div id="flashcardsView">
+            <div class="flashcard-container" id="flashcardContainer"></div>
+        </div>
+
+        <div id="quizView" style="display: none;">
+            <div class="quiz-container">
+                <div class="progress-bar">
+                    <div class="progress-fill" id="quizProgress" style="width: 0%"></div>
+                </div>
+                <div class="quiz-question">
+                    <div class="quiz-thai" id="quizThai"></div>
+                    <div class="quiz-feedback" id="quizFeedback"></div>
+                </div>
+                <input type="text" class="quiz-input" id="quizInput" placeholder="Type the romanization..." autocomplete="off">
+                <button class="quiz-btn check" id="quizCheckBtn">Check Answer</button>
+                <button class="quiz-btn next" id="quizNextBtn">Next →</button>
+                <div class="quiz-hint" id="quizHint"></div>
+            </div>
+        </div>
+    </div>
+
+    <div class="toast" id="toast"></div>
+
+    <script>
+        // Thai Flashcard Data with Romanization (including tone markers)
+        // Tone markers: á (high), à (low/mid), ǎ (rising), â (falling), a (mid)
+        const flashcardData = [
+            // Introduction (1-20)
+            { id: 1, thai: "ฉันชื่อ", romanization: "chǎn chûu", english: "I am (your name) / My name is", category: "introduction" },
+            { id: 2, thai: "ฉันมาจากประเทศไทย", romanization: "chǎn maa jàak bprà-têet tai", english: "I'm from Thailand", category: "introduction" },
+            { id: 3, thai: "ฉันอาศัยอยู่ในกรุงเทพฯ", romanization: "chǎn aa-sǐi yùu nai grung-têp", english: "I live in Bangkok", category: "introduction" },
+            { id: 4, thai: "ฉันเกิดที่นี่", romanization: "chǎn gèrt tîi nîi", english: "I was born here", category: "introduction" },
+            { id: 5, thai: "ฉันเป็นนักเรียน", romanization: "chǎn bpen nak-rian", english: "I am a student", category: "introduction" },
+            { id: 6, thai: "ฉันเป็นครู", romanization: "chǎn bpen kruu", english: "I am a teacher", category: "introduction" },
+            { id: 7, thai: "ฉันทำงานด้านไอที", romanization: "chǎn tam-ngaan dâan ai-tîi", english: "I work in IT", category: "introduction" },
+            { id: 8, thai: "ฉันเป็นหมอ", romanization: "chǎn bpen mɔ̌ɔ", english: "I am a doctor", category: "introduction" },
+            { id: 9, thai: "ฉันเป็นวิศวกร", romanization: "chǎn bpen wít-sà-wá-gɔɔn", english: "I am an engineer", category: "introduction" },
+            { id: 10, thai: "ฉันอายุ 25 ปี", romanization: "chǎn aa-yú sɔ̌ɔng-sìp hâa bpii", english: "I am 25 years old", category: "introduction" },
+            { id: 11, thai: "ฉันเรียนภาษาอังกฤษทุกวัน", romanization: "chǎn rian paa-sǎa ang-grìt túk wan", english: "I study English daily", category: "introduction" },
+            { id: 12, thai: "ฉันทำงานที่ธนาคาร", romanization: "chǎn tam-ngaan tîi tá-naa-kaan", english: "I work at a bank", category: "introduction" },
+            { id: 13, thai: "ฉันกำลังเรียนภาษาอังกฤษ", romanization: "chǎn gam-lang rian paa-sǎa ang-grìt", english: "I am learning English", category: "introduction" },
+            { id: 14, thai: "ฉันพูดภาษาอังกฤษได้คล่อง", romanization: "chǎn pûut paa-sǎa ang-grìt dâi klɔ̂ɔng", english: "I speak English fluently", category: "introduction" },
+            { id: 15, thai: "ฉันพูดได้สองภาษา", romanization: "chǎn pûut dâi sɔ̌ɔng paa-sǎa", english: "I can speak two languages", category: "introduction" },
+            { id: 16, thai: "ฉันชอบเรียนภาษา", romanization: "chǎn chɔ̂ɔp rian paa-sǎa", english: "I love learning languages", category: "introduction" },
+            { id: 17, thai: "ฉันทำงานที่บ้าน", romanization: "chǎn tam-ngaan tîi bâan", english: "I work from home", category: "introduction" },
+            { id: 18, thai: "ฉันรักงานของฉัน", romanization: "chǎn rák ngaan kɔ̌ɔng chǎn", english: "I love my job", category: "introduction" },
+            { id: 19, thai: "ฉันมีธุรกิจของตัวเอง", romanization: "chǎn mii tú-rá-gìt kɔ̌ɔng dtua-eeng", english: "I have my own business", category: "introduction" },
+
+            // Family & Hobbies (21-40)
+            { id: 20, thai: "ฉันมีพี่น้องสองคน", romanization: "chǎn mii pîi-nɔ́ɔng sɔ̌ɔng kon", english: "I have two siblings", category: "family" },
+            { id: 21, thai: "ฉันมีพี่ชายหนึ่งคน", romanization: "chǎn mii pîi-chaai nùeng kon", english: "I have one brother (older)", category: "family" },
+            { id: 22, thai: "ฉันมีพี่สาวหนึ่งคน", romanization: "chǎn mii pîi-sǎao nùeng kon", english: "I have one sister (older)", category: "family" },
+            { id: 23, thai: "ฉันอาศัยอยู่กับพ่อแม่", romanization: "chǎn aa-sǐi yùu gàp pɔ̂ɔ-mâe", english: "I live with my parents", category: "family" },
+            { id: 24, thai: "ฉันมีครอบครัวใหญ่", romanization: "chǎn mii khrɔ̂ɔp-khrua yài", english: "I have a big family", category: "family" },
+            { id: 25, thai: "พ่อแม่ของฉันเป็นครู", romanization: "pɔ̂ɔ-mâe kɔ̌ɔng chǎn bpen kruu", english: "My parents are teachers", category: "family" },
+            { id: 26, thai: "ฉันมีลูกสองคน", romanization: "chǎn mii lûuk sɔ̌ɔng kon", english: "I have two kids", category: "family" },
+            { id: 27, thai: "ฉันรักครอบครัวของฉัน", romanization: "chǎn rák khrɔ̂ɔp-khrua kɔ̌ɔng chǎn", english: "I love my family", category: "family" },
+            { id: 28, thai: "ฉันแต่งงานแล้ว", romanization: "chǎn dtàeng-ngaan láew", english: "I am married", category: "family" },
+            { id: 29, thai: "ฉันโสด", romanization: "chǎn sòot", english: "I am single", category: "family" },
+            { id: 30, thai: "ฉันชอบอ่านหนังสือ", romanization: "chǎn chɔ̂ɔp àan nǎng-sǔu", english: "I love reading books", category: "family" },
+            { id: 31, thai: "ฉันชอบดูหนัง", romanization: "chǎn chɔ̂ɔp duu nǎng", english: "I like watching movies", category: "family" },
+            { id: 32, thai: "ฉันสนุกกับการเล่นเกม", romanization: "chǎn sanùk gàp gaan lên geem", english: "I enjoy playing games", category: "family" },
+            { id: 33, thai: "ฉันชอบทำอาหาร", romanization: "chǎn chɔ̂ɔp tam aa-hǎan", english: "I like cooking food", category: "family" },
+            { id: 34, thai: "ฉันชอบวาดภาพ", romanization: "chǎn chɔ̂ɔp wâat pâap", english: "I enjoy drawing pictures", category: "family" },
+            { id: 35, thai: "ฉันเล่นกีตาร์บางครั้ง", romanization: "chǎn lên gii-dtâa baang khráng", english: "I play guitar sometimes", category: "family" },
+            { id: 36, thai: "ฉันชอบเดินทางไปต่างประเทศ", romanization: "chǎn chɔ̂ɔp dəən-taang bpai dtàang bprà-têet", english: "I love traveling abroad", category: "family" },
+            { id: 37, thai: "ฉันชอบกิจกรรมกลางแจ้ง", romanization: "chǎn chɔ̂ɔp gìt-jà-gràm glaang-jâeng", english: "I enjoy outdoor activities", category: "family" },
+            { id: 38, thai: "ฉันชอบถ่ายรูป", romanization: "chǎn chɔ̂ɔp tàai rûup", english: "I love taking photos", category: "family" },
+            { id: 39, thai: "ฉันฝึกโยคะทุกวัน", romanization: "chǎn fùk yoo-gá túk wan", english: "I practice yoga daily", category: "family" },
+
+            // Daily Routine & Travel (41-60)
+            { id: 40, thai: "ฉันตื่นแต่เช้า", romanization: "chǎn dtùèn dtàe cháo", english: "I wake up early", category: "routine" },
+            { id: 41, thai: "ฉันเข้านอนตอน 4 ทุ่ม", romanization: "chǎn kâo nɔɔn dtaawn sìi tûm", english: "I sleep at 10 PM", category: "routine" },
+            { id: 42, thai: "ฉันออกกำลังกายทุกวัน", romanization: "chǎn òɔk gam-lang-gaai túk wan", english: "I exercise every day", category: "routine" },
+            { id: 43, thai: "ฉันกินอาหารเพื่อสุขภาพ", romanization: "chǎn gin aa-hǎan pûea sùk-kà-pâap", english: "I eat healthy food", category: "routine" },
+            { id: 44, thai: "ฉันดื่มกาแฟทุกวัน", romanization: "chǎn dèum gaa-fae túk wan", english: "I drink coffee daily", category: "routine" },
+            { id: 45, thai: "ฉันชอบชามากกว่ากาแฟ", romanization: "chǎn chɔ̂ɔp chaa mâak gwàa gaa-fae", english: "I prefer tea over coffee", category: "routine" },
+            { id: 46, thai: "ฉันชอบอาหารเผ็ด", romanization: "chǎn chɔ̂ɔp aa-hǎan pèt", english: "I love spicy food", category: "routine" },
+            { id: 47, thai: "ฉันไม่ชอบอาหารจานด่วน", romanization: "chǎn mâi chɔ̂ɔp aa-hǎan jaan dùan", english: "I don't like fast food", category: "routine" },
+            { id: 48, thai: "ฉันชอบทำอาหารที่บ้าน", romanization: "chǎn chɔ̂ɔp tam aa-hǎan tîi bâan", english: "I love cooking at home", category: "routine" },
+            { id: 49, thai: "ฉันเดินไปทำงาน", romanization: "chǎn dəən bpai tam-ngaan", english: "I walk to work", category: "routine" },
+            { id: 50, thai: "ฉันเดินทางบ่อย", romanization: "chǎn dəən-taang bɔ̀ɔi", english: "I travel a lot", category: "routine" },
+            { id: 51, thai: "ฉันชอบไปเที่ยวทะเล", romanization: "chǎn chɔ̂ɔp bpai tîao tá-lee", english: "I love visiting beaches", category: "routine" },
+            { id: 52, thai: "ฉันชอบภูเขามากกว่า", romanization: "chǎn chɔ̂ɔp pûu-khǎo mâak gwàa", english: "I prefer mountains more", category: "routine" },
+            { id: 53, thai: "ฉันชอบขับรถเที่ยว", romanization: "chǎn chɔ̂ɔp kàp rót tîao", english: "I enjoy road trips", category: "routine" },
+            { id: 54, thai: "ฉันขึ้นรถเมลล์ทุกวัน", romanization: "chǎn kûn rót-mee túk wan", english: "I take the bus daily", category: "routine" },
+            { id: 55, thai: "ฉันขี่มอเตอร์ไซค์", romanization: "chǎn khìi mó-dtəə-sai", english: "I ride a motorcycle", category: "routine" },
+            { id: 56, thai: "ฉันขับรถ", romanization: "chǎn kàp rót", english: "I drive a car", category: "routine" },
+            { id: 57, thai: "ฉันใช้ขนส่งสาธารณะ", romanization: "chǎn chái kǒng-sǒng sǎa-tá-ra-ná", english: "I use public transport", category: "routine" },
+            { id: 58, thai: "ฉันขึ้นรถไฟบ่อย", romanization: "chǎn kûn rót-fai bɔ̀ɔi", english: "I take a train often", category: "routine" },
+            { id: 59, thai: "ฉันชอบเดินทางไปต่างประเทศ", romanization: "chǎn chɔ̂ɔp dəən-taang bpai dtàang bprà-têet", english: "I love flying abroad", category: "routine" },
+
+            // Technology & Personality (61-80)
+            { id: 60, thai: "ฉันทำงานกับคอมพิวเตอร์", romanization: "chǎn tam-ngaan gàp kom-píw-dtəə", english: "I work with computers", category: "technology" },
+            { id: 61, thai: "ฉันใช้แล็ปท็อปทุกวัน", romanization: "chǎn chái láép-tɔ́p túk wan", english: "I use a laptop daily", category: "technology" },
+            { id: 62, thai: "ฉันชอบโซเชียลมีเดีย", romanization: "chǎn chɔ̂ɔp soh-chîal mii-dîa", english: "I love social media", category: "technology" },
+            { id: 63, thai: "ฉันเล่นอินสตาแกรมบ่อย", romanization: "chǎn lên in-sà-dtà-graem bɔ̀ɔi", english: "I use Instagram often", category: "technology" },
+            { id: 64, thai: "ฉันดูยูทูปทุกวัน", romanization: "chǎn duu yuu-tûup túk wan", english: "I watch YouTube daily", category: "technology" },
+            { id: 65, thai: "ฉันชอบทวิตเตอร์มากกว่า", romanization: "chǎn chɔ̂ɔp twít-dtəə mâak gwàa", english: "I prefer Twitter more", category: "technology" },
+            { id: 66, thai: "ฉันเล่นติ๊กต็อกบางครั้ง", romanization: "chǎn lên dtík-dtók baang khráng", english: "I use TikTok sometimes", category: "technology" },
+            { id: 67, thai: "ฉันชอบช้อปปิ้งออนไลน์", romanization: "chǎn chɔ̂ɔp chɔ́p-bpîng on-lai", english: "I enjoy online shopping", category: "technology" },
+            { id: 68, thai: "ฉันเล่นเกมออนไลน์", romanization: "chǎn lên geem on-lai", english: "I play games online", category: "technology" },
+            { id: 69, thai: "ฉันทำงานด้านไอทีซัพพอร์ต", romanization: "chǎn tam-ngaan dâan ai-tîi sáp-pɔ̀ɔt", english: "I work in IT support", category: "technology" },
+            { id: 70, thai: "ฉันเป็นคนเป็นมิตร", romanization: "chǎn bpen kon bpen mítr", english: "I am very friendly", category: "technology" },
+            { id: 71, thai: "ฉันเป็นคนเก็บตัว", romanization: "chǎn bpen kon gèp dtua", english: "I am an introvert", category: "technology" },
+            { id: 72, thai: "ฉันเป็นคนชอบสังคม", romanization: "chǎn bpen kon chɔ̂ɔp sǎng-kom", english: "I am an extrovert", category: "technology" },
+            { id: 73, thai: "ฉันเป็นคนอยากรู้อยากเห็น", romanization: "chǎn bpen kon yàak rúu yàak hěn", english: "I am very curious", category: "technology" },
+            { id: 74, thai: "ฉันชอบแก้ปัญหา", romanization: "chǎn chɔ̂ɔp gàe bpan-hǎa", english: "I love solving problems", category: "technology" },
+            { id: 75, thai: "ฉันชอบช่วยเหลือผู้อื่น", romanization: "chǎn chɔ̂ɔp chûai-lʉ̌a pûu-ùen", english: "I like helping people", category: "technology" },
+            { id: 76, thai: "ฉันชอบพบปะผู้คน", romanization: "chǎn chɔ̂ɔp póbp-bpà bpûu-kon", english: "I enjoy meeting people", category: "technology" },
+            { id: 77, thai: "ฉันทำงานหนักมาก", romanization: "chǎn tam-ngaan nàk mâak", english: "I work very hard", category: "technology" },
+            { id: 78, thai: "ฉันเป็นคนอดทน", romanization: "chǎn bpen kon òt-ton", english: "I am very patient", category: "technology" },
+            { id: 79, thai: "ฉันมองโลกในแง่ดีเสมอ", romanization: "chǎn mɔɔng lôok nai ngâe dii sà-məə", english: "I am always positive", category: "technology" },
+
+            // Pets & Animals (81-100)
+            { id: 80, thai: "ฉันมีแมว", romanization: "chǎn mii maew", english: "I have a cat", category: "pets" },
+            { id: 81, thai: "ฉันมีสุนัข", romanization: "chǎn mii sù-nák", english: "I have a dog", category: "pets" },
+            { id: 82, thai: "ฉันรักสัตว์", romanization: "chǎn rák sàt", english: "I love animals", category: "pets" },
+            { id: 83, thai: "ฉันมีสัตว์เลี้ยงสามตัว", romanization: "chǎn mii sàt-líang sǎam dtua", english: "I have three pets", category: "pets" },
+            { id: 84, thai: "ฉันชอบพาสุนัขเดินเล่น", romanization: "chǎn chɔ̂ɔp paa sù-nák dəən lên", english: "I enjoy walking dogs", category: "pets" },
+            { id: 85, thai: "ฉันชอบเลี้ยงปลา", romanization: "chǎn chɔ̂ɔp líang bplaa", english: "I love fish keeping", category: "pets" },
+            { id: 86, thai: "ฉันชอบสุนัขมากกว่า", romanization: "chǎn chɔ̂ɔp sù-nák mâak gwàa", english: "I prefer dogs more", category: "pets" },
+            { id: 87, thai: "ฉันเป็นคนรักแมว", romanization: "chǎn bpen kon rák maew", english: "I am a cat person", category: "pets" },
+            { id: 88, thai: "ฉันชอบให้อาหารนก", romanization: "chǎn chɔ̂ɔp hâi aa-hǎan nók", english: "I love feeding birds", category: "pets" },
+            { id: 89, thai: "ฉันชอบไปสวนสัตว์", romanization: "chǎn chɔ̂ɔp bpai sǔan-sàt", english: "I enjoy visiting zoos", category: "pets" },
+            { id: 90, thai: "ฉันชอบสะสมแสตมป์", romanization: "chǎn chɔ̂ɔp sà-sǒm sà-dtæm", english: "I love collecting stamps", category: "pets" },
+            { id: 91, thai: "ฉันชอบเล่นเกมกระดาน", romanization: "chǎn chɔ̂ɔp lên geem grà-daan", english: "I enjoy board games", category: "pets" },
+            { id: 92, thai: "ฉันฝึกสมาธิ", romanization: "chǎn fùk sà-maa-tí", english: "I practice meditation", category: "pets" },
+            { id: 93, thai: "ฉันชอบทำสวน", romanization: "chǎn chɔ̂ɔp tam sǔan", english: "I enjoy gardening", category: "pets" },
+            { id: 94, thai: "ฉันชอบวาดภาพ", romanization: "chǎn chɔ̂ɔp wâat pâap", english: "I love painting", category: "pets" },
+            { id: 95, thai: "ฉันชอบเขียน", romanization: "chǎn chɔ̂ɔp kǐan", english: "I enjoy writing", category: "pets" },
+            { id: 96, thai: "ฉันชอบที่เงียบๆ", romanization: "chǎn chɔ̂ɔp tîi ngîap-ngîap", english: "I prefer quiet places", category: "pets" },
+            { id: 97, thai: "ฉันชอบคริสต์มาส", romanization: "chǎn chɔ̂ɔp krít-sàt-mâat", english: "I love Christmas", category: "pets" },
+            { id: 98, thai: "ฉันยุ่งตลอดเวลา", romanization: "chǎn yûng dtà-lɔ̀ɔt wee-laa", english: "I am always busy", category: "pets" },
+            { id: 99, thai: "ฉันรักชีวิตของฉัน", romanization: "chǎn rák chii-wít kɔ̌ɔng chǎn", english: "I love my life", category: "pets" },
+
+            // Kitchen Vocabulary
+            { id: 100, thai: "เตาแก๊ส", romanization: "dtao gáés", english: "Gas stove", category: "kitchen" },
+            { id: 101, thai: "กระทะทอด", romanization: "grà-tá tôht", english: "Frying pan", category: "kitchen" },
+            { id: 102, thai: "หม้อ", romanization: "mɔ̂ɔ", english: "Pot", category: "kitchen" },
+            { id: 103, thai: "มีด", romanization: "mîit", english: "Knife", category: "kitchen" },
+            { id: 104, thai: "เขียง", romanization: "kǐang", english: "Cutting board", category: "kitchen" },
+            { id: 105, thai: "ที่ปอกเปลือก", romanization: "tîi bpòk bpùeak", english: "Peeler", category: "kitchen" },
+            { id: 106, thai: "ที่ขูด", romanization: "tîi kùut", english: "Grater", category: "kitchen" },
+            { id: 107, thai: "ตู้เย็น", romanization: "dtûu yen", english: "Refrigerator", category: "kitchen" },
+            { id: 108, thai: "กาต้มน้ำ", romanization: "gaa dtôm náam", english: "Kettle", category: "kitchen" },
+            { id: 109, thai: "เตาอบ", romanization: "dtao òp", english: "Oven", category: "kitchen" },
+            { id: 110, thai: "อ่างล้างจาน", romanization: "àang láang jaan", english: "Sink", category: "kitchen" },
+            { id: 111, thai: "ตะหลิว", romanization: "dtà-lǐu", english: "Spatula", category: "kitchen" },
+            { id: 112, thai: "กระบวย", romanization: "grà-buai", english: "Ladle", category: "kitchen" },
+            { id: 113, thai: "ที่ตีไข่", romanization: "tîi dtìi kài", english: "Whisk", category: "kitchen" },
+            { id: 114, thai: "กระชอน", romanization: "grà-chɔɔn", english: "Strainer", category: "kitchen" },
+            { id: 115, thai: "จาน", romanization: "jaan", english: "Plate", category: "kitchen" },
+            { id: 116, thai: "ชาม", romanization: "chaam", english: "Bowl", category: "kitchen" },
+            { id: 117, thai: "ช้อน", romanization: "chɔ́ɔn", english: "Spoon", category: "kitchen" },
+            { id: 118, thai: "ส้อม", romanization: "sɔ́ɔm", english: "Fork", category: "kitchen" },
+            { id: 119, thai: "ตะเกียบ", romanization: "dtà-gìap", english: "Chopsticks", category: "kitchen" },
+            { id: 120, thai: "หม้อหุงข้าว", romanization: "mɔ̂ɔ hǔng kâao", english: "Rice cooker", category: "kitchen" },
+            { id: 121, thai: "เครื่องปั่น", romanization: "krûeang bpàn", english: "Blender", category: "kitchen" },
+
+            // Bathroom Vocabulary
+            { id: 122, thai: "อ่างอาบน้ำ", romanization: "àang àap náam", english: "Bathtub", category: "bathroom" },
+            { id: 123, thai: "ฝักบัว", romanization: "fàk-bǔa", english: "Shower", category: "bathroom" },
+            { id: 124, thai: "อ่างล้างหน้า", romanization: "àang láang nâa", english: "Sink", category: "bathroom" },
+            { id: 125, thai: "ก๊อกน้ำ", romanization: "gɔ́ɔk náam", english: "Faucet", category: "bathroom" },
+            { id: 126, thai: "กระจก", romanization: "grà-jòk", english: "Mirror", category: "bathroom" },
+            { id: 127, thai: "โถส้วม", romanization: "tǒo sûam", english: "Toilet", category: "bathroom" },
+            { id: 128, thai: "ผ้าเช็ดตัว", romanization: "pâa chét dtua", english: "Towel", category: "bathroom" },
+            { id: 129, thai: "สบู่", romanization: "sà-bùu", english: "Soap", category: "bathroom" },
+            { id: 130, thai: "แชมพู", romanization: "chaem-pûu", english: "Shampoo", category: "bathroom" },
+            { id: 131, thai: "ครีมนวดผม", romanization: "kriim nûat pǒm", english: "Conditioner", category: "bathroom" },
+            { id: 132, thai: "แปรงสีฟัน", romanization: "braeng sǐi fan", english: "Toothbrush", category: "bathroom" },
+            { id: 133, thai: "ยาสีฟัน", romanization: "yaa sǐi fan", english: "Toothpaste", category: "bathroom" },
+            { id: 134, thai: "ไดร์เป่าผม", romanization: "drai pào pǒm", english: "Hair dryer", category: "bathroom" },
+            { id: 135, thai: "เครื่องทำน้ำอุ่น", romanization: "krûeang tam náam ùn", english: "Water heater", category: "bathroom" },
+
+            // Travel Vocabulary
+            { id: 136, thai: "เสื้อผ้า", romanization: "sûea-pâa", english: "Clothes", category: "travel" },
+            { id: 137, thai: "รองเท้า", romanization: "rong-táao", english: "Shoes", category: "travel" },
+            { id: 138, thai: "พาสปอร์ต", romanization: "pâat-sà-bpòt", english: "Passport", category: "travel" },
+            { id: 139, thai: "โทรศัพท์", romanization: "too-rá-sàp", english: "Mobile phone", category: "travel" },
+            { id: 140, thai: "ที่ชาร์จ", romanization: "tîi cháat", english: "Charger", category: "travel" },
+            { id: 141, thai: "แว่นกันแดด", romanization: "wâen gan dàaet", english: "Sunglasses", category: "travel" },
+            { id: 142, thai: "หมวก", romanization: "mùak", english: "Hat", category: "travel" },
+            { id: 143, thai: "ยาประจำตัว", romanization: "yaa bprà-jam dtua", english: "Personal medication", category: "travel" },
+
+            // Morning Routine Sentences
+            { id: 144, thai: "ฉันตื่นนอนตอนเช้า", romanization: "chǎn dtùèn nɔɔn dtaawn cháo", english: "I wake up in the morning", category: "routine" },
+            { id: 145, thai: "ฉันแปรงฟัน", romanization: "chǎn braeng fan", english: "I brush my teeth", category: "routine" },
+            { id: 146, thai: "ฉันล้างหน้า", romanization: "chǎn láang nâa", english: "I wash my face", category: "routine" },
+            { id: 147, thai: "ฉันเช็ดผมด้วยผ้าเช็ดตัว", romanization: "chǎn chét pǒm dûuai pâa chét dtua", english: "I dry my hair with a towel", category: "routine" },
+            { id: 148, thai: "ฉันทาโรลออน", romanization: "chǎn taa roon-on", english: "I put on deodorant", category: "routine" },
+            { id: 149, thai: "ฉันใส่รองเท้า", romanization: "chǎn sài rong-táao", english: "I put on my shoes", category: "routine" },
+            { id: 150, thai: "ฉันออกจากบ้าน", romanization: "chǎn òɔk jàak bâan", english: "I leave the house", category: "routine" },
+            { id: 151, thai: "ฉันขับรถไปทำงาน", romanization: "chǎn kàp rót bpai tam-ngaan", english: "I drive to work", category: "routine" },
+            { id: 152, thai: "ฉันถึงที่ทำงาน", romanization: "chǎn tǔeng tîi tam-ngaan", english: "I arrive at work", category: "routine" }
+        ];
+
+        // State management
+        let currentMode = 'flashcards';
+        let currentCategory = 'all';
+        let currentCards = [...flashcardData];
+        let learnedCards = new Set();
+        let quizIndex = 0;
+        let quizScore = { correct: 0, total: 0 };
+        let streakData = loadStreakData();
+
+        // Load saved progress
+        function loadProgress() {
+            const saved = localStorage.getItem('thaiFlashcards_learned');
+            if (saved) {
+                learnedCards = new Set(JSON.parse(saved));
+            }
+            updateStats();
+        }
+
+        function saveProgress() {
+            localStorage.setItem('thaiFlashcards_learned', JSON.stringify([...learnedCards]));
+        }
+
+        function loadStreakData() {
+            const saved = localStorage.getItem('thaiFlashcards_streak');
+            if (saved) {
+                return JSON.parse(saved);
+            }
+            return { count: 0, lastDate: null };
+        }
+
+        function updateStreak() {
+            const today = new Date().toDateString();
+            if (streakData.lastDate !== today) {
+                const yesterday = new Date();
+                yesterday.setDate(yesterday.getDate() - 1);
+                if (streakData.lastDate === yesterday.toDateString()) {
+                    streakData.count++;
+                } else if (streakData.lastDate !== today) {
+                    streakData.count = 1;
+                }
+                streakData.lastDate = today;
+                localStorage.setItem('thaiFlashcards_streak', JSON.stringify(streakData));
+            }
+            updateStats();
+        }
+
+        // Initialize
+        document.addEventListener('DOMContentLoaded', () => {
+            loadProgress();
+            renderFlashcards();
+            setupEventListeners();
+            updateStats();
+        });
+
+        // Setup event listeners
+        function setupEventListeners() {
+            // Mode switching
+            document.querySelectorAll('.mode-btn').forEach(btn => {
+                btn.addEventListener('click', (e) => {
+                    document.querySelectorAll('.mode-btn').forEach(b => b.classList.remove('active'));
+                    e.target.classList.add('active');
+                    currentMode = e.target.dataset.mode;
+                    toggleViews();
+                });
+            });
+
+            // Category filtering
+            document.querySelectorAll('.category-btn').forEach(btn => {
+                btn.addEventListener('click', (e) => {
+                    document.querySelectorAll('.category-btn').forEach(b => b.classList.remove('active'));
+                    e.target.classList.add('active');
+                    currentCategory = e.target.dataset.category;
+                    filterCards();
+                });
+            });
+
+            // Controls
+            document.getElementById('shuffleBtn').addEventListener('click', shuffleCards);
+            document.getElementById('resetBtn').addEventListener('click', resetProgress);
+            document.getElementById('quizCheckBtn').addEventListener('click', checkQuizAnswer);
+            document.getElementById('quizNextBtn').addEventListener('click', nextQuizQuestion);
+            document.getElementById('quizInput').addEventListener('keypress', (e) => {
+                if (e.key === 'Enter') {
+                    checkQuizAnswer();
+                }
+            });
+        }
+
+        // Toggle views
+        function toggleViews() {
+            document.getElementById('flashcardsView').style.display = currentMode === 'flashcards' ? 'block' : 'none';
+            document.getElementById('quizView').style.display = currentMode === 'quiz' ? 'block' : 'none';
+            if (currentMode === 'quiz') {
+                startQuiz();
+            }
+        }
+
+        // Filter cards by category
+        function filterCards() {
+            if (currentCategory === 'all') {
+                currentCards = [...flashcardData];
+            } else {
+                currentCards = flashcardData.filter(card => card.category === currentCategory);
+            }
+            renderFlashcards();
+        }
+
+        // Shuffle cards
+        function shuffleCards() {
+            for (let i = currentCards.length - 1; i > 0; i--) {
+                const j = Math.floor(Math.random() * (i + 1));
+                [currentCards[i], currentCards[j]] = [currentCards[j], currentCards[i]];
+            }
+            renderFlashcards();
+            showToast('Cards shuffled!');
+        }
+
+        // Render flashcards
+        function renderFlashcards() {
+            const container = document.getElementById('flashcardContainer');
+            container.innerHTML = '';
+
+            currentCards.forEach((card, index) => {
+                const flashcard = document.createElement('div');
+                flashcard.className = 'flashcard';
+                flashcard.innerHTML = `
+                    <div class="flashcard-inner">
+                        <div class="flashcard-front">
+                            <span class="card-number">${card.id}</span>
+                            <span class="card-category">${card.category}</span>
+                            <div class="english-text" style="font-size: 1.3rem;">${card.english}</div>
+                            <div style="color: #7f8c8d; font-size: 0.9rem; margin-top: 15px;">Click to reveal Thai</div>
+                        </div>
+                        <div class="flashcard-back">
+                            <span class="card-number">${card.id}</span>
+                            <span class="card-category">${card.category}</span>
+                            <div class="thai-text">${card.thai}</div>
+                            <div class="romanization">${card.romanization}</div>
+                            <button class="audio-btn" onclick="playAudio('${card.thai}', this)">🔊</button>
+                            <div class="difficulty-buttons">
+                                <button class="diff-btn easy" onclick="markLearned(${card.id}, event)">✓ Learned</button>
+                                <button class="diff-btn hard" onclick="markHard(${card.id}, event)">✗ Hard</button>
+                            </div>
+                        </div>
+                    </div>
+                `;
+
+                flashcard.addEventListener('click', (e) => {
+                    if (!e.target.classList.contains('audio-btn') && !e.target.classList.contains('diff-btn')) {
+                        flashcard.classList.toggle('flipped');
+                    }
+                });
+
+                container.appendChild(flashcard);
+            });
+        }
+
+        // Play audio using Web Speech API
+        function playAudio(text, btn) {
+            if ('speechSynthesis' in window) {
+                const utterance = new SpeechSynthesisUtterance(text);
+                utterance.lang = 'th-TH';
+                utterance.rate = 0.8;
+                utterance.pitch = 1;
+
+                btn.classList.add('playing');
+
+                utterance.onend = () => {
+                    btn.classList.remove('playing');
+                };
+
+                speechSynthesis.speak(utterance);
+            } else {
+                showToast('Text-to-speech not supported in this browser');
+            }
+        }
+
+        // Mark card as learned
+        function markLearned(id, event) {
+            event.stopPropagation();
+            learnedCards.add(id);
+            saveProgress();
+            updateStats();
+            showToast('Marked as learned! ✓');
+        }
+
+        // Mark card as hard
+        function markHard(id, event) {
+            event.stopPropagation();
+            showToast('Keep practicing! 💪');
+        }
+
+        // Update stats
+        function updateStats() {
+            document.getElementById('totalCards').textContent = flashcardData.length;
+            document.getElementById('learnedCards').textContent = learnedCards.size;
+            document.getElementById('streakCount').textContent = streakData.count;
+            const accuracy = quizScore.total > 0 ? Math.round((quizScore.correct / quizScore.total) * 100) : 0;
+            document.getElementById('accuracyRate').textContent = accuracy + '%';
+        }
+
+        // Reset progress
+        function resetProgress() {
+            if (confirm('Are you sure you want to reset all progress?')) {
+                learnedCards.clear();
+                saveProgress();
+                quizScore = { correct: 0, total: 0 };
+                updateStats();
+                showToast('Progress reset!');
+            }
+        }
+
+        // Quiz mode
+        function startQuiz() {
+            quizIndex = 0;
+            currentCards = currentCategory === 'all' ? [...flashcardData] : flashcardData.filter(c => c.category === currentCategory);
+            shuffleCards();
+            showQuizQuestion();
+        }
+
+        function showQuizQuestion() {
+            if (quizIndex >= currentCards.length) {
+                endQuiz();
+                return;
+            }
+
+            const card = currentCards[quizIndex];
+            document.getElementById('quizThai').textContent = card.thai;
+            document.getElementById('quizInput').value = '';
+            document.getElementById('quizInput').className = 'quiz-input';
+            document.getElementById('quizFeedback').textContent = '';
+            document.getElementById('quizFeedback').className = 'quiz-feedback';
+            document.getElementById('quizCheckBtn').style.display = 'block';
+            document.getElementById('quizNextBtn').style.display = 'none';
+            document.getElementById('quizHint').textContent = `Card ${quizIndex + 1} of ${currentCards.length}`;
+
+            const progress = ((quizIndex) / currentCards.length) * 100;
+            document.getElementById('quizProgress').style.width = progress + '%';
+
+            document.getElementById('quizInput').focus();
+        }
+
+        function checkQuizAnswer() {
+            const input = document.getElementById('quizInput').value.trim().toLowerCase();
+            const card = currentCards[quizIndex];
+            const correct = card.romanization.toLowerCase();
+
+            // Simple matching - check if input contains key parts of romanization
+            const isCorrect = input === correct || correct.includes(input) || input.includes(correct.split(' ')[0]);
+
+            const feedback = document.getElementById('quizFeedback');
+            const quizInput = document.getElementById('quizInput');
+
+            if (isCorrect) {
+                feedback.textContent = '✓ Correct! ' + card.romanization;
+                feedback.className = 'quiz-feedback correct';
+                quizInput.className = 'quiz-input correct';
+                quizScore.correct++;
+                playAudio(card.thai);
+            } else {
+                feedback.textContent = '✗ Incorrect. Answer: ' + card.romanization;
+                feedback.className = 'quiz-feedback incorrect';
+                quizInput.className = 'quiz-input incorrect';
+            }
+
+            quizScore.total++;
+            updateStats();
+
+            document.getElementById('quizCheckBtn').style.display = 'none';
+            document.getElementById('quizNextBtn').style.display = 'block';
+            document.getElementById('quizNextBtn').focus();
+        }
+
+        function nextQuizQuestion() {
+            quizIndex++;
+            showQuizQuestion();
+        }
+
+        function endQuiz() {
+            const percentage = Math.round((quizScore.correct / quizScore.total) * 100);
+            document.getElementById('quizThai').textContent = '🎉 Quiz Complete!';
+            document.getElementById('quizFeedback').textContent = `Score: ${quizScore.correct}/${quizScore.total} (${percentage}%)`;
+            document.getElementById('quizFeedback').className = 'quiz-feedback correct';
+            document.getElementById('quizInput').style.display = 'none';
+            document.getElementById('quizCheckBtn').style.display = 'none';
+            document.getElementById('quizNextBtn').style.display = 'none';
+            document.getElementById('quizProgress').style.width = '100%';
+            document.getElementById('quizHint').textContent = 'Refresh or change category to start again';
+
+            updateStreak();
+            showToast(`Great job! ${percentage}% accuracy`);
+        }
+
+        // Toast notification
+        function showToast(message) {
+            const toast = document.getElementById('toast');
+            toast.textContent = message;
+            toast.classList.add('show');
+            setTimeout(() => {
+                toast.classList.remove('show');
+            }, 2500);
+        }
+    </script>
+</body>
+</html>
