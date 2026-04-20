@@ -1,0 +1,13 @@
+{
+    "version": "0.2.0",
+    "configurations": [
+        {
+            "name": "🚀 Deploy to Firebase",
+            "type": "node",
+            "request": "launch",
+            "preLaunchTask": "Firebase: Deploy",
+            "runtimeExecutable": "echo",
+            "runtimeArgs": ["Deployment initiated..."]
+        }
+    ]
+}
