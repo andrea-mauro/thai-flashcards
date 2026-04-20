@@ -8,22 +8,28 @@ A lightweight, standalone web application for learning Thai vocabulary and phras
   - `index.html`: The main structure of the app.
   - `css/styles.css`: Visual styling and responsive design.
   - `data/flashcards.js`: The vocabulary dataset.
-  - `js/app.js`: Application logic (rendering, filtering, and state management).
+  - `js/app.js`: Application logic.
+  - `robots.txt`: Privacy configuration to prevent search engine indexing.
 - `firebase.json` & `.firebaserc`: Firebase Hosting configuration.
 
 ## 🚀 Local Development
 
 You can develop locally by simply opening `src/index.html` in any web browser. Because the data is loaded via a JavaScript script tag (rather than a `fetch` call), no local server is required to bypass CORS restrictions.
 
-## 🌐 Deployment (Firebase Hosting)
+## 🌐 Deployment & Privacy
 
-The project is configured for Firebase Hosting. To deploy updates:
+The project is configured for Firebase Hosting.
 
+### Deployment
+To deploy updates:
 1. Ensure you have the Firebase CLI installed: `npm install -g firebase-tools`
 2. Log in: `firebase login`
 3. Deploy: `firebase deploy`
 
 The app is live at: `https://thai-flashcards-1d99d.web.app`
+
+### Privacy (SEO)
+A `src/robots.txt` file is included with a `Disallow: /` rule. This tells search engine crawlers (like Googlebot) not to index the site, keeping the URL private and preventing it from appearing in public search results.
 
 ## 🔊 Audio Support
 
