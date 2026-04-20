@@ -4,8 +4,6 @@
         let currentView = 'flashcards';
         let currentCategory = 'all';
         let currentCards = [...flashcardData];
-        let learnedCards = new Set();
-        let streakData = loadStreakData();
 
         // Numbers Quiz State
         let currentNumberRange = 10;
@@ -25,55 +23,13 @@
         // Initialize app
         function init() {
             try {
-                loadProgress();
                 renderFlashcards();
                 setupEventListeners();
                 updateStats();
-
-                // Restore last view
-                const savedView = localStorage.getItem('thaiFlashcards_view');
-                if (savedView) switchView(savedView);
             } catch (error) {
                 console.error('Error initializing flashcard app:', error);
                 showToast('Error loading application.');
             }
-        }
-
-        // Load saved progress
-        function loadProgress() {
-            const saved = localStorage.getItem('thaiFlashcards_learned');
-            if (saved) {
-                learnedCards = new Set(JSON.parse(saved));
-            }
-            updateStats();
-        }
-
-        function saveProgress() {
-            localStorage.setItem('thaiFlashcards_learned', JSON.stringify([...learnedCards]));
-        }
-
-        function loadStreakData() {
-            const saved = localStorage.getItem('thaiFlashcards_streak');
-            if (saved) {
-                return JSON.parse(saved);
-            }
-            return { count: 0, lastDate: null };
-        }
-
-        function updateStreak() {
-            const today = new Date().toDateString();
-            if (streakData.lastDate !== today) {
-                const yesterday = new Date();
-                yesterday.setDate(yesterday.getDate() - 1);
-                if (streakData.lastDate === yesterday.toDateString()) {
-                    streakData.count++;
-                } else if (streakData.lastDate !== today) {
-                    streakData.count = 1;
-                }
-                streakData.lastDate = today;
-                localStorage.setItem('thaiFlashcards_streak', JSON.stringify(streakData));
-            }
-            updateStats();
         }
 
         // Initialize
@@ -97,8 +53,8 @@
             });
 
             // Controls
-            document.getElementById('shuffleBtn').addEventListener('click', shuffleCards);
-            document.getElementById('resetBtn').addEventListener('click', resetProgress);
+            const shuffleBtn = document.getElementById('shuffleBtn');
+            if (shuffleBtn) shuffleBtn.addEventListener('click', shuffleCards);
 
             // Numbers Quiz Range
             document.querySelectorAll('.range-btn').forEach(btn => {
@@ -110,24 +66,42 @@
                 });
             });
 
-            document.getElementById('nextNumberBtn').addEventListener('click', generateNumberQuestion);
-            document.getElementById('quizAudioBtn').addEventListener('click', () => {
-                if (currentCorrectNumber !== null) {
-                    playAudio(toThai(currentCorrectNumber).thai);
-                }
-            });
+            const nextBtn = document.getElementById('nextNumberBtn');
+            if (nextBtn) nextBtn.addEventListener('click', generateNumberQuestion);
+            
+            const audioBtn = document.getElementById('quizAudioBtn');
+            if (audioBtn) {
+                audioBtn.addEventListener('click', () => {
+                    if (currentCorrectNumber !== null) {
+                        playAudio(toThai(currentCorrectNumber).thai);
+                    }
+                });
+            }
         }
 
         // View management
         function switchView(viewId) {
+            const viewEl = document.getElementById(`${viewId}View`);
+            const tabEl = document.querySelector(`[data-view="${viewId}"]`);
+            const statsBar = document.querySelector('.stats-bar');
+            
+            if (!viewEl || !tabEl) {
+                console.warn(`View or Tab for "${viewId}" not found. Defaulting to flashcards.`);
+                if (viewId !== 'flashcards') switchView('flashcards');
+                return;
+            }
+
             currentView = viewId;
             document.querySelectorAll('.view').forEach(v => v.style.display = 'none');
             document.querySelectorAll('.tab-btn').forEach(b => b.classList.remove('active'));
             
-            document.getElementById(`${viewId}View`).style.display = 'block';
-            document.querySelector(`[data-view="${viewId}"]`).classList.add('active');
-            
-            localStorage.setItem('thaiFlashcards_view', viewId);
+            viewEl.style.display = 'block';
+            tabEl.classList.add('active');
+
+            // Hide/Show stats bar based on view
+            if (statsBar) {
+                statsBar.style.display = viewId === 'flashcards' ? 'flex' : 'none';
+            }
             
             if (viewId === 'numbers' && currentCorrectNumber === null) {
                 generateNumberQuestion();
@@ -244,7 +218,6 @@
                 feedback.innerHTML = `Correct! <strong>${data.thai}</strong> (${data.roman})`;
                 feedback.className = 'quiz-feedback correct';
                 playAudio(data.thai);
-                updateStreak();
             } else {
                 btn.classList.add('incorrect');
                 feedback.innerHTML = `Incorrect. It was <strong>${data.thai}</strong> (${data.roman})`;
@@ -269,6 +242,7 @@
                 currentCards = flashcardData.filter(card => card.category === currentCategory);
             }
             renderFlashcards();
+            updateStats();
         }
 
         // Shuffle cards
@@ -303,16 +277,12 @@
                             <div class="thai-text">${card.thai}</div>
                             <div class="romanization">${card.romanization}</div>
                             <button class="audio-btn" onclick="playAudio('${card.thai}', this)">🔊</button>
-                            <div class="difficulty-buttons">
-                                <button class="diff-btn easy" onclick="markLearned(${card.id}, event)">✓ Learned</button>
-                                <button class="diff-btn hard" onclick="markHard(${card.id}, event)">✗ Hard</button>
-                            </div>
                         </div>
                     </div>
                 `;
 
                 flashcard.addEventListener('click', (e) => {
-                    if (!e.target.classList.contains('audio-btn') && !e.target.classList.contains('diff-btn')) {
+                    if (!e.target.classList.contains('audio-btn')) {
                         flashcard.classList.toggle('flipped');
                     }
                 });
@@ -323,13 +293,15 @@
 
         // Play audio using Web Speech API
         function playAudio(text, btn) {
+            if (!text) return;
+            
             if ('speechSynthesis' in window) {
-                // Cancel any ongoing speech to prevent overlap
-                speechSynthesis.cancel();
+                // Cancel any ongoing speech
+                window.speechSynthesis.cancel();
 
                 const utterance = new SpeechSynthesisUtterance(text);
                 utterance.lang = 'th-TH';
-                utterance.rate = 0.85; // Slightly slower for clarity
+                utterance.rate = 0.85;
                 utterance.pitch = 1;
 
                 if (btn && btn.classList) btn.classList.add('playing');
@@ -338,52 +310,32 @@
                     if (btn && btn.classList) btn.classList.remove('playing');
                 };
 
-                speechSynthesis.speak(utterance);
+                utterance.onerror = (event) => {
+                    console.error('SpeechSynthesis Error:', event);
+                    if (btn && btn.classList) btn.classList.remove('playing');
+                };
+
+                window.speechSynthesis.speak(utterance);
             } else {
                 showToast('Text-to-speech not supported in this browser');
             }
         }
 
-        // Mark card as learned
-        function markLearned(id, event) {
-            event.stopPropagation();
-            learnedCards.add(id);
-            saveProgress();
-            updateStats();
-            updateStreak();
-            showToast('Marked as learned! ✓');
-        }
-
-        // Mark card as hard
-        function markHard(id, event) {
-            event.stopPropagation();
-            showToast('Keep practicing! 💪');
-        }
-
         // Update stats
         function updateStats() {
-            document.getElementById('totalCards').textContent = flashcardData.length;
-            document.getElementById('learnedCards').textContent = learnedCards.size;
-            document.getElementById('streakCount').textContent = streakData.count;
-        }
-
-        // Reset progress
-        function resetProgress() {
-            if (confirm('Are you sure you want to reset all progress?')) {
-                learnedCards.clear();
-                saveProgress();
-                updateStats();
-                showToast('Progress reset!');
-            }
+            const el = document.getElementById('totalCards');
+            if (el) el.textContent = currentCards.length;
         }
 
         // Toast notification
         function showToast(message) {
             const toast = document.getElementById('toast');
-            toast.textContent = message;
-            toast.classList.add('show');
-            setTimeout(() => {
-                toast.classList.remove('show');
-            }, 2500);
+            if (toast) {
+                toast.textContent = message;
+                toast.classList.add('show');
+                setTimeout(() => {
+                    toast.classList.remove('show');
+                }, 2500);
+            }
         }
     
