@@ -1,10 +1,26 @@
 
         // State management
         let flashcardData = FLASHCARD_DATA;
+        let currentView = 'flashcards';
         let currentCategory = 'all';
         let currentCards = [...flashcardData];
         let learnedCards = new Set();
         let streakData = loadStreakData();
+
+        // Numbers Quiz State
+        let currentNumberRange = 10;
+        let currentCorrectNumber = null;
+        let quizMode = 'visual'; // 'visual' (digit -> thai) or 'audio' (sound -> digit)
+
+        const thaiNumbers = {
+            units: ['', 'หนึ่ง', 'สอง', 'สาม', 'สี่', 'ห้า', 'หก', 'เจ็ด', 'แปด', 'เก้า'],
+            tens: ['', 'สิบ', 'ยี่สิบ', 'สามสิบ', 'สี่สิบ', 'ห้าสิบ', 'หกสิบ', 'เจ็ดสิบ', 'แปดสิบ', 'เก้าสิบ']
+        };
+
+        const thaiRoman = {
+            units: ['', 'nùeng', 'sǎawng', 'sǎam', 'sìi', 'hâa', 'hòk', 'jèt', 'bpàet', 'gâao'],
+            positions: ['', 'sìp', 'rɔ́ɔi', 'phan']
+        };
 
         // Initialize app
         function init() {
@@ -13,6 +29,10 @@
                 renderFlashcards();
                 setupEventListeners();
                 updateStats();
+
+                // Restore last view
+                const savedView = localStorage.getItem('thaiFlashcards_view');
+                if (savedView) switchView(savedView);
             } catch (error) {
                 console.error('Error initializing flashcard app:', error);
                 showToast('Error loading application.');
@@ -61,6 +81,11 @@
 
         // Setup event listeners
         function setupEventListeners() {
+            // Main Navigation Tabs
+            document.querySelectorAll('.tab-btn').forEach(btn => {
+                btn.addEventListener('click', () => switchView(btn.dataset.view));
+            });
+
             // Category filtering
             document.querySelectorAll('.category-btn').forEach(btn => {
                 btn.addEventListener('click', (e) => {
@@ -74,6 +99,166 @@
             // Controls
             document.getElementById('shuffleBtn').addEventListener('click', shuffleCards);
             document.getElementById('resetBtn').addEventListener('click', resetProgress);
+
+            // Numbers Quiz Range
+            document.querySelectorAll('.range-btn').forEach(btn => {
+                btn.addEventListener('click', (e) => {
+                    document.querySelectorAll('.range-btn').forEach(b => b.classList.remove('active'));
+                    e.target.classList.add('active');
+                    currentNumberRange = e.target.dataset.range === 'random' ? 5000 : parseInt(e.target.dataset.range);
+                    generateNumberQuestion();
+                });
+            });
+
+            document.getElementById('nextNumberBtn').addEventListener('click', generateNumberQuestion);
+            document.getElementById('quizAudioBtn').addEventListener('click', () => {
+                if (currentCorrectNumber !== null) {
+                    playAudio(toThai(currentCorrectNumber).thai);
+                }
+            });
+        }
+
+        // View management
+        function switchView(viewId) {
+            currentView = viewId;
+            document.querySelectorAll('.view').forEach(v => v.style.display = 'none');
+            document.querySelectorAll('.tab-btn').forEach(b => b.classList.remove('active'));
+            
+            document.getElementById(`${viewId}View`).style.display = 'block';
+            document.querySelector(`[data-view="${viewId}"]`).classList.add('active');
+            
+            localStorage.setItem('thaiFlashcards_view', viewId);
+            
+            if (viewId === 'numbers' && currentCorrectNumber === null) {
+                generateNumberQuestion();
+            }
+        }
+
+        // --- Thai Number Logic ---
+        function toThai(n) {
+            if (n === 0) return { thai: 'ศูนย์', roman: 'sǔun' };
+            if (n === 10) return { thai: 'สิบ', roman: 'sìp' };
+            
+            let thai = '';
+            let roman = '';
+            let numStr = n.toString();
+            let len = numStr.length;
+
+            for (let i = 0; i < len; i++) {
+                let digit = parseInt(numStr[i]);
+                let pos = len - i - 1;
+
+                if (digit !== 0) {
+                    if (pos === 1) { // Tens position
+                        if (digit === 1) {
+                            thai += 'สิบ';
+                            roman += (roman === '' ? '' : '-') + 'sìp';
+                        } else if (digit === 2) {
+                            thai += 'ยี่สิบ';
+                            roman += (roman === '' ? '' : '-') + 'yîi-sìp';
+                        } else {
+                            thai += thaiNumbers.units[digit] + 'สิบ';
+                            roman += (roman === '' ? '' : '-') + thaiRoman.units[digit] + '-sìp';
+                        }
+                    } else if (pos === 0 && len > 1 && digit === 1) { // Units position (special 1)
+                        thai += 'เอ็ด';
+                        roman += (roman === '' ? '' : '-') + 'èt';
+                    } else if (pos === 2) { // Hundreds
+                        thai += thaiNumbers.units[digit] + 'ร้อย';
+                        roman += (roman === '' ? '' : '-') + thaiRoman.units[digit] + '-rɔ́ɔi';
+                    } else if (pos === 3) { // Thousands
+                        thai += thaiNumbers.units[digit] + 'พัน';
+                        roman += (roman === '' ? '' : '-') + thaiRoman.units[digit] + '-phan';
+                    } else {
+                        thai += thaiNumbers.units[digit];
+                        roman += (roman === '' ? '' : '-') + thaiRoman.units[digit];
+                    }
+                }
+            }
+            return { thai, roman };
+        }
+
+        function generateNumberQuestion() {
+            const range = currentNumberRange;
+            currentCorrectNumber = Math.floor(Math.random() * range) + 1;
+            quizMode = Math.random() > 0.5 ? 'visual' : 'audio';
+
+            const questionEl = document.getElementById('quizQuestion');
+            const typeLabel = document.getElementById('quizTypeLabel');
+            const audioVis = document.getElementById('audioVisualizer');
+            const choicesEl = document.getElementById('quizChoices');
+            const feedback = document.getElementById('quizFeedback');
+            const nextBtn = document.getElementById('nextNumberBtn');
+
+            feedback.textContent = '';
+            feedback.className = 'quiz-feedback';
+            nextBtn.style.display = 'none';
+            choicesEl.innerHTML = '';
+
+            if (quizMode === 'visual') {
+                questionEl.textContent = currentCorrectNumber;
+                typeLabel.textContent = 'What is this in Thai?';
+                audioVis.style.display = 'none';
+                questionEl.style.fontSize = '4rem';
+            } else {
+                const data = toThai(currentCorrectNumber);
+                questionEl.innerHTML = `<div>${data.thai}</div><div style="font-size: 1.2rem; color: #7f8c8d; font-weight: normal; margin-top: 10px;">${data.roman}</div>`;
+                typeLabel.textContent = 'Listen and identify the number';
+                audioVis.style.display = 'block';
+                questionEl.style.fontSize = '3rem';
+                setTimeout(() => playAudio(data.thai), 300);
+            }
+
+            // Generate choices
+            let choices = [currentCorrectNumber];
+            while (choices.length < 4) {
+                let wrong = currentCorrectNumber + (Math.floor(Math.random() * 21) - 10);
+                if (wrong < 1) wrong = Math.floor(Math.random() * range) + 1;
+                if (!choices.includes(wrong)) choices.push(wrong);
+            }
+            choices.sort(() => Math.random() - 0.5);
+
+            choices.forEach(num => {
+                const btn = document.createElement('button');
+                btn.className = 'choice-btn';
+                const data = toThai(num);
+                if (quizMode === 'visual') {
+                    btn.innerHTML = `<div style="font-size: 1.2rem; font-weight: bold;">${data.thai}</div><div class="choice-romanization">${data.roman}</div>`;
+                } else {
+                    btn.textContent = num;
+                }
+                btn.onclick = () => checkNumberAnswer(num, btn);
+                choicesEl.appendChild(btn);
+            });
+        }
+
+        function checkNumberAnswer(selected, btn) {
+            if (document.querySelector('.choice-btn.correct')) return; // Already answered
+
+            const feedback = document.getElementById('quizFeedback');
+            const nextBtn = document.getElementById('nextNumberBtn');
+            const data = toThai(currentCorrectNumber);
+
+            if (selected === currentCorrectNumber) {
+                btn.classList.add('correct');
+                feedback.innerHTML = `Correct! <strong>${data.thai}</strong> (${data.roman})`;
+                feedback.className = 'quiz-feedback correct';
+                playAudio(data.thai);
+                updateStreak();
+            } else {
+                btn.classList.add('incorrect');
+                feedback.innerHTML = `Incorrect. It was <strong>${data.thai}</strong> (${data.roman})`;
+                feedback.className = 'quiz-feedback incorrect';
+                // Show correct one
+                document.querySelectorAll('.choice-btn').forEach(b => {
+                    if (quizMode === 'visual') {
+                        if (b.innerText.includes(data.thai)) b.classList.add('correct');
+                    } else {
+                        if (parseInt(b.textContent) === currentCorrectNumber) b.classList.add('correct');
+                    }
+                });
+            }
+            nextBtn.style.display = 'inline-block';
         }
 
         // Filter cards by category
@@ -139,15 +324,18 @@
         // Play audio using Web Speech API
         function playAudio(text, btn) {
             if ('speechSynthesis' in window) {
+                // Cancel any ongoing speech to prevent overlap
+                speechSynthesis.cancel();
+
                 const utterance = new SpeechSynthesisUtterance(text);
                 utterance.lang = 'th-TH';
-                utterance.rate = 0.8;
+                utterance.rate = 0.85; // Slightly slower for clarity
                 utterance.pitch = 1;
 
-                if (btn) btn.classList.add('playing');
+                if (btn && btn.classList) btn.classList.add('playing');
 
                 utterance.onend = () => {
-                    if (btn) btn.classList.remove('playing');
+                    if (btn && btn.classList) btn.classList.remove('playing');
                 };
 
                 speechSynthesis.speak(utterance);

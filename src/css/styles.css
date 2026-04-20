@@ -33,6 +33,38 @@
             opacity: 0.9;
         }
 
+        /* Main Tabs */
+        .main-tabs {
+            display: flex;
+            justify-content: center;
+            gap: 15px;
+            margin-bottom: 25px;
+        }
+
+        .tab-btn {
+            padding: 12px 25px;
+            font-size: 1rem;
+            border: none;
+            border-radius: 25px;
+            cursor: pointer;
+            transition: all 0.3s ease;
+            font-weight: 600;
+            background: rgba(255, 255, 255, 0.2);
+            color: white;
+            border: 2px solid transparent;
+        }
+
+        .tab-btn.active {
+            background: white;
+            color: #667eea;
+            box-shadow: 0 4px 15px rgba(0,0,0,0.2);
+        }
+
+        .tab-btn:hover:not(.active) {
+            background: rgba(255, 255, 255, 0.3);
+            transform: translateY(-2px);
+        }
+
         .category-filter {
             display: flex;
             justify-content: center;
@@ -81,6 +113,131 @@
         .stat-label {
             font-size: 0.85rem;
             opacity: 0.9;
+        }
+
+        /* View Management */
+        .view {
+            animation: fadeIn 0.4s ease;
+        }
+
+        @keyframes fadeIn {
+            from { opacity: 0; transform: translateY(10px); }
+            to { opacity: 1; transform: translateY(0); }
+        }
+
+        /* Numbers Quiz Styles */
+        .numbers-quiz-container {
+            max-width: 600px;
+            margin: 0 auto;
+        }
+
+        .quiz-config {
+            display: flex;
+            justify-content: center;
+            gap: 10px;
+            margin-bottom: 30px;
+            flex-wrap: wrap;
+        }
+
+        .range-btn {
+            padding: 8px 15px;
+            border: 1px solid white;
+            background: transparent;
+            color: white;
+            border-radius: 10px;
+            cursor: pointer;
+            transition: all 0.2s;
+        }
+
+        .range-btn.active {
+            background: white;
+            color: #667eea;
+            font-weight: bold;
+        }
+
+        .quiz-card {
+            background: white;
+            border-radius: 25px;
+            padding: 40px;
+            text-align: center;
+            box-shadow: 0 15px 35px rgba(0,0,0,0.2);
+        }
+
+        .quiz-question {
+            font-size: 4rem;
+            font-weight: bold;
+            color: #2c3e50;
+            margin-bottom: 10px;
+        }
+
+        .quiz-type-label {
+            color: #7f8c8d;
+            font-size: 1rem;
+            margin-bottom: 30px;
+        }
+
+        .quiz-choices {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 15px;
+            margin-top: 30px;
+        }
+
+        .choice-btn {
+            padding: 15px;
+            font-size: 1.1rem;
+            border: 2px solid #ecf0f1;
+            background: white;
+            border-radius: 15px;
+            cursor: pointer;
+            transition: all 0.2s;
+            color: #2c3e50;
+        }
+
+        .choice-btn:hover {
+            border-color: #667eea;
+            background: #f8f9ff;
+        }
+
+        .choice-romanization {
+            font-size: 0.8rem;
+            color: #7f8c8d;
+            transition: color 0.2s;
+        }
+
+        .choice-btn.correct, .choice-btn.incorrect {
+            color: white;
+        }
+
+        .choice-btn.correct .choice-romanization, 
+        .choice-btn.incorrect .choice-romanization {
+            color: rgba(255, 255, 255, 0.9);
+        }
+
+        .choice-btn.correct {
+            background: #27ae60;
+            border-color: #27ae60;
+        }
+
+        .choice-btn.incorrect {
+            background: #e74c3c;
+            border-color: #e74c3c;
+        }
+
+        .quiz-feedback {
+            margin-top: 20px;
+            font-weight: bold;
+            height: 24px;
+        }
+
+        .quiz-feedback.correct { color: #27ae60; }
+        .quiz-feedback.incorrect { color: #e74c3c; }
+
+        .audio-btn.large {
+            width: 80px;
+            height: 80px;
+            font-size: 2rem;
+            margin: 0 auto;
         }
 
         /* Flashcard Styles */

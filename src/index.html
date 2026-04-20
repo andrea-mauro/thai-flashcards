@@ -14,16 +14,9 @@
             <p>Learn Thai vocabulary and phrases</p>
         </header>
 
-        <div class="category-filter" id="categoryFilter">
-            <button class="category-btn active" data-category="all">All</button>
-            <button class="category-btn" data-category="introduction">Introduction</button>
-            <button class="category-btn" data-category="family">Family</button>
-            <button class="category-btn" data-category="routine">Daily Routine</button>
-            <button class="category-btn" data-category="technology">Technology</button>
-            <button class="category-btn" data-category="pets">Pets & Animals</button>
-            <button class="category-btn" data-category="kitchen">Kitchen</button>
-            <button class="category-btn" data-category="bathroom">Bathroom</button>
-            <button class="category-btn" data-category="travel">Travel</button>
+        <div class="main-tabs">
+            <button class="tab-btn active" data-view="flashcards">📚 Flashcards</button>
+            <button class="tab-btn" data-view="numbers">🔢 Numbers</button>
         </div>
 
         <div class="stats-bar">
@@ -41,13 +34,53 @@
             </div>
         </div>
 
-        <div class="controls">
-            <button class="control-btn shuffle-btn" id="shuffleBtn">🔀 Shuffle</button>
-            <button class="control-btn" id="resetBtn">🔄 Reset Progress</button>
+        <div id="flashcardsView" class="view">
+            <div class="category-filter" id="categoryFilter">
+                <button class="category-btn active" data-category="all">All</button>
+                <button class="category-btn" data-category="introduction">Introduction</button>
+                <button class="category-btn" data-category="family">Family</button>
+                <button class="category-btn" data-category="routine">Daily Routine</button>
+                <button class="category-btn" data-category="technology">Technology</button>
+                <button class="category-btn" data-category="pets">Pets & Animals</button>
+                <button class="category-btn" data-category="kitchen">Kitchen</button>
+                <button class="category-btn" data-category="bathroom">Bathroom</button>
+                <button class="category-btn" data-category="travel">Travel</button>
+            </div>
+
+            <div class="controls">
+                <button class="control-btn shuffle-btn" id="shuffleBtn">🔀 Shuffle</button>
+                <button class="control-btn" id="resetBtn">🔄 Reset Progress</button>
+            </div>
+
+            <div class="flashcard-container" id="flashcardContainer"></div>
         </div>
 
-        <div id="flashcardsView">
-            <div class="flashcard-container" id="flashcardContainer"></div>
+        <div id="numbersView" class="view" style="display: none;">
+            <div class="numbers-quiz-container">
+                <div class="quiz-config">
+                    <button class="range-btn active" data-range="10">1-10</button>
+                    <button class="range-btn" data-range="100">1-100</button>
+                    <button class="range-btn" data-range="1000">1-1,000</button>
+                    <button class="range-btn" data-range="random">Random Mixed</button>
+                </div>
+                
+                <div class="quiz-card">
+                    <div id="quizQuestion" class="quiz-question">Ready?</div>
+                    <div id="quizTypeLabel" class="quiz-type-label">Select a range to start</div>
+                    
+                    <div id="audioVisualizer" class="audio-visualizer" style="display: none;">
+                        <button class="audio-btn large" id="quizAudioBtn">🔊</button>
+                    </div>
+
+                    <div id="quizChoices" class="quiz-choices">
+                        <!-- Choices will be injected here -->
+                    </div>
+
+                    <div id="quizFeedback" class="quiz-feedback"></div>
+                    
+                    <button id="nextNumberBtn" class="control-btn" style="display: none; margin-top: 20px;">Next Number →</button>
+                </div>
+            </div>
         </div>
     </div>
 
