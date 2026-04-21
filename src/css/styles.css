@@ -260,6 +260,11 @@
             border-radius: 5px;
         }
 
+        .ref-group li.highlight-noon {
+            background-color: #e0e7ff;
+            font-weight: bold;
+        }
+
         @media (max-width: 600px) {
             .reference-grid {
                 grid-template-columns: 1fr;
