@@ -2,7 +2,7 @@ const { defineConfig } = require("cypress");
 
 module.exports = defineConfig({
   e2e: {
-    baseUrl: 'http://localhost:5500', // Matches http-server src -p 5500
+    baseUrl: 'http://localhost:5566', // Matches http-server src -p 5566
     supportFile: false,
     viewportWidth: 375, // iPhone X/12 width
     viewportHeight: 812, // iPhone X/12 height
