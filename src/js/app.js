@@ -231,7 +231,6 @@
                 typeLabel.textContent = 'Listen and identify the number';
                 audioVis.style.display = 'block';
                 questionEl.style.fontSize = '3rem';
-                setTimeout(() => playAudio(data.thai), 300);
             }
 
             // Generate choices
