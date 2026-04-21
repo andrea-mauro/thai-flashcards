@@ -16,3 +16,7 @@ dist/
 # Node
 node_modules/
 npm-debug.log
+
+# Cypress
+cypress/screenshots/
+cypress/videos/

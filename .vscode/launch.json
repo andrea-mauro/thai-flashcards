@@ -2,6 +2,22 @@
     "version": "0.2.0",
     "configurations": [
         {
+            "name": "🧪 Run E2E Tests",
+            "type": "node",
+            "request": "launch",
+            "preLaunchTask": "NPM: Run Tests",
+            "runtimeExecutable": "echo",
+            "runtimeArgs": ["Tests completed."]
+        },
+        {
+            "name": "👁️ Open Cypress UI",
+            "type": "node",
+            "request": "launch",
+            "preLaunchTask": "NPM: Cypress UI (Interactive)",
+            "runtimeExecutable": "echo",
+            "runtimeArgs": ["Cypress UI opened."]
+        },
+        {
             "name": "🚀 Deploy to Firebase",
             "type": "node",
             "request": "launch",
