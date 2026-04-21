@@ -17,7 +17,11 @@
 
         const thaiRoman = {
             units: ['', 'nùeng', 'sǎawng', 'sǎam', 'sìi', 'hâa', 'hòk', 'jèt', 'bpàet', 'gâao'],
-            positions: ['', 'sìp', 'rɔ́ɔi', 'phan']
+            positions: ['', 'sìp', 'rɔ́ɔi', 'phan', 'mùen', 'sǎen', 'láan']
+        };
+
+        const thaiPos = {
+            units: ['', 'สิบ', 'ร้อย', 'พัน', 'หมื่น', 'แสน', 'ล้าน']
         };
 
         // Initialize app
@@ -75,6 +79,34 @@
                     if (currentCorrectNumber !== null) {
                         playAudio(toThai(currentCorrectNumber).thai);
                     }
+                });
+            }
+
+            // Number Explorer
+            const explorerBtn = document.getElementById('explorerBtn');
+            const explorerInput = document.getElementById('explorerInput');
+            if (explorerBtn && explorerInput) {
+                explorerBtn.addEventListener('click', () => {
+                    const val = parseInt(explorerInput.value);
+                    if (isNaN(val) || val < 0) {
+                        showToast('Please enter a valid positive number.');
+                        return;
+                    }
+                    if (val > 9999999) {
+                        showToast('Number too large (max 9,999,999).');
+                        return;
+                    }
+                    
+                    const data = toThai(val);
+                    const resultEl = document.getElementById('explorerResult');
+                    const thaiEl = document.getElementById('explorerThai');
+                    const romanEl = document.getElementById('explorerRoman');
+                    
+                    thaiEl.textContent = data.thai;
+                    romanEl.textContent = data.roman;
+                    resultEl.style.display = 'block';
+                    
+                    playAudio(data.thai);
                 });
             }
         }
@@ -137,15 +169,13 @@
                     } else if (pos === 0 && len > 1 && digit === 1) { // Units position (special 1)
                         thai += 'เอ็ด';
                         roman += (roman === '' ? '' : '-') + 'èt';
-                    } else if (pos === 2) { // Hundreds
-                        thai += thaiNumbers.units[digit] + 'ร้อย';
-                        roman += (roman === '' ? '' : '-') + thaiRoman.units[digit] + '-rɔ́ɔi';
-                    } else if (pos === 3) { // Thousands
-                        thai += thaiNumbers.units[digit] + 'พัน';
-                        roman += (roman === '' ? '' : '-') + thaiRoman.units[digit] + '-phan';
                     } else {
-                        thai += thaiNumbers.units[digit];
-                        roman += (roman === '' ? '' : '-') + thaiRoman.units[digit];
+                        // All other positions (100, 1k, 10k, 100k, 1m)
+                        const positionLabel = thaiPos.units[pos] || '';
+                        const positionRoman = thaiRoman.positions[pos] || '';
+                        
+                        thai += thaiNumbers.units[digit] + positionLabel;
+                        roman += (roman === '' ? '' : '-') + thaiRoman.units[digit] + (positionRoman ? '-' + positionRoman : '');
                     }
                 }
             }
@@ -252,12 +282,14 @@
                 [currentCards[i], currentCards[j]] = [currentCards[j], currentCards[i]];
             }
             renderFlashcards();
+            updateStats();
             showToast('Cards shuffled!');
         }
 
         // Render flashcards
         function renderFlashcards() {
             const container = document.getElementById('flashcardContainer');
+            if (!container) return;
             container.innerHTML = '';
 
             currentCards.forEach((card, index) => {

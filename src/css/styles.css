@@ -122,8 +122,110 @@
 
         /* Numbers Quiz Styles */
         .numbers-quiz-container {
-            max-width: 600px;
+            max-width: 800px;
             margin: 0 auto;
+        }
+
+        .numbers-guide {
+            background: white;
+            border-radius: 15px;
+            margin-bottom: 30px;
+            overflow: hidden;
+            box-shadow: 0 4px 15px rgba(0,0,0,0.1);
+        }
+
+        .numbers-guide summary {
+            padding: 15px 20px;
+            cursor: pointer;
+            font-weight: 600;
+            color: #667eea;
+            background: #f8f9ff;
+            user-select: none;
+            transition: background 0.2s;
+        }
+
+        .numbers-guide summary:hover {
+            background: #f0f2ff;
+        }
+
+        .guide-content {
+            padding: 20px;
+            border-top: 1px solid #eee;
+        }
+
+        .guide-grid {
+            display: grid;
+            grid-template-columns: 1fr 1fr 1fr;
+            gap: 20px;
+        }
+
+        .guide-col h3 {
+            font-size: 1rem;
+            color: #2c3e50;
+            margin-bottom: 12px;
+            border-bottom: 2px solid #667eea;
+            padding-bottom: 5px;
+            display: inline-block;
+        }
+
+        .guide-col ul {
+            list-style: none;
+            font-size: 0.9rem;
+            color: #34495e;
+        }
+
+        .guide-col li {
+            margin-bottom: 6px;
+        }
+
+        .number-explorer {
+            margin-top: 30px;
+            padding-top: 20px;
+            border-top: 1px solid #eee;
+        }
+
+        .explorer-controls {
+            display: flex;
+            gap: 10px;
+            margin-top: 10px;
+            margin-bottom: 15px;
+        }
+
+        .number-explorer input {
+            flex: 1;
+            padding: 10px 15px;
+            border: 2px solid #667eea;
+            border-radius: 10px;
+            font-size: 1rem;
+            outline: none;
+        }
+
+        .number-explorer .control-btn {
+            background: #667eea;
+            margin-bottom: 0;
+        }
+
+        .explorer-result {
+            background: #f8f9ff;
+            padding: 15px;
+            border-radius: 10px;
+            text-align: center;
+            animation: fadeIn 0.3s ease;
+        }
+
+        .explorer-result .thai-text {
+            margin-bottom: 5px;
+        }
+
+        .explorer-result .romanization {
+            margin-bottom: 0;
+            font-size: 1rem;
+        }
+
+        @media (max-width: 600px) {
+            .guide-grid {
+                grid-template-columns: 1fr;
+            }
         }
 
         .quiz-config {

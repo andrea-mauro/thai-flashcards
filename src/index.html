@@ -48,6 +48,62 @@
 
         <div id="numbersView" class="view" style="display: none;">
             <div class="numbers-quiz-container">
+                <details class="numbers-guide">
+                    <summary>📚 Thai Numbers - How it works</summary>
+                    <div class="guide-content">
+                        <div class="guide-grid">
+                            <div class="guide-col">
+                                <h3>0-10</h3>
+                                <ul>
+                                    <li>0: ศูนย์ (sǔun)</li>
+                                    <li>1: หนึ่ง (nùeng)</li>
+                                    <li>2: สอง (sǎawng)</li>
+                                    <li>3: สาม (sǎam)</li>
+                                    <li>4: สี่ (sìi)</li>
+                                    <li>5: ห้า (hâa)</li>
+                                    <li>6: หก (hòk)</li>
+                                    <li>7: เจ็ด (jèt)</li>
+                                    <li>8: แปด (bpàet)</li>
+                                    <li>9: เก้า (gâao)</li>
+                                    <li>10: สิบ (sìp)</li>
+                                </ul>
+                            </div>
+                            <div class="guide-col">
+                                <h3>Building 11-99</h3>
+                                <ul>
+                                    <li><strong>Special 11:</strong> สิบเอ็ด (sìp-èt) - <em>'èt' is used for 1 in the units place</em></li>
+                                    <li><strong>Special 20:</strong> ยี่สิบ (yîi-sìp) - <em>'yîi' replaces 'sǎawng' (2) for 20s</em></li>
+                                    <li><strong>Special 21:</strong> ยี่สิบเอ็ด (yîi-sìp-èt)</li>
+                                    <li><strong>Structure:</strong> [Digit] + สิบ (sìp) + [Digit]</li>
+                                    <li><em>Example: 42</em> <br> สี่สิบสอง (sìi-sìp-sǎawng)</li>
+                                </ul>
+                            </div>
+                            <div class="guide-col">
+                                <h3>Large Units</h3>
+                                <ul>
+                                    <li>100: ร้อย (rɔ́ɔi)</li>
+                                    <li>1,000: พัน (phan)</li>
+                                    <li>10,000: หมื่น (mùen)</li>
+                                    <li>100,000: แสน (sǎen)</li>
+                                    <li>1,000,000: ล้าน (láan)</li>
+                                </ul>
+                            </div>
+                        </div>
+
+                        <div class="number-explorer">
+                            <h3>🔍 Number Explorer</h3>
+                            <div class="explorer-controls">
+                                <input type="number" id="explorerInput" placeholder="Enter any number..." min="0" max="9999999">
+                                <button id="explorerBtn" class="control-btn">Translate & Play</button>
+                            </div>
+                            <div id="explorerResult" class="explorer-result" style="display: none;">
+                                <div id="explorerThai" class="thai-text" style="font-size: 1.5rem; color: #667eea;"></div>
+                                <div id="explorerRoman" class="romanization"></div>
+                            </div>
+                        </div>
+                    </div>
+                </details>
+
                 <div class="quiz-config">
                     <button class="range-btn active" data-range="10">1-10</button>
                     <button class="range-btn" data-range="100">1-100</button>
