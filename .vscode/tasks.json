@@ -26,7 +26,7 @@
         {
             "label": "Firebase: Deploy",
             "type": "shell",
-            "command": "firebase deploy",
+            "command": "npm run build:full && firebase deploy",
             "problemMatcher": [],
             "group": {
                 "kind": "build",
