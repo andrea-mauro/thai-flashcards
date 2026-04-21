@@ -1,66 +1,29 @@
-describe('Thai Flashcards E2E Tests', () => {
+describe('General App Tests', () => {
   beforeEach(() => {
-    // Visit the app (requires Live Server or a local server running)
-    cy.visit('/index.html');
+    // Visit the app and ensure the initial view is flashcards
+    cy.visit('/index.html#flashcards');
   });
 
-  it('loads the app and shows flashcards', () => {
-    cy.get('h1').should('contain', 'Thai Flashcards');
-    cy.get('.flashcard').should('have.length.at.least', 1);
-  });
+  // Add any general app tests here that don't fit into specific feature files.
+  // For example, testing navigation between views or overall app loading.
+  it('navigates between views', () => {
+    // Test initial view
+    cy.url().should('include', '#flashcards');
 
-  it('filters cards by category', () => {
-    // Click 'Family' category
-    cy.get('.category-btn[data-category="family"]').click();
-    cy.get('.category-btn[data-category="family"]').should('have.class', 'active');
-    
-    // Check if the total cards count updated
-    cy.get('#totalCards').invoke('text').then((count) => {
-      expect(parseInt(count)).to.be.greaterThan(0);
-    });
-  });
-
-  it('switches to Numbers view and generates a question', () => {
-    // Click Numbers tab
+    // Navigate to Numbers view
     cy.get('.tab-btn[data-view="numbers"]').click();
+    cy.url().should('include', '#numbers');
     cy.get('#numbersView').should('be.visible');
-    cy.get('#flashcardsView').should('not.be.visible');
 
-    // Check if a question is generated
-    cy.get('#quizQuestion').should('not.contain', 'Ready?');
-    cy.get('.choice-btn').should('have.length', 4);
-  });
+    // Navigate to Time view
+    cy.get('.tab-btn[data-view="time"]').click();
+    cy.url().should('include', '#time');
+    cy.get('#timeView').should('be.visible');
 
-  it('interacts with the Numbers quiz', () => {
-    cy.get('.tab-btn[data-view="numbers"]').click();
-    
-    // Click a range button
-    cy.get('.range-btn[data-range="100"]').click();
-    
-    // Attempt to answer (logic check)
-    cy.get('.choice-btn').first().click();
-    cy.get('#quizFeedback').should('not.be.empty');
-    cy.get('#nextNumberBtn').should('be.visible');
-  });
-
-  it('verifies flashcard flip interaction', () => {
-    cy.get('.flashcard').first().as('card');
-    
-    // Should not be flipped initially
-    cy.get('@card').should('not.have.class', 'flipped');
-    
-    // Click the card (forcing it to ensure the click hits even during any grid rendering)
-    cy.get('@card').click({ force: true });
-    
-    // Should have the flipped class
-    cy.get('@card').should('have.class', 'flipped');
-    
-    // Verify Thai text exists (using exist instead of be.visible because 
-    // backface-visibility and 3D transforms can sometimes confuse visibility checks)
-    cy.get('@card').find('.thai-text').should('exist');
-    
-    // Flip back
-    cy.get('@card').click({ force: true });
-    cy.get('@card').should('not.have.class', 'flipped');
+    // Navigate back to Flashcards view
+    cy.get('.tab-btn[data-view="flashcards"]').click();
+    cy.url().should('include', '#flashcards');
+    cy.get('#flashcardsView').should('be.visible');
   });
 });
+
