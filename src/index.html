@@ -2,45 +2,57 @@
 <html lang="en">
 <head>
     <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
     <title>Thai Flashcards</title>
-    <link rel="icon" href="data:image/svg+xml,<svg xmlns=%22http://www.w3.org/2000/svg%22 viewBox=%220 0 100 100%22><text y=%22.9em%22 font-size=%2290%22>🇹🇭</text></svg>">
     <link rel="stylesheet" href="css/styles.css">
+    
+    <!-- Instant Routing Script -->
+    <script>
+        (function() {
+            const hash = window.location.hash.replace('#', '');
+            // Default to flashcards, but accept any hash as a starting view
+            window.INITIAL_VIEW = hash || 'flashcards';
+            document.documentElement.classList.add('app-loading');
+        })();
+    </script>
+
+    <script src="data/flashcards.js" defer></script>
+    <script src="js/app.js" defer></script>
 </head>
-<body>
+<body class="loading">
     <div class="container">
         <header>
-            <h1>🇹🇭 Thai Flashcards</h1>
+            <h1>Thai Flashcards</h1>
             <p>Learn Thai vocabulary and phrases</p>
         </header>
 
         <div class="main-tabs">
-            <button class="tab-btn active" data-view="flashcards">📚 Flashcards</button>
-            <button class="tab-btn" data-view="numbers">🔢 Numbers</button>
+            <button class="tab-btn" data-view="flashcards">Flashcards</button>
+            <button class="tab-btn" data-view="numbers">Numbers</button>
         </div>
 
-        <div class="stats-bar">
+        <div class="stats-bar" style="display: none;">
             <div class="stat-item">
                 <div class="stat-value" id="totalCards">0</div>
                 <div class="stat-label">Total Cards</div>
             </div>
         </div>
 
-        <div id="flashcardsView" class="view">
+        <div id="flashcardsView" class="view" style="display: none;">
             <div class="category-filter" id="categoryFilter">
                 <button class="category-btn active" data-category="all">All</button>
                 <button class="category-btn" data-category="introduction">Introduction</button>
                 <button class="category-btn" data-category="family">Family</button>
-                <button class="category-btn" data-category="routine">Daily Routine</button>
+                <button class="category-btn" data-category="routine">Routine</button>
                 <button class="category-btn" data-category="technology">Technology</button>
-                <button class="category-btn" data-category="pets">Pets & Animals</button>
+                <button class="category-btn" data-category="pets">Pets</button>
                 <button class="category-btn" data-category="kitchen">Kitchen</button>
                 <button class="category-btn" data-category="bathroom">Bathroom</button>
                 <button class="category-btn" data-category="travel">Travel</button>
             </div>
 
             <div class="controls">
-                <button class="control-btn shuffle-btn" id="shuffleBtn">🔀 Shuffle</button>
+                <button class="control-btn shuffle-btn" id="shuffleBtn">Shuffle</button>
             </div>
 
             <div class="flashcard-container" id="flashcardContainer"></div>
@@ -49,7 +61,7 @@
         <div id="numbersView" class="view" style="display: none;">
             <div class="numbers-quiz-container">
                 <details class="numbers-guide">
-                    <summary>📚 Thai Numbers - How it works</summary>
+                    <summary>📚 Thai Numbers Guide (How it works)</summary>
                     <div class="guide-content">
                         <div class="guide-grid">
                             <div class="guide-col">
@@ -107,34 +119,25 @@
                 <div class="quiz-config">
                     <button class="range-btn active" data-range="10">1-10</button>
                     <button class="range-btn" data-range="100">1-100</button>
-                    <button class="range-btn" data-range="1000">1-1,000</button>
-                    <button class="range-btn" data-range="random">Random Mixed</button>
+                    <button class="range-btn" data-range="1000">1-1000</button>
+                    <button class="range-btn" data-range="random">Random</button>
                 </div>
                 
                 <div class="quiz-card">
                     <div id="quizQuestion" class="quiz-question">Ready?</div>
-                    <div id="quizTypeLabel" class="quiz-type-label">Select a range to start</div>
+                    <div id="quizTypeLabel" class="quiz-type-label">Select range</div>
                     
                     <div id="audioVisualizer" class="audio-visualizer" style="display: none;">
                         <button class="audio-btn large" id="quizAudioBtn">🔊</button>
                     </div>
 
-                    <div id="quizChoices" class="quiz-choices">
-                        <!-- Choices will be injected here -->
-                    </div>
-
+                    <div id="quizChoices" class="quiz-choices"></div>
                     <div id="quizFeedback" class="quiz-feedback"></div>
-                    
-                    <button id="nextNumberBtn" class="control-btn" style="display: none; margin-top: 20px;">Next Number →</button>
+                    <button id="nextNumberBtn" class="control-btn" style="display: none; margin-top: 20px;">Next</button>
                 </div>
             </div>
         </div>
     </div>
-
     <div class="toast" id="toast"></div>
-
-    <!-- Load app logic -->
-    <script src="data/flashcards.js"></script>
-    <script src="js/app.js"></script>
 </body>
 </html>

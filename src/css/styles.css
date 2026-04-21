@@ -115,9 +115,14 @@
             opacity: 0.9;
         }
 
+        /* Initial loading shield */
+        .app-loading body {
+            visibility: hidden !important;
+        }
+
         /* View Management */
         .view {
-            display: block;
+            display: none;
         }
 
         /* Numbers Quiz Styles */

@@ -27,13 +27,27 @@
         // Initialize app
         function init() {
             try {
+                // Instantly show the correct view
+                const startingView = window.INITIAL_VIEW || 'flashcards';
+                switchView(startingView);
+                
                 renderFlashcards();
                 setupEventListeners();
                 updateStats();
+
+                // Lift the loading shield
+                document.documentElement.classList.remove('app-loading');
+
+                window.addEventListener('hashchange', handleRouting);
             } catch (error) {
                 console.error('Error initializing flashcard app:', error);
                 showToast('Error loading application.');
             }
+        }
+
+        function handleRouting() {
+            const hash = window.location.hash.replace('#', '');
+            switchView(hash || 'flashcards');
         }
 
         // Initialize
@@ -43,7 +57,9 @@
         function setupEventListeners() {
             // Main Navigation Tabs
             document.querySelectorAll('.tab-btn').forEach(btn => {
-                btn.addEventListener('click', () => switchView(btn.dataset.view));
+                btn.addEventListener('click', () => {
+                    window.location.hash = btn.dataset.view;
+                });
             });
 
             // Category filtering
@@ -117,9 +133,12 @@
             const tabEl = document.querySelector(`[data-view="${viewId}"]`);
             const statsBar = document.querySelector('.stats-bar');
             
-            if (!viewEl || !tabEl) {
-                console.warn(`View or Tab for "${viewId}" not found. Defaulting to flashcards.`);
-                if (viewId !== 'flashcards') switchView('flashcards');
+            // If the view doesn't exist, fall back to flashcards
+            if (!viewEl) {
+                if (viewId !== 'flashcards') {
+                    console.warn(`View "${viewId}" not found. Falling back to flashcards.`);
+                    switchView('flashcards');
+                }
                 return;
             }
 
@@ -128,7 +147,7 @@
             document.querySelectorAll('.tab-btn').forEach(b => b.classList.remove('active'));
             
             viewEl.style.display = 'block';
-            tabEl.classList.add('active');
+            if (tabEl) tabEl.classList.add('active');
 
             // Hide/Show stats bar based on view
             if (statsBar) {
@@ -194,6 +213,8 @@
             const feedback = document.getElementById('quizFeedback');
             const nextBtn = document.getElementById('nextNumberBtn');
 
+            if (!questionEl || !typeLabel || !audioVis || !choicesEl || !feedback || !nextBtn) return;
+
             feedback.textContent = '';
             feedback.className = 'quiz-feedback';
             nextBtn.style.display = 'none';
@@ -241,6 +262,7 @@
 
             const feedback = document.getElementById('quizFeedback');
             const nextBtn = document.getElementById('nextNumberBtn');
+            if (!feedback || !nextBtn) return;
             const data = toThai(currentCorrectNumber);
 
             if (selected === currentCorrectNumber) {
