@@ -5,10 +5,18 @@
         let currentCategory = 'all';
         let currentCards = [...flashcardData];
 
+        // Immediate Routing (Before DOM load)
+        const initialHash = window.location.hash.replace('#', '');
+        currentView = initialHash || 'flashcards';
+
         // Numbers Quiz State
         let currentNumberRange = 10;
         let currentCorrectNumber = null;
         let quizMode = 'visual'; // 'visual' (digit -> thai) or 'audio' (sound -> digit)
+
+        // Time Quiz State
+        let currentCorrectTime = null; // { h: 14, m: 30 }
+        let timeQuizMode = 'visual';
 
         const thaiNumbers = {
             units: ['', 'หนึ่ง', 'สอง', 'สาม', 'สี่', 'ห้า', 'หก', 'เจ็ด', 'แปด', 'เก้า'],
@@ -125,6 +133,20 @@
                     playAudio(data.thai);
                 });
             }
+
+            // Time Quiz Controls
+            const nextTimeBtn = document.getElementById('nextTimeBtn');
+            if (nextTimeBtn) nextTimeBtn.addEventListener('click', generateTimeQuestion);
+
+            const timeAudioBtn = document.getElementById('timeAudioBtn');
+            if (timeAudioBtn) {
+                timeAudioBtn.addEventListener('click', () => {
+                    if (currentCorrectTime) {
+                        const data = toThaiTime(currentCorrectTime.h, currentCorrectTime.m);
+                        playAudio(data.thai);
+                    }
+                });
+            }
         }
 
         // View management
@@ -156,6 +178,10 @@
             
             if (viewId === 'numbers' && currentCorrectNumber === null) {
                 generateNumberQuestion();
+            }
+
+            if (viewId === 'time' && currentCorrectTime === null) {
+                generateTimeQuestion();
             }
         }
 
@@ -199,6 +225,146 @@
                 }
             }
             return { thai, roman };
+        }
+
+        // --- Thai Time Logic ---
+        function toThaiTime(h, m) {
+            let thai = '';
+            let roman = '';
+
+            // Period & Hour Logic
+            if (h === 0) {
+                thai = 'เที่ยงคืน';
+                roman = 'thîang khʉuen';
+            } else if (h >= 1 && h <= 5) {
+                thai = 'ตี' + thaiNumbers.units[h];
+                roman = 'dtii-' + thaiRoman.units[h];
+            } else if (h >= 6 && h <= 11) {
+                thai = thaiNumbers.units[h] + 'โมงเช้า';
+                roman = thaiRoman.units[h] + '-moong-cháao';
+            } else if (h === 12) {
+                thai = 'เที่ยง';
+                roman = 'thîang';
+            } else if (h >= 13 && h <= 15) {
+                const hour = h - 12;
+                thai = 'บ่าย' + thaiNumbers.units[hour] + 'โมง';
+                roman = 'bàai-' + thaiRoman.units[hour] + '-moong';
+            } else if (h >= 16 && h <= 18) {
+                const hour = h - 12;
+                thai = thaiNumbers.units[hour] + 'โมงเย็น';
+                roman = thaiRoman.units[hour] + '-moong-yen';
+            } else if (h >= 19 && h <= 23) {
+                const hour = h - 18;
+                thai = thaiNumbers.units[hour] + 'ทุ่ม';
+                roman = thaiRoman.units[hour] + '-thûm';
+            }
+
+            // Minutes Logic
+            if (m === 0) {
+                // Optional: add 'trong' for o'clock
+            } else if (m === 30) {
+                thai += 'ครึ่ง';
+                roman += '-khrʉueng';
+            } else {
+                const mData = toThai(m);
+                thai += mData.thai + 'นาที';
+                roman += '-' + mData.roman + '-naa-thii';
+            }
+
+            return { thai, roman };
+        }
+
+        function generateTimeQuestion() {
+            const h = Math.floor(Math.random() * 24);
+            const mChoices = [0, 5, 10, 15, 20, 25, 30, 35, 40, 45, 50, 55];
+            const m = mChoices[Math.floor(Math.random() * mChoices.length)];
+            
+            currentCorrectTime = { h, m };
+            timeQuizMode = Math.random() > 0.5 ? 'visual' : 'audio';
+
+            const questionEl = document.getElementById('timeQuestion');
+            const typeLabel = document.getElementById('timeTypeLabel');
+            const audioVis = document.getElementById('timeAudioVis');
+            const choicesEl = document.getElementById('timeChoices');
+            const feedback = document.getElementById('timeFeedback');
+            const nextBtn = document.getElementById('nextTimeBtn');
+
+            if (!questionEl || !choicesEl || !feedback || !nextBtn) return;
+
+            feedback.textContent = '';
+            feedback.className = 'quiz-feedback';
+            nextBtn.style.display = 'none';
+            choicesEl.innerHTML = '';
+
+            const timeStr = `${h.toString().padStart(2, '0')}:${m.toString().padStart(2, '0')}`;
+            const correctData = toThaiTime(h, m);
+
+            if (timeQuizMode === 'visual') {
+                questionEl.textContent = timeStr;
+                typeLabel.textContent = 'What is this time in Thai?';
+                audioVis.style.display = 'none';
+            } else {
+                questionEl.innerHTML = `<div style="font-size: 2rem;">${correctData.thai}</div><div style="font-size: 1.1rem; color: #7f8c8d; font-weight: normal; margin-top: 5px;">${correctData.roman}</div>`;
+                typeLabel.textContent = 'Identify this Thai time';
+                audioVis.style.display = 'block';
+            }
+
+            // Generate choices
+            let choices = [currentCorrectTime];
+            while (choices.length < 4) {
+                const wh = Math.floor(Math.random() * 24);
+                const wm = mChoices[Math.floor(Math.random() * mChoices.length)];
+                if (!choices.some(c => c.h === wh && c.m === wm)) {
+                    choices.push({ h: wh, m: wm });
+                }
+            }
+            choices.sort(() => Math.random() - 0.5);
+
+            choices.forEach(c => {
+                const btn = document.createElement('button');
+                btn.className = 'choice-btn';
+                const cData = toThaiTime(c.h, c.m);
+                const cStr = `${c.h.toString().padStart(2, '0')}:${c.h >= 12 ? ' PM' : ' AM'}`; // Simplified display for choice
+                const digitalTime = `${c.h.toString().padStart(2, '0')}:${c.m.toString().padStart(2, '0')}`;
+
+                if (timeQuizMode === 'visual') {
+                    btn.innerHTML = `<div style="font-size: 0.95rem; font-weight: bold; line-height: 1.2;">${cData.thai}</div><div class="choice-romanization" style="font-size: 0.75rem;">${cData.roman}</div>`;
+                } else {
+                    btn.textContent = digitalTime;
+                }
+                
+                btn.onclick = () => checkTimeAnswer(c, btn);
+                choicesEl.appendChild(btn);
+            });
+        }
+
+        function checkTimeAnswer(selected, btn) {
+            if (document.querySelector('#timeChoices .choice-btn.correct')) return;
+
+            const feedback = document.getElementById('timeFeedback');
+            const nextBtn = document.getElementById('nextTimeBtn');
+            const data = toThaiTime(currentCorrectTime.h, currentCorrectTime.m);
+            const digitalTime = `${currentCorrectTime.h.toString().padStart(2, '0')}:${currentCorrectTime.m.toString().padStart(2, '0')}`;
+
+            if (selected.h === currentCorrectTime.h && selected.m === currentCorrectTime.m) {
+                btn.classList.add('correct');
+                feedback.innerHTML = `Correct! <strong>${digitalTime}</strong> is ${data.thai}`;
+                feedback.className = 'quiz-feedback correct';
+                playAudio(data.thai);
+            } else {
+                btn.classList.add('incorrect');
+                feedback.innerHTML = `Incorrect. It was <strong>${digitalTime}</strong>`;
+                feedback.className = 'quiz-feedback incorrect';
+                
+                document.querySelectorAll('#timeChoices .choice-btn').forEach(b => {
+                    if (timeQuizMode === 'visual') {
+                        if (b.innerText.includes(data.thai)) b.classList.add('correct');
+                    } else {
+                        if (b.textContent === digitalTime) b.classList.add('correct');
+                    }
+                });
+            }
+            nextBtn.style.display = 'inline-block';
         }
 
         function generateNumberQuestion() {

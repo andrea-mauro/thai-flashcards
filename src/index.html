@@ -29,6 +29,7 @@
         <div class="main-tabs">
             <button class="tab-btn" data-view="flashcards">Flashcards</button>
             <button class="tab-btn" data-view="numbers">Numbers</button>
+            <button class="tab-btn" data-view="time">Time</button>
         </div>
 
         <div class="stats-bar" style="display: none;">
@@ -134,6 +135,111 @@
                     <div id="quizChoices" class="quiz-choices"></div>
                     <div id="quizFeedback" class="quiz-feedback"></div>
                     <button id="nextNumberBtn" class="control-btn" style="display: none; margin-top: 20px;">Next</button>
+                </div>
+            </div>
+        </div>
+
+        <div id="timeView" class="view" style="display: none;">
+            <div class="numbers-quiz-container">
+                <details class="numbers-guide">
+                    <summary>⏰ Thai Time Guide (6-Hour Cycle)</summary>
+                    <div class="guide-content">
+                        <div class="guide-grid">
+                            <div class="guide-col">
+                                <h3>Periods</h3>
+                                <ul>
+                                    <li><strong>1-5 AM:</strong> ตี (dtii) + [1-5]</li>
+                                    <li><strong>6-11 AM:</strong> [6-11] + โมงเช้า (moong cháao)</li>
+                                    <li><strong>12 PM:</strong> เที่ยง (thîang)</li>
+                                    <li><strong>1-3 PM:</strong> บ่าย (bàai) + [1-3] + โมง (moong)</li>
+                                    <li><strong>4-6 PM:</strong> [4-6] + โมงเย็น (moong yen)</li>
+                                    <li><strong>7-11 PM:</strong> [1-5] + ทุ่ม (thûm)</li>
+                                    <li><strong>12 AM:</strong> เที่ยงคืน (thîang khʉuen)</li>
+                                </ul>
+                            </div>
+                            <div class="guide-col">
+                                <h3>Minutes & More</h3>
+                                <ul>
+                                    <li><strong>Minutes:</strong> [Number] + นาที (naa-thii)</li>
+                                    <li><strong>Half (30):</strong> ครึ่ง (khrʉueng)</li>
+                                    <li><strong>O'clock:</strong> ตรง (trong)</li>
+                                    <li><em>Example: 7:30 AM</em><br>เจ็ดโมงเช้าครึ่ง<br>(jèt moong cháao khrʉueng)</li>
+                                </ul>
+                            </div>
+                            <div class="guide-col curiosity-col">
+                                <h3>💡 Historical Curiosity</h3>
+                                <p style="font-size: 0.85rem; color: #7f8c8d; line-height: 1.4;">The names come from the <strong>sounds</strong> of traditional instruments used in villages:</p>
+                                <ul class="curiosity-list" style="list-style: none; font-size: 0.85rem; margin-top: 10px;">
+                                    <li><strong>Dtee (ตี):</strong> "Ting!" - The sharp sound of hitting a small metal rod in the quiet early morning.</li>
+                                    <li><strong>Mong (โมง):</strong> "Bong!" - The deep sound of a brass gong during the busy day.</li>
+                                    <li><strong>Thum (ทุ่ม):</strong> "Thump!" - The low resonance of a large drum during the still evening.</li>
+                                </ul>
+                            </div>
+                        </div>
+
+                        <div class="hours-reference">
+                            <h3>🕒 Full Hour Reference (12 AM - 11 PM)</h3>
+                            <div class="reference-grid">
+                                <div class="ref-group">
+                                    <h4>Night / Early Morning</h4>
+                                    <ul>
+                                        <li>12 AM: เที่ยงคืน (thîang khʉuen)</li>
+                                        <li>1 AM: ตีหนึ่ง (dtii nùeng)</li>
+                                        <li>2 AM: ตีสอง (dtii sǎawng)</li>
+                                        <li>3 AM: ตีสาม (dtii sǎam)</li>
+                                        <li>4 AM: ตีสี่ (dtii sìi)</li>
+                                        <li>5 AM: ตีห้า (dtii hâa)</li>
+                                    </ul>
+                                </div>
+                                <div class="ref-group">
+                                    <h4>Morning</h4>
+                                    <ul>
+                                        <li>6 AM: หกโมงเช้า (hòk moong cháao)</li>
+                                        <li>7 AM: เจ็ดโมงเช้า (jèt moong cháao)</li>
+                                        <li>8 AM: แปดโมงเช้า (bpàet moong cháao)</li>
+                                        <li>9 AM: เก้าโมงเช้า (gâao moong cháao)</li>
+                                        <li>10 AM: สิบโมงเช้า (sìp moong cháao)</li>
+                                        <li>11 AM: สิบเอ็ดโมงเช้า (sìp-èt moong cháao)</li>
+                                    </ul>
+                                </div>
+                                <div class="ref-group">
+                                    <h4>Afternoon / Evening</h4>
+                                    <ul>
+                                        <li>12 PM: เที่ยง (thîang)</li>
+                                        <li>1 PM: บ่ายโมง (bàai moong)</li>
+                                        <li>2 PM: บ่ายสองโมง (bàai sǎawng moong)</li>
+                                        <li>3 PM: บ่ายสามโมง (bàai sǎam moong)</li>
+                                        <li>4 PM: สี่โมงเย็น (sìi moong yen)</li>
+                                        <li>5 PM: ห้าโมงเย็น (hâa moong yen)</li>
+                                        <li>6 PM: หกโมงเย็น (hòk moong yen)</li>
+                                    </ul>
+                                </div>
+                                <div class="ref-group">
+                                    <h4>Night (Drums)</h4>
+                                    <ul>
+                                        <li>7 PM: หนึ่งทุ่ม (nùeng thûm)</li>
+                                        <li>8 PM: สองทุ่ม (sǎawng thûm)</li>
+                                        <li>9 PM: สามทุ่ม (sǎam thûm)</li>
+                                        <li>10 PM: สี่ทุ่ม (sìi thûm)</li>
+                                        <li>11 PM: ห้าทุ่ม (hâa thûm)</li>
+                                    </ul>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </details>
+
+                <div class="quiz-card">
+                    <div id="timeQuestion" class="quiz-question" style="font-size: 3.5rem;">Ready?</div>
+                    <div id="timeTypeLabel" class="quiz-type-label">Test your time skills</div>
+                    
+                    <div id="timeAudioVis" class="audio-visualizer" style="display: none;">
+                        <button class="audio-btn large" id="timeAudioBtn">🔊</button>
+                    </div>
+
+                    <div id="timeChoices" class="quiz-choices"></div>
+                    <div id="timeFeedback" class="quiz-feedback"></div>
+                    <button id="nextTimeBtn" class="control-btn" style="display: none; margin-top: 20px;">Next Time →</button>
                 </div>
             </div>
         </div>
