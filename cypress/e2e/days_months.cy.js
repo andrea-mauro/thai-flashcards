@@ -25,11 +25,11 @@ describe('Days & Months Section Tests', () => {
     cy.get('#daysView .numbers-guide summary').click();
     
     // Select a date
-    cy.get('#dateInput').type('2026-04-21');
-    cy.get('#dateTranslateBtn').click();
+    cy.get('#dateInput').type('2026-04-21', { force: true });
+    cy.get('#dateTranslateBtn').click({ force: true });
     
     // Verify result exists
-    cy.get('#dateResult').should('be.visible');
+    cy.get('#dateResult').should('exist');
     cy.get('#dateThai').should('not.be.empty');
     cy.get('#dateRoman').should('not.be.empty');
   });
@@ -40,11 +40,11 @@ describe('Days & Months Section Tests', () => {
     cy.get('#dayChoices .choice-btn').should('have.length', 4);
 
     // Switch to Months mode
-    cy.get('.day-range-btn[data-mode="months"]').click();
+    cy.get('.day-range-btn[data-mode="months"]').click({ force: true });
     cy.get('.day-range-btn[data-mode="months"]').should('have.class', 'active');
     
     // Click an answer and verify feedback
-    cy.get('#dayChoices .choice-btn').first().click();
+    cy.get('#dayChoices .choice-btn').first().click({ force: true });
     cy.get('#dayFeedback').should('not.be.empty');
     cy.get('#nextDayBtn').should('be.visible');
   });

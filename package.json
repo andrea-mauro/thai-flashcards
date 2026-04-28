@@ -4,9 +4,9 @@
   "description": "A lightweight, standalone web application for learning Thai vocabulary and phrases. It features category filtering, progress tracking (learned vs. hard cards), daily streaks, and text-to-speech audio.",
   "main": "index.js",
   "scripts": {
-    "clean": "rm -rf dist && mkdir -p dist/css dist/js dist/data",
-    "build:js": "terser src/js/app.js -o dist/js/app.js --compress --mangle && terser src/data/flashcards.js -o dist/data/flashcards.js --compress --mangle",
-    "build:css": "cleancss -o dist/css/styles.css src/css/styles.css",
+    "clean": "rm -rf dist && mkdir -p dist/css dist/js/modules dist/data",
+    "build:js": "terser src/js/utils.js -o dist/js/utils.js --compress --mangle && terser src/js/app.js -o dist/js/app.js --compress --mangle && terser src/data/flashcards.js -o dist/data/flashcards.js --compress --mangle && for f in src/js/modules/*.js; do terser \"$f\" -o \"dist/js/modules/$(basename \"$f\")\" --compress --mangle; done",
+    "build:css": "cleancss -o dist/css/base.css src/css/base.css && cleancss -o dist/css/flashcards.css src/css/flashcards.css && cleancss -o dist/css/quiz.css src/css/quiz.css",
     "build:html": "html-minifier-terser --collapse-whitespace --remove-comments --remove-redundant-attributes --remove-script-type-attributes --remove-tag-whitespace --use-short-doctype --minify-js true --minify-css true src/index.html -o dist/index.html",
     "build": "npm run clean && npm run build:js && npm run build:css && npm run build:html",
     "build:full": "npm run build && npm run test:dist",

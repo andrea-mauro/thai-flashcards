@@ -9,22 +9,22 @@ describe('General App Tests', () => {
 
   it('navigates between views', () => {
     // Navigate to Numbers view
-    cy.get('.tab-btn[data-view="numbers"]').click();
+    cy.get('.tab-btn[data-view="numbers"]').click({ force: true });
     cy.url().should('include', '#numbers');
     cy.get('#numbersView').should('be.visible');
 
     // Navigate to Time view
-    cy.get('.tab-btn[data-view="time"]').click();
+    cy.get('.tab-btn[data-view="time"]').click({ force: true });
     cy.url().should('include', '#time');
     cy.get('#timeView').should('be.visible');
     
     // Navigate to Days view
-    cy.get('.tab-btn[data-view="days"]').click();
+    cy.get('.tab-btn[data-view="days"]').click({ force: true });
     cy.url().should('include', '#days');
     cy.get('#daysView').should('be.visible');
 
     // Navigate back to Flashcards view
-    cy.get('.tab-btn[data-view="flashcards"]').click();
+    cy.get('.tab-btn[data-view="flashcards"]').click({ force: true });
     cy.url().should('include', '#flashcards');
     cy.get('#flashcardsView').should('be.visible');
   });

@@ -4,19 +4,28 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
     <title>Thai Flashcards</title>
-    <link rel="stylesheet" href="css/styles.css">
+    
+    <!-- Component Styles -->
+    <link rel="stylesheet" href="css/base.css">
+    <link rel="stylesheet" href="css/flashcards.css">
+    <link rel="stylesheet" href="css/quiz.css">
     
     <!-- Instant Routing Script -->
     <script>
         (function() {
             const hash = window.location.hash.replace('#', '');
-            // Default to flashcards, but accept any hash as a starting view
             window.INITIAL_VIEW = hash || 'flashcards';
             document.documentElement.classList.add('app-loading');
         })();
     </script>
 
+    <!-- App Data & Logic -->
     <script src="data/flashcards.js" defer></script>
+    <script src="js/utils.js" defer></script>
+    <script src="js/modules/numbers.js" defer></script>
+    <script src="js/modules/flashcards.js" defer></script>
+    <script src="js/modules/time.js" defer></script>
+    <script src="js/modules/days.js" defer></script>
     <script src="js/app.js" defer></script>
 </head>
 <body class="loading">
@@ -26,12 +35,12 @@
             <p>Learn Thai vocabulary and phrases</p>
         </header>
 
-        <div class="main-tabs">
+        <nav class="main-tabs">
             <button class="tab-btn" data-view="flashcards">Flashcards</button>
             <button class="tab-btn" data-view="numbers">Numbers</button>
             <button class="tab-btn" data-view="time">Time</button>
             <button class="tab-btn" data-view="days">Days/Months</button>
-        </div>
+        </nav>
 
         <div class="stats-bar" style="display: none;">
             <div class="stat-item">
@@ -40,7 +49,8 @@
             </div>
         </div>
 
-        <div id="flashcardsView" class="view" style="display: none;">
+        <!-- Flashcards View -->
+        <section id="flashcardsView" class="view">
             <div class="category-filter" id="categoryFilter">
                 <button class="category-btn active" data-category="all">All</button>
                 <button class="category-btn" data-category="introduction">Introduction</button>
@@ -52,15 +62,14 @@
                 <button class="category-btn" data-category="bathroom">Bathroom</button>
                 <button class="category-btn" data-category="travel">Travel</button>
             </div>
-
             <div class="controls">
                 <button class="control-btn shuffle-btn" id="shuffleBtn">Shuffle</button>
             </div>
-
             <div class="flashcard-container" id="flashcardContainer"></div>
-        </div>
+        </section>
 
-        <div id="numbersView" class="view" style="display: none;">
+        <!-- Numbers View -->
+        <section id="numbersView" class="view">
             <div class="numbers-quiz-container">
                 <details class="numbers-guide" open>
                     <summary>📚 Thai Numbers Guide (How it works)</summary>
@@ -103,7 +112,6 @@
                                 </ul>
                             </div>
                         </div>
-
                         <div class="number-explorer">
                             <h3>🔍 Number Explorer</h3>
                             <div class="explorer-controls">
@@ -111,36 +119,33 @@
                                 <button id="explorerBtn" class="control-btn">Translate & Play</button>
                             </div>
                             <div id="explorerResult" class="explorer-result" style="display: none;">
-                                <div id="explorerThai" class="thai-text" style="font-size: 1.5rem; color: #667eea;"></div>
+                                <div id="explorerThai" class="thai-text"></div>
                                 <div id="explorerRoman" class="romanization"></div>
                             </div>
                         </div>
                     </div>
                 </details>
-
                 <div class="quiz-config">
                     <button class="range-btn active" data-range="10">1-10</button>
                     <button class="range-btn" data-range="100">1-100</button>
                     <button class="range-btn" data-range="1000">1-1000</button>
                     <button class="range-btn" data-range="random">Random</button>
                 </div>
-                
                 <div class="quiz-card">
                     <div id="quizQuestion" class="quiz-question">Ready?</div>
                     <div id="quizTypeLabel" class="quiz-type-label">Select range</div>
-                    
                     <div id="audioVisualizer" class="audio-visualizer" style="display: none;">
                         <button class="audio-btn large" id="quizAudioBtn">🔊</button>
                     </div>
-
                     <div id="quizChoices" class="quiz-choices"></div>
                     <div id="quizFeedback" class="quiz-feedback"></div>
                     <button id="nextNumberBtn" class="control-btn" style="display: none; margin-top: 20px;">Next</button>
                 </div>
             </div>
-        </div>
+        </section>
 
-        <div id="timeView" class="view" style="display: none;">
+        <!-- Time View -->
+        <section id="timeView" class="view">
             <div class="numbers-quiz-container">
                 <details class="numbers-guide" open>
                     <summary>⏰ Thai Time Guide (6-Hour Cycle)</summary>
@@ -164,7 +169,7 @@
                                     <li><strong>Minutes:</strong> [Number] + นาที (naa-thii)</li>
                                     <li><strong>Half (30):</strong> ครึ่ง (khrʉueng)</li>
                                     <li><strong>O'clock:</strong> ตรง (trong)</li>
-                                    <li><em>Example: 7:30 AM</em><br>เจ็ดโมงเช้าครึ่ง<br>(jèt moong cháao khrʉueng)</li>
+                                    <li><em>Example: 7:30 AM</em><br>เจ็ดโมงเช้าครึ่ง (jèt moong cháao khrʉueng)</li>
                                 </ul>
                             </div>
                             <div class="guide-col curiosity-col">
@@ -177,7 +182,6 @@
                                 </ul>
                             </div>
                         </div>
-
                         <div class="hours-reference">
                             <h3>🕒 Full Hour Reference (12 AM - 11 PM)</h3>
                             <div class="reference-grid">
@@ -234,23 +238,21 @@
                         </div>
                     </div>
                 </details>
-
                 <div class="quiz-card">
                     <div id="timeQuestion" class="quiz-question" style="font-size: 3.5rem;">Ready?</div>
                     <div id="timeTypeLabel" class="quiz-type-label">Test your time skills</div>
-                    
                     <div id="timeAudioVis" class="audio-visualizer" style="display: none;">
                         <button class="audio-btn large" id="timeAudioBtn">🔊</button>
                     </div>
-
                     <div id="timeChoices" class="quiz-choices"></div>
                     <div id="timeFeedback" class="quiz-feedback"></div>
-                    <button id="nextTimeBtn" class="control-btn" style="display: none; margin-top: 20px;">Next Time →</button>
+                    <button id="nextTimeBtn" class="control-btn" style="display: none; margin-top: 20px;">Next</button>
                 </div>
             </div>
-        </div>
+        </section>
 
-        <div id="daysView" class="view" style="display: none;">
+        <!-- Days/Months View -->
+        <section id="daysView" class="view">
             <div class="numbers-quiz-container">
                 <details class="numbers-guide" open>
                     <summary>🗓️ Days & Months Guide</summary>
@@ -258,7 +260,7 @@
                         <div class="guide-grid">
                             <div class="guide-col">
                                 <h3>Days of the Week</h3>
-                                <ul class="guide-list" style="list-style: none; font-size: 0.9rem;">
+                                <ul class="guide-list">
                                     <li><strong>Sunday</strong>: วันอาทิตย์ (wan aa-thít)</li>
                                     <li><strong>Monday</strong>: วันจันทร์ (wan jan)</li>
                                     <li><strong>Tuesday</strong>: วันอังคาร (wan ang-khaan)</li>
@@ -270,7 +272,7 @@
                             </div>
                             <div class="guide-col">
                                 <h3>Months</h3>
-                                <ul class="guide-list" style="list-style: none; font-size: 0.9rem;">
+                                <ul class="guide-list">
                                     <li><strong>January</strong>: มกราคม (mók-gà-raa-khom)</li>
                                     <li><strong>February</strong>: กุมภาพันธ์ (gum-phaa-phan)</li>
                                     <li><strong>March</strong>: มีนาคม (mii-naa-khom)</li>
@@ -286,41 +288,36 @@
                                 </ul>
                             </div>
                         </div>
-
                         <div class="number-explorer">
                             <h3>🔍 Date Explorer</h3>
                             <div class="explorer-controls">
-                                <input type="date" id="dateInput" style="flex: 1; padding: 10px; border: 2px solid #667eea; border-radius: 10px;">
-                                <button id="dateTranslateBtn" class="control-btn" style="background: #667eea; margin-bottom: 0;">Translate & Play</button>
+                                <input type="date" id="dateInput">
+                                <button id="dateTranslateBtn" class="control-btn">Translate & Play</button>
                             </div>
-                            <div id="dateResult" class="explorer-result" style="display: none; background: #f8f9ff; padding: 15px; border-radius: 10px; text-align: center; margin-top: 15px;">
-                                <div id="dateThai" class="thai-text" style="font-size: 1.5rem; color: #667eea; margin-bottom: 5px;"></div>
-                                <div id="dateRoman" class="romanization" style="margin-bottom: 0;"></div>
+                            <div id="dateResult" class="explorer-result" style="display: none;">
+                                <div id="dateThai" class="thai-text"></div>
+                                <div id="dateRoman" class="romanization"></div>
                             </div>
                         </div>
                     </div>
                 </details>
-
                 <div class="quiz-config">
-                    <button class="day-range-btn active" data-mode="days">Days</button>
-                    <button class="day-range-btn" data-mode="months">Months</button>
+                    <button class="day-range-btn active" data-mode="days">Days Only</button>
+                    <button class="day-range-btn" data-mode="months">Months Only</button>
                     <button class="day-range-btn" data-mode="both">Mixed</button>
                 </div>
-                
                 <div class="quiz-card">
                     <div id="dayQuestion" class="quiz-question" style="font-size: 3rem;">Ready?</div>
                     <div id="dayTypeLabel" class="quiz-type-label">Test your knowledge</div>
-                    
                     <div id="dayAudioVis" class="audio-visualizer" style="display: none;">
                         <button class="audio-btn large" id="dayAudioBtn">🔊</button>
                     </div>
-
                     <div id="dayChoices" class="quiz-choices"></div>
                     <div id="dayFeedback" class="quiz-feedback"></div>
-                    <button id="nextDayBtn" class="control-btn" style="display: none; margin-top: 20px;">Next →</button>
+                    <button id="nextDayBtn" class="control-btn" style="display: none; margin-top: 20px;">Next</button>
                 </div>
             </div>
-        </div>
+        </section>
     </div>
     <div class="toast" id="toast"></div>
 </body>

@@ -9,7 +9,7 @@ describe('Numbers Quiz Section Tests', () => {
   it('switches to Numbers view and generates a question', () => {
     // Check if a question is generated
     cy.get('#quizQuestion').should('not.contain', 'Ready?');
-    cy.get('.choice-btn').should('have.length', 4);
+    cy.get('#numbersView .choice-btn').should('have.length', 4);
   });
 
   it('interacts with the Numbers quiz', () => {
@@ -17,7 +17,7 @@ describe('Numbers Quiz Section Tests', () => {
     cy.get('.range-btn[data-range="100"]').click();
     
     // Attempt to answer (logic check)
-    cy.get('.choice-btn').first().click();
+    cy.get('#numbersView .choice-btn').first().click();
     cy.get('#quizFeedback').should('not.be.empty');
     cy.get('#nextNumberBtn').should('be.visible');
   });

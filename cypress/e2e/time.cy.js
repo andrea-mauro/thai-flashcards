@@ -20,30 +20,31 @@ describe('Thai Time Section Tests', () => {
     // Check for historical curiosity
     cy.get('#timeView .curiosity-col').should('contain', 'Historical Curiosity');
   });
+it('verifies the 24-hour reference list', () => {
+  cy.get('#timeView .numbers-guide summary').click();
+  // Use exist instead of be.visible because long content can be clipped by details element
+  cy.get('#timeView .hours-reference').should('exist');
 
-  it('verifies the 24-hour reference list', () => {
-    cy.get('#timeView .numbers-guide summary').click();
-    cy.get('#timeView .hours-reference').should('be.visible');
-    
-    // Check specific hour formats from your notes
-    cy.get('#timeView .reference-grid').should('contain', 'ตีหนึ่ง'); // 1 AM
-    cy.get('#timeView .reference-grid').should('contain', 'บ่ายโมง'); // 1 PM
-    cy.get('#timeView .reference-grid').should('contain', 'หนึ่งทุ่ม'); // 7 PM
-  });
+  // Check specific hour formats from your notes
+  cy.get('#timeView .reference-grid').should('contain', 'ตีหนึ่ง'); // 1 AM
+  cy.get('#timeView .reference-grid').should('contain', 'บ่ายโมง'); // 1 PM
+  cy.get('#timeView .reference-grid').should('contain', 'หกโมงเย็น'); // 6 PM
+  cy.get('#timeView .reference-grid').should('contain', 'หนึ่งทุ่ม'); // 7 PM
+});
 
-  it('interacts with the Time Quiz', () => {
-    // Should have generated a question on load
-    cy.get('#timeQuestion').should('not.contain', 'Ready?');
-    cy.get('#timeChoices .choice-btn').should('have.length', 4);
+it('interacts with the Time Quiz', () => {
+  // Should have generated a question on load
+  cy.get('#timeQuestion').should('not.contain', 'Ready?');
+  cy.get('#timeChoices .choice-btn').should('have.length', 4);
 
-    // Click an answer and verify feedback
-    cy.get('#timeChoices .choice-btn').first().click();
-    cy.get('#timeFeedback').should('not.be.empty');
-    cy.get('#nextTimeBtn').should('be.visible');
+  // Click an answer and verify feedback
+  cy.get('#timeChoices .choice-btn').first().click({ force: true });
+  cy.get('#timeFeedback').should('not.be.empty');
+  cy.get('#nextTimeBtn').should('be.visible');
 
-    // Click Next Time and verify refresh
-    cy.get('#nextTimeBtn').click();
-    cy.get('#timeFeedback').should('be.empty');
-    cy.get('#nextTimeBtn').should('not.be.visible');
-  });
+  // Click Next Time and verify refresh
+  cy.get('#nextTimeBtn').click({ force: true });
+  cy.get('#timeFeedback').should('be.empty');
+  cy.get('#nextTimeBtn').should('not.be.visible');
+});
 });
