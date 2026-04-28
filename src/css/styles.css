@@ -160,7 +160,7 @@
 
         .guide-grid {
             display: grid;
-            grid-template-columns: 1fr 1fr 1fr;
+            grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
             gap: 20px;
         }
 
@@ -285,7 +285,7 @@
             flex-wrap: wrap;
         }
 
-        .range-btn {
+        .range-btn, .day-range-btn {
             padding: 8px 15px;
             border: 1px solid white;
             background: transparent;
@@ -295,7 +295,7 @@
             transition: all 0.2s;
         }
 
-        .range-btn.active {
+        .range-btn.active, .day-range-btn.active {
             background: white;
             color: #667eea;
             font-weight: bold;

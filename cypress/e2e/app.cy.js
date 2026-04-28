@@ -1,15 +1,13 @@
 describe('General App Tests', () => {
   beforeEach(() => {
+    cy.viewport('iphone-x');
     // Visit the app and ensure the initial view is flashcards
     cy.visit('/index.html#flashcards');
+    // Wait for the app-loading shield to be removed from HTML
+    cy.get('html', { timeout: 10000 }).should('not.have.class', 'app-loading');
   });
 
-  // Add any general app tests here that don't fit into specific feature files.
-  // For example, testing navigation between views or overall app loading.
   it('navigates between views', () => {
-    // Test initial view
-    cy.url().should('include', '#flashcards');
-
     // Navigate to Numbers view
     cy.get('.tab-btn[data-view="numbers"]').click();
     cy.url().should('include', '#numbers');
@@ -19,6 +17,11 @@ describe('General App Tests', () => {
     cy.get('.tab-btn[data-view="time"]').click();
     cy.url().should('include', '#time');
     cy.get('#timeView').should('be.visible');
+    
+    // Navigate to Days view
+    cy.get('.tab-btn[data-view="days"]').click();
+    cy.url().should('include', '#days');
+    cy.get('#daysView').should('be.visible');
 
     // Navigate back to Flashcards view
     cy.get('.tab-btn[data-view="flashcards"]').click();
@@ -26,4 +29,3 @@ describe('General App Tests', () => {
     cy.get('#flashcardsView').should('be.visible');
   });
 });
-

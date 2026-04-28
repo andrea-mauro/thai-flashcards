@@ -30,6 +30,7 @@
             <button class="tab-btn" data-view="flashcards">Flashcards</button>
             <button class="tab-btn" data-view="numbers">Numbers</button>
             <button class="tab-btn" data-view="time">Time</button>
+            <button class="tab-btn" data-view="days">Days/Months</button>
         </div>
 
         <div class="stats-bar" style="display: none;">
@@ -245,6 +246,78 @@
                     <div id="timeChoices" class="quiz-choices"></div>
                     <div id="timeFeedback" class="quiz-feedback"></div>
                     <button id="nextTimeBtn" class="control-btn" style="display: none; margin-top: 20px;">Next Time →</button>
+                </div>
+            </div>
+        </div>
+
+        <div id="daysView" class="view" style="display: none;">
+            <div class="numbers-quiz-container">
+                <details class="numbers-guide">
+                    <summary>🗓️ Days & Months Guide</summary>
+                    <div class="guide-content">
+                        <div class="guide-grid">
+                            <div class="guide-col">
+                                <h3>Days of the Week</h3>
+                                <ul class="guide-list" style="list-style: none; font-size: 0.9rem;">
+                                    <li><strong>Sunday</strong>: วันอาทิตย์ (wan aa-thít)</li>
+                                    <li><strong>Monday</strong>: วันจันทร์ (wan jan)</li>
+                                    <li><strong>Tuesday</strong>: วันอังคาร (wan ang-khaan)</li>
+                                    <li><strong>Wednesday</strong>: วันพุธ (wan phút)</li>
+                                    <li><strong>Thursday</strong>: วันพฤหัสบดี (wan phá-rú-hàt)</li>
+                                    <li><strong>Friday</strong>: วันศุกร์ (wan sùk)</li>
+                                    <li><strong>Saturday</strong>: วันเสาร์ (wan sǎo)</li>
+                                </ul>
+                            </div>
+                            <div class="guide-col">
+                                <h3>Months</h3>
+                                <ul class="guide-list" style="list-style: none; font-size: 0.9rem;">
+                                    <li><strong>January</strong>: มกราคม (mók-gà-raa-khom)</li>
+                                    <li><strong>February</strong>: กุมภาพันธ์ (gum-phaa-phan)</li>
+                                    <li><strong>March</strong>: มีนาคม (mii-naa-khom)</li>
+                                    <li><strong>April</strong>: เมษายน (mee-sǎa-yon)</li>
+                                    <li><strong>May</strong>: พฤษภาคม (phrúet-sà-phaa-khom)</li>
+                                    <li><strong>June</strong>: มิถุนายน (mí-thù-naa-yon)</li>
+                                    <li><strong>July</strong>: กรกฎาคม (gà-rá-gà-daa-khom)</li>
+                                    <li><strong>August</strong>: สิงหาคม (sǐng-hǎa-khom)</li>
+                                    <li><strong>September</strong>: กันยายน (gan-yaa-yon)</li>
+                                    <li><strong>October</strong>: ตุลาคม (dtù-laa-khom)</li>
+                                    <li><strong>November</strong>: พฤศจิกายน (phrúet-sà-jì-gaa-yon)</li>
+                                    <li><strong>December</strong>: ธันวาคม (than-waa-khom)</li>
+                                </ul>
+                            </div>
+                        </div>
+
+                        <div class="number-explorer">
+                            <h3>🔍 Date Explorer</h3>
+                            <div class="explorer-controls">
+                                <input type="date" id="dateInput" style="flex: 1; padding: 10px; border: 2px solid #667eea; border-radius: 10px;">
+                                <button id="dateTranslateBtn" class="control-btn" style="background: #667eea; margin-bottom: 0;">Translate & Play</button>
+                            </div>
+                            <div id="dateResult" class="explorer-result" style="display: none; background: #f8f9ff; padding: 15px; border-radius: 10px; text-align: center; margin-top: 15px;">
+                                <div id="dateThai" class="thai-text" style="font-size: 1.5rem; color: #667eea; margin-bottom: 5px;"></div>
+                                <div id="dateRoman" class="romanization" style="margin-bottom: 0;"></div>
+                            </div>
+                        </div>
+                    </div>
+                </details>
+
+                <div class="quiz-config">
+                    <button class="day-range-btn active" data-mode="days">Days</button>
+                    <button class="day-range-btn" data-mode="months">Months</button>
+                    <button class="day-range-btn" data-mode="both">Mixed</button>
+                </div>
+                
+                <div class="quiz-card">
+                    <div id="dayQuestion" class="quiz-question" style="font-size: 3rem;">Ready?</div>
+                    <div id="dayTypeLabel" class="quiz-type-label">Test your knowledge</div>
+                    
+                    <div id="dayAudioVis" class="audio-visualizer" style="display: none;">
+                        <button class="audio-btn large" id="dayAudioBtn">🔊</button>
+                    </div>
+
+                    <div id="dayChoices" class="quiz-choices"></div>
+                    <div id="dayFeedback" class="quiz-feedback"></div>
+                    <button id="nextDayBtn" class="control-btn" style="display: none; margin-top: 20px;">Next →</button>
                 </div>
             </div>
         </div>
