@@ -10,9 +10,9 @@ describe('Flashcard Section Tests', () => {
   });
 
   it('filters cards by category', () => {
-    // Click 'Family' category
-    cy.get('.category-btn[data-category="family"]').click();
-    cy.get('.category-btn[data-category="family"]').should('have.class', 'active');
+    // Click 'Bathroom' category
+    cy.get('.category-btn[data-category="bathroom"]').click();
+    cy.get('.category-btn[data-category="bathroom"]').should('have.class', 'active');
     
     // Check if the total cards count updated
     cy.get('#totalCards').invoke('text').then((count) => {

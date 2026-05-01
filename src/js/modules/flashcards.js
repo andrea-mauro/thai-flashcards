@@ -4,9 +4,26 @@
     let currentCards = [...FLASHCARD_DATA];
 
     function init() {
+        populateCategories();
         renderFlashcards();
         updateStats();
         setupEventListeners();
+    }
+
+    function populateCategories() {
+        const filterContainer = document.getElementById('categoryFilter');
+        if (!filterContainer) return;
+
+        const categories = ['all', ...new Set(FLASHCARD_DATA.map(card => card.category))];
+        filterContainer.innerHTML = '';
+        
+        categories.forEach(cat => {
+            const btn = document.createElement('button');
+            btn.className = `category-btn ${cat === 'all' ? 'active' : ''}`;
+            btn.dataset.category = cat;
+            btn.textContent = cat.charAt(0).toUpperCase() + cat.slice(1);
+            filterContainer.appendChild(btn);
+        });
     }
 
     function setupEventListeners() {
@@ -56,13 +73,11 @@
             flashcard.innerHTML = `
                 <div class="flashcard-inner">
                     <div class="flashcard-front">
-                        <span class="card-number">${card.id}</span>
                         <span class="card-category">${card.category}</span>
                         <div class="english-text" style="font-size: 1.3rem;">${card.english}</div>
                         <div style="color: #7f8c8d; font-size: 0.9rem; margin-top: 15px;">Click to reveal Thai</div>
                     </div>
                     <div class="flashcard-back">
-                        <span class="card-number">${card.id}</span>
                         <span class="card-category">${card.category}</span>
                         <div class="thai-text">${card.thai}</div>
                         <div class="romanization">${card.romanization}</div>
