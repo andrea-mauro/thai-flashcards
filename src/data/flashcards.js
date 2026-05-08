@@ -1,5 +1,5 @@
 const FLASHCARD_DATA = [
-  // Bathroom (from 214838.jpg & 214839.jpg)
+  // Bathroom
   { "id": 1, "thai": "หัวฝักบัว", "romanization": "hǔa fàk-bǔa", "english": "Shower head", "category": "bathroom" },
   { "id": 2, "thai": "สบู่", "romanization": "sà-bùu", "english": "Soap", "category": "bathroom" },
   { "id": 3, "thai": "ครีมอาบน้ำ", "romanization": "kriim àap náam", "english": "Body wash", "category": "bathroom" },
@@ -37,7 +37,7 @@ const FLASHCARD_DATA = [
   { "id": 35, "thai": "ถังขยะ", "romanization": "tǎng kà-yà", "english": "Trash can", "category": "bathroom" },
   { "id": 36, "thai": "ที่ปั๊มส้วม", "romanization": "tîi bpám sûam", "english": "Plunger", "category": "bathroom" },
 
-  // Kitchen (from 214841.jpg)
+  // Kitchen
   { "id": 37, "thai": "เตาแก๊ส", "romanization": "dtao gáés", "english": "Gas stove", "category": "kitchen" },
   { "id": 38, "thai": "กระทะทอด", "romanization": "grà-tá tôht", "english": "Frying pan", "category": "kitchen" },
   { "id": 39, "thai": "หม้อ", "romanization": "mɔ̂ɔ", "english": "Pot", "category": "kitchen" },
@@ -83,7 +83,7 @@ const FLASHCARD_DATA = [
   { "id": 79, "thai": "ทัพพีตักข้าว", "romanization": "táp-pii dtàk kâao", "english": "Rice paddle", "category": "kitchen" },
   { "id": 80, "thai": "ตะแกรงย่าง", "romanization": "dtà-graeng yâang", "english": "Grill rack", "category": "kitchen" },
 
-  // Introduction (from 214844.jpg)
+  // Introduction
   { "id": 81, "thai": "ฉันชื่อ", "romanization": "chǎn chûu", "english": "I am (your name)", "category": "introduction" },
   { "id": 82, "thai": "ฉันชื่อ", "romanization": "chǎn chûu", "english": "My name is (your name)", "category": "introduction" },
   { "id": 83, "thai": "ฉันมาจากประเทศไทย", "romanization": "chǎn maa jàak bprà-têet tai", "english": "I'm from Thailand", "category": "introduction" },

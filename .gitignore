@@ -21,3 +21,8 @@ npm-debug.log
 cypress/screenshots/
 cypress/videos/
 .DS_Store
+
+# AI Tools
+.aider*
+.claude/
+.continue/
