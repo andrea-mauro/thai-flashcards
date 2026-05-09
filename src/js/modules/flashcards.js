@@ -27,15 +27,19 @@
     }
 
     function setupEventListeners() {
-        // Category filtering
-        document.querySelectorAll('.category-btn').forEach(btn => {
-            btn.addEventListener('click', (e) => {
+        // Category filtering (using event delegation for dynamic buttons)
+        const filterContainer = document.getElementById('categoryFilter');
+        if (filterContainer) {
+            filterContainer.addEventListener('click', (e) => {
+                const btn = e.target.closest('.category-btn');
+                if (!btn) return;
+
                 document.querySelectorAll('.category-btn').forEach(b => b.classList.remove('active'));
-                e.target.classList.add('active');
-                currentCategory = e.target.dataset.category;
+                btn.classList.add('active');
+                currentCategory = btn.dataset.category;
                 filterCards();
             });
-        });
+        }
 
         // Controls
         const shuffleBtn = document.getElementById('shuffleBtn');
