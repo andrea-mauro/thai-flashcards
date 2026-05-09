@@ -42,28 +42,32 @@
         </header>
 
         <nav class="main-tabs">
-            <button class="tab-btn" data-view="flashcards">Flashcards</button>
             <button class="tab-btn" data-view="tones">Tones</button>
             <button class="tab-btn" data-view="numbers">Numbers</button>
             <button class="tab-btn" data-view="time">Time</button>
             <button class="tab-btn" data-view="days">Days/Months</button>
         </nav>
-
-        <div class="stats-bar" style="display: none;">
-            <div class="stat-item">
-                <div class="stat-value" id="totalCards">0</div>
-                <div class="stat-label">Total Cards</div>
-            </div>
-        </div>
+        <nav class="main-tabs">
+            <button class="tab-btn" data-view="flashcards">Flashcards</button>
+        </nav>
 
         <!-- Flashcards View -->
         <section id="flashcardsView" class="view">
             <div class="category-filter" id="categoryFilter">
                 <!-- Dynamically populated -->
             </div>
+            
             <div class="controls">
                 <button class="control-btn shuffle-btn" id="shuffleBtn">Shuffle</button>
             </div>
+
+            <div class="stats-bar" style="display: none;">
+                <div class="stat-item">
+                    <div class="stat-value" id="totalCards">0</div>
+                    <div class="stat-label">Total Cards</div>
+                </div>
+            </div>
+            
             <div class="flashcard-container" id="flashcardContainer"></div>
         </section>
 
