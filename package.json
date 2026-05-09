@@ -7,7 +7,7 @@
     "clean": "rm -rf dist && mkdir -p dist/css dist/js/modules dist/data",
     "build:assets": "cp src/favicon.svg dist/favicon.svg",
     "build:js": "terser src/js/utils.js -o dist/js/utils.js --compress --mangle && terser src/js/app.js -o dist/js/app.js --compress --mangle && terser src/data/flashcards.js -o dist/data/flashcards.js --compress --mangle && for f in src/js/modules/*.js; do terser \"$f\" -o \"dist/js/modules/$(basename \"$f\")\" --compress --mangle; done",
-    "build:css": "cleancss -o dist/css/base.css src/css/base.css && cleancss -o dist/css/flashcards.css src/css/flashcards.css && cleancss -o dist/css/quiz.css src/css/quiz.css",
+    "build:css": "for f in src/css/*.css; do cleancss -o \"dist/css/$(basename \"$f\")\" \"$f\"; done",
     "build:html": "html-minifier-terser --collapse-whitespace --remove-comments --remove-redundant-attributes --remove-script-type-attributes --remove-tag-whitespace --use-short-doctype --minify-js true --minify-css true src/index.html -o dist/index.html",
     "build": "npm run clean && npm run build:assets && npm run build:js && npm run build:css && npm run build:html",
     "build:full": "npm run build && npm run test:dist",
