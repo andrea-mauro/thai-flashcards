@@ -31,6 +31,7 @@
     font-weight: bold;
     width: 40px;
     text-align: center;
+    color: #2c3e50;
 }
 
 .tone-name {
@@ -78,6 +79,7 @@
     font-size: 1rem;
     padding: 4px;
     transition: transform 0.2s;
+    color: #2c3e50;
 }
 
 .audio-btn:hover {
@@ -133,6 +135,7 @@
     font-weight: bold;
     display: block;
     margin-bottom: 5px;
+    color: #2c3e50;
 }
 
 .analogy-meaning {

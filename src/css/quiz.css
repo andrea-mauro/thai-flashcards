@@ -123,19 +123,28 @@
 }
 
 .ref-group h4 {
-    font-size: 0.9rem;
-    color: #7f8c8d;
+    font-size: 0.95rem;
+    color: #34495e;
+    font-weight: 600;
     margin-bottom: 10px;
     text-transform: uppercase;
     letter-spacing: 1px;
 }
 
+.ref-group ul {
+    list-style-type: none;
+    padding: 0;
+    margin: 0;
+}
+
 .ref-group li {
     margin-bottom: 5px;
     padding: 5px 10px;
-    background: #f8f9ff;
+    background: #f0f2ff;
     border-radius: 5px;
-    font-size: 0.85rem;
+    font-size: 0.95rem;
+    color: #2c3e50;
+    font-weight: 500;
 }
 
 .ref-group li.highlight-noon {
