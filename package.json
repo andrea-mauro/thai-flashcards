@@ -11,6 +11,7 @@
     "build:html": "html-minifier-terser --collapse-whitespace --remove-comments --remove-redundant-attributes --remove-script-type-attributes --remove-tag-whitespace --use-short-doctype --minify-js true --minify-css true src/index.html -o dist/index.html",
     "build": "npm run clean && npm run build:assets && npm run build:js && npm run build:css && npm run build:html",
     "build:full": "npm run build && npm run test:dist",
+    "start": "npm run serve",
     "serve": "http-server src -p 5566",
     "serve:dist": "http-server dist -p 5566",
     "test": "start-server-and-test serve http://localhost:5566 cypress:run",
