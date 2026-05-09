@@ -22,20 +22,6 @@
                 "reveal": "always",
                 "panel": "new"
             }
-        },
-        {
-            "label": "Firebase: Deploy",
-            "type": "shell",
-            "command": "npm run build:full && firebase deploy",
-            "problemMatcher": [],
-            "group": {
-                "kind": "build",
-                "isDefault": true
-            },
-            "presentation": {
-                "reveal": "always",
-                "panel": "new"
-            }
         }
     ]
 }
