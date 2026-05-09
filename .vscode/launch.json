@@ -16,14 +16,6 @@
             "preLaunchTask": "NPM: Cypress UI (Interactive)",
             "runtimeExecutable": "echo",
             "runtimeArgs": ["Cypress UI opened."]
-        },
-        {
-            "name": "🚀 Deploy to Firebase",
-            "type": "node",
-            "request": "launch",
-            "preLaunchTask": "Firebase: Deploy",
-            "runtimeExecutable": "echo",
-            "runtimeArgs": ["Deployment initiated..."]
         }
     ]
 }
