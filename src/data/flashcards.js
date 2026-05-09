@@ -103,5 +103,69 @@ const FLASHCARD_DATA = [
   { "id": 97, "thai": "ฉันชอบเรียนภาษา", "romanization": "chǎn chɔ̂ɔp rian paa-sǎa", "english": "I love learning languages", "category": "introduction" },
   { "id": 98, "thai": "ฉันทำงานที่บ้าน", "romanization": "chǎn tam-ngaan tîi bâan", "english": "I work from home", "category": "introduction" },
   { "id": 99, "thai": "ฉันรักงานของฉัน", "romanization": "chǎn rák ngaan kɔ̌ɔng chǎn", "english": "I love my job", "category": "introduction" },
-  { "id": 100, "thai": "ฉันมีธุรกิจของตัวเอง", "romanization": "chǎn mii tú-rá-gìt kɔ̌ɔng dtua-eeng", "english": "I have my own business", "category": "introduction" }
+  { "id": 100, "thai": "ฉันมีธุรกิจของตัวเอง", "romanization": "chǎn mii tú-rá-gìt kɔ̌ɔng dtua-eeng", "english": "I have my own business", "category": "introduction" },
+
+  // Greetings
+  { "id": 101, "thai": "สวัสดีตอนเช้า", "romanization": "sà-wàt-dii dton cháao", "english": "Good morning", "category": "greetings" },
+  { "id": 102, "thai": "สวัสดีตอนสาย", "romanization": "sà-wàt-dii dton sǎai", "english": "Good late morning", "category": "greetings" },
+  { "id": 103, "thai": "สวัสดีตอนบ่าย", "romanization": "sà-wàt-dii dton bàai", "english": "Good afternoon", "category": "greetings" },
+  { "id": 104, "thai": "สวัสดีตอนเย็น", "romanization": "sà-wàt-dii dton yen", "english": "Good evening", "category": "greetings" },
+  { "id": 105, "thai": "สวัสดีตอนค่ำ", "romanization": "sà-wàt-dii dton kâm", "english": "Good night (greeting)", "category": "greetings" },
+  { "id": 106, "thai": "ฝันดี", "romanization": "fǎn dii", "english": "Good night / Sweet dreams", "category": "greetings" },
+  { "id": 107, "thai": "ขอบคุณมาก", "romanization": "kòp kun mâak", "english": "Thank you very much", "category": "greetings" },
+  { "id": 108, "thai": "ไม่เป็นไร", "romanization": "mâi bpen rai", "english": "No problem / You're welcome", "category": "greetings" },
+
+  // Pronouns
+  { "id": 109, "thai": "ผม", "romanization": "pǒm", "english": "I / Me (Male)", "category": "pronouns" },
+  { "id": 110, "thai": "ดิฉัน", "romanization": "dì-chǎn", "english": "I / Me (Female - formal)", "category": "pronouns" },
+  { "id": 111, "thai": "เรา", "romanization": "rao", "english": "We", "category": "pronouns" },
+  { "id": 112, "thai": "คุณ", "romanization": "kun", "english": "You", "category": "pronouns" },
+  { "id": 113, "thai": "พวกคุณ", "romanization": "pûak kun", "english": "You (plural)", "category": "pronouns" },
+  { "id": 114, "thai": "เขา", "romanization": "kǎo", "english": "He / She / Him / Her", "category": "pronouns" },
+  { "id": 115, "thai": "พวกเขา", "romanization": "pûak kǎo", "english": "They", "category": "pronouns" },
+  { "id": 116, "thai": "มัน", "romanization": "man", "english": "It", "category": "pronouns" },
+
+  // Eating & Drinking
+  { "id": 117, "thai": "กิน", "romanization": "gin", "english": "To eat", "category": "eating" },
+  { "id": 118, "thai": "ดื่ม", "romanization": "dʉ̀ʉm", "english": "To drink", "category": "eating" },
+  { "id": 119, "thai": "น้ำ", "romanization": "náam", "english": "Water", "category": "eating" },
+  { "id": 120, "thai": "น้ำส้ม", "romanization": "náam sôm", "english": "Orange juice", "category": "eating" },
+  { "id": 121, "thai": "น้ำแตงโม", "romanization": "náam dtaeng-moo", "english": "Watermelon juice", "category": "eating" },
+  { "id": 122, "thai": "น้ำมะพร้าว", "romanization": "náam má-práao", "english": "Coconut water", "category": "eating" },
+  { "id": 123, "thai": "อยาก", "romanization": "yàak", "english": "To want (to do something)", "category": "eating" },
+  { "id": 124, "thai": "ผัดไทย", "romanization": "pàt tai", "english": "Pad Thai", "category": "eating" },
+
+  // Weather
+  { "id": 125, "thai": "อากาศ", "romanization": "aa-gàat", "english": "Weather", "category": "weather" },
+  { "id": 126, "thai": "ร้อน", "romanization": "rɔ́ɔn", "english": "Hot", "category": "weather" },
+  { "id": 127, "thai": "อุ่น", "romanization": "ùn", "english": "Warm", "category": "weather" },
+  { "id": 128, "thai": "เย็น", "romanization": "yen", "english": "Cool", "category": "weather" },
+  { "id": 129, "thai": "หนาว", "romanization": "nǎao", "english": "Cold", "category": "weather" },
+
+  // Feelings
+  { "id": 130, "thai": "รู้สึก", "romanization": "rúu-sʉ̀k", "english": "To feel", "category": "feelings" },
+  { "id": 131, "thai": "หิว", "romanization": "hǐu", "english": "Hungry", "category": "feelings" },
+  { "id": 132, "thai": "อิ่ม", "romanization": "ìm", "english": "Full (after eating)", "category": "feelings" },
+  { "id": 133, "thai": "เจ็บ", "romanization": "jèp", "english": "Hurt / In pain", "category": "feelings" },
+  { "id": 134, "thai": "สบายดี", "romanization": "sà-baai dii", "english": "Feeling good / Well", "category": "feelings" },
+  { "id": 135, "thai": "ไม่สบาย", "romanization": "mâi sà-baai", "english": "Not feeling well / Sick", "category": "feelings" },
+  { "id": 136, "thai": "ง่วงนอน", "romanization": "ngûuang noon", "english": "Sleepy", "category": "feelings" },
+  { "id": 137, "thai": "เหนื่อย", "romanization": "nʉ̀ai", "english": "Tired", "category": "feelings" },
+
+  // Taste
+  { "id": 138, "thai": "รสชาติ", "romanization": "rót-châat", "english": "Taste / Flavor", "category": "taste" },
+  { "id": 139, "thai": "เปรี้ยว", "romanization": "bprîao", "english": "Sour", "category": "taste" },
+  { "id": 140, "thai": "หวาน", "romanization": "wǎan", "english": "Sweet", "category": "taste" },
+  { "id": 141, "thai": "เผ็ด", "romanization": "pèt", "english": "Spicy", "category": "taste" },
+  { "id": 142, "thai": "เค็ม", "romanization": "kem", "english": "Salty", "category": "taste" },
+  { "id": 143, "thai": "ขม", "romanization": "kǒm", "english": "Bitter", "category": "taste" },
+
+  // Phrases
+  { "id": 144, "thai": "สบายดีไหม", "romanization": "sà-baai dii mǎi", "english": "How are you?", "category": "phrases" },
+  { "id": 145, "thai": "ขอโทษ", "romanization": "kɔ̌ɔ tôot", "english": "I'm sorry / Excuse me", "category": "phrases" },
+  { "id": 146, "thai": "คุณชื่ออะไร", "romanization": "kun chʉ̂ʉ à-rai", "english": "What is your name?", "category": "phrases" },
+  { "id": 147, "thai": "ยินดีที่ได้รู้จัก", "romanization": "yin-dii tîi dâi rúu-jàk", "english": "Nice to meet you", "category": "phrases" },
+  { "id": 148, "thai": "ราคาเท่าไหร่", "romanization": "raa-kaa tâo-rài", "english": "How much is it?", "category": "phrases" },
+  { "id": 149, "thai": "ทั้งหมดเท่าไหร่", "romanization": "táng mòt tâo-rài", "english": "How much for everything?", "category": "phrases" },
+  { "id": 150, "thai": "เมื่อวาน", "romanization": "mʉ̂a-waan", "english": "Yesterday", "category": "phrases" }
 ];
