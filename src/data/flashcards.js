@@ -167,5 +167,17 @@ const FLASHCARD_DATA = [
   { "id": 147, "thai": "ยินดีที่ได้รู้จัก", "romanization": "yin-dii tîi dâi rúu-jàk", "english": "Nice to meet you", "category": "phrases" },
   { "id": 148, "thai": "ราคาเท่าไหร่", "romanization": "raa-kaa tâo-rài", "english": "How much is it?", "category": "phrases" },
   { "id": 149, "thai": "ทั้งหมดเท่าไหร่", "romanization": "táng mòt tâo-rài", "english": "How much for everything?", "category": "phrases" },
-  { "id": 150, "thai": "เมื่อวาน", "romanization": "mʉ̂a-waan", "english": "Yesterday", "category": "phrases" }
+  { "id": 150, "thai": "เมื่อวาน", "romanization": "mʉ̂a-waan", "english": "Yesterday", "category": "phrases" },
+
+  // Colors
+  { "id": 151, "thai": "สีแดง", "romanization": "sǐi daeng", "english": "Red", "category": "colors" },
+  { "id": 152, "thai": "สีน้ำเงิน", "romanization": "sǐi náam-ngən", "english": "Blue", "category": "colors" },
+  { "id": 153, "thai": "สีเหลือง", "romanization": "sǐi lʉ̌ang", "english": "Yellow", "category": "colors" },
+  { "id": 154, "thai": "สีเขียว", "romanization": "sǐi kǐiao", "english": "Green", "category": "colors" },
+  { "id": 155, "thai": "สีส้ม", "romanization": "sǐi sôm", "english": "Orange", "category": "colors" },
+  { "id": 156, "thai": "สีชมพู", "romanization": "sǐi chom-puu", "english": "Pink", "category": "colors" },
+  { "id": 157, "thai": "สีม่วง", "romanization": "sǐi mûuang", "english": "Purple", "category": "colors" },
+  { "id": 158, "thai": "สีขาว", "romanization": "sǐi kǎao", "english": "White", "category": "colors" },
+  { "id": 159, "thai": "สีดำ", "romanization": "sǐi dam", "english": "Black", "category": "colors" },
+  { "id": 160, "thai": "สีน้ำตาล", "romanization": "sǐi náam-dtaan", "english": "Brown", "category": "colors" }
 ];
