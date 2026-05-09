@@ -40,6 +40,8 @@ jobs:
         run: npm ci
       - name: Build
         run: npm run build
+      - name: Run Tests
+        run: npm run test:dist
       - name: Setup Pages
         uses: actions/configure-pages@v5
       - name: Upload artifact
