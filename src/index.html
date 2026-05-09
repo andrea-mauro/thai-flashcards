@@ -10,6 +10,7 @@
     <link rel="stylesheet" href="css/base.css">
     <link rel="stylesheet" href="css/flashcards.css">
     <link rel="stylesheet" href="css/quiz.css">
+    <link rel="stylesheet" href="css/tones.css">
     
     <!-- Instant Routing Script -->
     <script>
@@ -27,6 +28,7 @@
     <script src="js/modules/flashcards.js" defer></script>
     <script src="js/modules/time.js" defer></script>
     <script src="js/modules/days.js" defer></script>
+    <script src="js/modules/tones.js" defer></script>
     <script src="js/app.js" defer></script>
 </head>
 <body class="loading">
@@ -38,6 +40,7 @@
 
         <nav class="main-tabs">
             <button class="tab-btn" data-view="flashcards">Flashcards</button>
+            <button class="tab-btn" data-view="tones">Tones</button>
             <button class="tab-btn" data-view="numbers">Numbers</button>
             <button class="tab-btn" data-view="time">Time</button>
             <button class="tab-btn" data-view="days">Days/Months</button>
@@ -59,6 +62,141 @@
                 <button class="control-btn shuffle-btn" id="shuffleBtn">Shuffle</button>
             </div>
             <div class="flashcard-container" id="flashcardContainer"></div>
+        </section>
+
+        <!-- Tones View -->
+        <section id="tonesView" class="view" style="display: none;">
+            <div class="tones-container">
+                <div class="tone-card mid">
+                    <div class="tone-header">
+                        <div class="tone-symbol">—</div>
+                        <div class="tone-name">Mid Tone</div>
+                    </div>
+                    <p class="tone-description">Should sound monotone, like a flat line. No change in pitch.</p>
+                    <div class="tone-examples">
+                        <div class="tone-example">
+                            <div class="example-thai">กิน (gin) <button class="audio-btn" onclick="playAudio('กิน', this)">🔊</button></div>
+                            <div class="example-meaning">Eat</div>
+                        </div>
+                        <div class="tone-example">
+                            <div class="example-thai">นอน (noon) <button class="audio-btn" onclick="playAudio('นอน', this)">🔊</button></div>
+                            <div class="example-meaning">Sleep</div>
+                        </div>
+                        <div class="tone-example">
+                            <div class="example-thai">มา (maa) <button class="audio-btn" onclick="playAudio('มา', this)">🔊</button></div>
+                            <div class="example-meaning">Come</div>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="tone-card low">
+                    <div class="tone-header">
+                        <div class="tone-symbol">\</div>
+                        <div class="tone-name">Low Tone</div>
+                    </div>
+                    <p class="tone-description">Start lower than your normal voice and go slightly lower.</p>
+                    <div class="tone-examples">
+                        <div class="tone-example">
+                            <div class="example-thai">ไข่ (kài) <button class="audio-btn" onclick="playAudio('ไข่', this)">🔊</button></div>
+                            <div class="example-meaning">Egg</div>
+                        </div>
+                        <div class="tone-example">
+                            <div class="example-thai">ปาก (bpàak) <button class="audio-btn" onclick="playAudio('ปาก', this)">🔊</button></div>
+                            <div class="example-meaning">Mouth</div>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="tone-card falling">
+                    <div class="tone-header">
+                        <div class="tone-symbol">^</div>
+                        <div class="tone-name">Falling Tone</div>
+                    </div>
+                    <p class="tone-description">Similar to the accent produced by an exclamation mark, like saying "Hi!" emphatically.</p>
+                    <div class="tone-examples">
+                        <div class="tone-example">
+                            <div class="example-thai">ไม่ (mâi) <button class="audio-btn" onclick="playAudio('ไม่', this)">🔊</button></div>
+                            <div class="example-meaning">No / Not</div>
+                        </div>
+                        <div class="tone-example">
+                            <div class="example-thai">มาก (mâak) <button class="audio-btn" onclick="playAudio('มาก', this)">🔊</button></div>
+                            <div class="example-meaning">Very / Much</div>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="tone-card high">
+                    <div class="tone-header">
+                        <div class="tone-symbol">/</div>
+                        <div class="tone-name">High Tone</div>
+                    </div>
+                    <p class="tone-description">Like asking a question curiously, like saying "Really?".</p>
+                    <div class="tone-examples">
+                        <div class="tone-example">
+                            <div class="example-thai">ไม้ (mái) <button class="audio-btn" onclick="playAudio('ไม้', this)">🔊</button></div>
+                            <div class="example-meaning">Wood</div>
+                        </div>
+                        <div class="tone-example">
+                            <div class="example-thai">รู้ (róo) <button class="audio-btn" onclick="playAudio('รู้', this)">🔊</button></div>
+                            <div class="example-meaning">To know</div>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="tone-card rising">
+                    <div class="tone-header">
+                        <div class="tone-symbol">v</div>
+                        <div class="tone-name">Rising Tone</div>
+                    </div>
+                    <p class="tone-description">Like asking a question in disbelief, like saying "Whaaat?". Starts low and rises up.</p>
+                    <div class="tone-examples">
+                        <div class="tone-example">
+                            <div class="example-thai">ฝัน (fǎn) <button class="audio-btn" onclick="playAudio('ฝัน', this)">🔊</button></div>
+                            <div class="example-meaning">Dream</div>
+                        </div>
+                        <div class="tone-example">
+                            <div class="example-thai">หวาน (wǎan) <button class="audio-btn" onclick="playAudio('หวาน', this)">🔊</button></div>
+                            <div class="example-meaning">Sweet</div>
+                        </div>
+                        <div class="tone-example">
+                            <div class="example-thai">หิว (hǐu) <button class="audio-btn" onclick="playAudio('หิว', this)">🔊</button></div>
+                            <div class="example-meaning">Hungry</div>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="pitch-analogy">
+                    <h2>The "MA" Analogy</h2>
+                    <p style="text-align: center; color: #7f8c8d; margin-bottom: 25px;">Five different tones for the same sound change the meaning completely.</p>
+                    <div class="analogy-grid">
+                        <div class="analogy-item">
+                            <span class="analogy-word">มา (mā)</span>
+                            <span class="analogy-meaning">To come</span>
+                            <span class="analogy-tone" style="color: #ff7675;">Mid</span>
+                        </div>
+                        <div class="analogy-item">
+                            <span class="analogy-word">ป่า (pàa)</span>
+                            <span class="analogy-meaning">Forest</span>
+                            <span class="analogy-tone" style="color: #74b9ff;">Low</span>
+                        </div>
+                        <div class="analogy-item">
+                            <span class="analogy-word">ม้า (má)</span>
+                            <span class="analogy-meaning">Horse</span>
+                            <span class="analogy-tone" style="color: #ffe135;">High</span>
+                        </div>
+                        <div class="analogy-item">
+                            <span class="analogy-word">ย่า (yâa)</span>
+                            <span class="analogy-meaning">Grandma</span>
+                            <span class="analogy-tone" style="color: #55efc4;">Falling</span>
+                        </div>
+                        <div class="analogy-item">
+                            <span class="analogy-word">หมา (mǎa)</span>
+                            <span class="analogy-meaning">Dog</span>
+                            <span class="analogy-tone" style="color: #fab1a0;">Rising</span>
+                        </div>
+                    </div>
+                </div>
+            </div>
         </section>
 
         <!-- Numbers View -->

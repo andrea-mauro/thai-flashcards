@@ -14,6 +14,7 @@
                     NumbersQuiz.init();
                     TimeQuiz.init();
                     DaysQuiz.init();
+                    TonesGuide.init();
 
                     setupEventListeners();
 

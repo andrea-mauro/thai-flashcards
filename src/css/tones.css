@@ -1,0 +1,149 @@
+/* Tones Section Styles */
+.tones-container {
+    max-width: 800px;
+    margin: 0 auto;
+}
+
+.tone-card {
+    background: white;
+    border-radius: 15px;
+    margin-bottom: 20px;
+    padding: 20px;
+    box-shadow: 0 4px 15px rgba(0,0,0,0.1);
+    border-left: 8px solid #ccc;
+}
+
+.tone-card.mid { border-left-color: #ff7675; }
+.tone-card.low { border-left-color: #74b9ff; }
+.tone-card.falling { border-left-color: #55efc4; }
+.tone-card.high { border-left-color: #ffe135; }
+.tone-card.rising { border-left-color: #fab1a0; }
+
+.tone-header {
+    display: flex;
+    align-items: center;
+    gap: 15px;
+    margin-bottom: 15px;
+}
+
+.tone-symbol {
+    font-size: 2rem;
+    font-weight: bold;
+    width: 40px;
+    text-align: center;
+}
+
+.tone-name {
+    font-size: 1.2rem;
+    font-weight: 700;
+    color: #2c3e50;
+    text-transform: uppercase;
+}
+
+.tone-description {
+    color: #7f8c8d;
+    font-style: italic;
+    margin-bottom: 15px;
+    line-height: 1.4;
+}
+
+.tone-examples {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(150px, 1fr));
+    gap: 10px;
+}
+
+.tone-example {
+    background: #f8f9ff;
+    padding: 10px;
+    border-radius: 8px;
+    text-align: center;
+}
+
+.example-thai {
+    font-size: 1.1rem;
+    font-weight: 600;
+    color: #2c3e50;
+    margin-bottom: 5px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    gap: 8px;
+}
+
+.audio-btn {
+    background: none;
+    border: none;
+    cursor: pointer;
+    font-size: 1rem;
+    padding: 4px;
+    transition: transform 0.2s;
+}
+
+.audio-btn:hover {
+    transform: scale(1.2);
+}
+
+.audio-btn.playing {
+    color: #667eea;
+    animation: pulse 1s infinite;
+}
+
+@keyframes pulse {
+    0% { transform: scale(1); }
+    50% { transform: scale(1.3); }
+    100% { transform: scale(1); }
+}
+
+.example-meaning {
+    font-size: 0.85rem;
+    color: #636e72;
+}
+
+/* Pitch Chart Analogy */
+.pitch-analogy {
+    background: white;
+    border-radius: 15px;
+    padding: 25px;
+    margin-top: 40px;
+    box-shadow: 0 4px 15px rgba(0,0,0,0.1);
+}
+
+.pitch-analogy h2 {
+    text-align: center;
+    margin-bottom: 20px;
+    color: #2c3e50;
+}
+
+.analogy-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(120px, 1fr));
+    gap: 15px;
+}
+
+.analogy-item {
+    text-align: center;
+    padding: 15px;
+    border-radius: 10px;
+    background: #f8f9ff;
+}
+
+.analogy-word {
+    font-size: 1.5rem;
+    font-weight: bold;
+    display: block;
+    margin-bottom: 5px;
+}
+
+.analogy-meaning {
+    font-size: 0.9rem;
+    color: #636e72;
+}
+
+.analogy-tone {
+    font-size: 0.8rem;
+    text-transform: uppercase;
+    font-weight: 600;
+    display: block;
+    margin-top: 5px;
+}
