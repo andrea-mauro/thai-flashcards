@@ -2,20 +2,11 @@
   "name": "thai-flashcards",
   "version": "1.0.0",
   "description": "A lightweight, standalone web application for learning Thai vocabulary and phrases. It features category filtering, progress tracking (learned vs. hard cards), daily streaks, and text-to-speech audio.",
-  "main": "index.js",
+  "main": "app.js",
   "scripts": {
-    "clean": "rm -rf dist && mkdir -p dist/css dist/js/modules dist/data",
-    "build:assets": "cp src/favicon.svg dist/favicon.svg",
-    "build:js": "terser src/js/utils.js -o dist/js/utils.js --compress --mangle && terser src/js/app.js -o dist/js/app.js --compress --mangle && terser src/data/flashcards.js -o dist/data/flashcards.js --compress --mangle && for f in src/js/modules/*.js; do terser \"$f\" -o \"dist/js/modules/$(basename \"$f\")\" --compress --mangle; done",
-    "build:css": "for f in src/css/*.css; do cleancss -o \"dist/css/$(basename \"$f\")\" \"$f\"; done",
-    "build:html": "html-minifier-terser --collapse-whitespace --remove-comments --remove-redundant-attributes --remove-script-type-attributes --remove-tag-whitespace --use-short-doctype --minify-js true --minify-css true src/index.html -o dist/index.html",
-    "build": "npm run clean && npm run build:assets && npm run build:js && npm run build:css && npm run build:html",
-    "build:full": "npm run build && npm run test:dist",
     "start": "npm run serve",
-    "serve": "http-server src -p 5566",
-    "serve:dist": "http-server dist -p 5566",
+    "serve": "http-server docs -p 5566",
     "test": "start-server-and-test serve http://localhost:5566 cypress:run",
-    "test:dist": "start-server-and-test serve:dist http://localhost:5566 cypress:run",
     "test:open": "start-server-and-test serve http://localhost:5566 cypress:open",
     "cypress:run": "cypress run",
     "cypress:open": "cypress open"
@@ -25,11 +16,8 @@
   "license": "MIT",
   "type": "commonjs",
   "devDependencies": {
-    "clean-css-cli": "^5.6.3",
     "cypress": "^15.14.0",
-    "html-minifier-terser": "^7.2.0",
     "http-server": "^14.1.1",
-    "start-server-and-test": "^3.0.2",
-    "terser": "^5.46.1"
+    "start-server-and-test": "^3.0.2"
   }
 }
