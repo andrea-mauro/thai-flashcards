@@ -16,13 +16,7 @@ You can develop locally by running `npm install` followed by `npm start`. You ca
 
 ## 🌐 Deployment
 
-The project is configured for automated deployment via **GitHub Actions** to **GitHub Pages**.
-
-### Deployment
-Every time you push to the `main` branch, a GitHub Action automatically:
-1. Minifies the CSS and JavaScript.
-2. Optimizes the HTML.
-3. Deploys the `dist/` folder to GitHub Pages.
+The project is configured for automated deployment via **GitHub Actions** to **GitHub Pages**. 
 
 ## 🔊 Audio Support
 
