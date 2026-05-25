@@ -61,10 +61,17 @@
                 <button class="control-btn shuffle-btn" id="shuffleBtn">Shuffle</button>
             </div>
 
-            <div class="stats-bar" style="display: none;">
+            <div class="stats-bar">
                 <div class="stat-item">
                     <div class="stat-value" id="totalCards">0</div>
                     <div class="stat-label">Total Cards</div>
+                </div>
+                <div class="stat-item">
+                    <div class="stat-value" id="masteredCards">0</div>
+                    <div class="stat-label">Mastered</div>
+                    <button id="resetProgressBtn" class="reset-btn" title="Reset all progress">
+                        <svg xmlns="http://www.w3.org/2000/svg" width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M3 12a9 9 0 1 0 9-9 9.75 9.75 0 0 0-6.74 2.74L3 8"></path><path d="M3 3v5h5"></path></svg>
+                    </button>
                 </div>
             </div>
             

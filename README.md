@@ -7,8 +7,21 @@ A lightweight, standalone web application for learning Thai vocabulary and phras
 - `src/`: Source code directory.
   - `index.html`: The main structure of the app.
   - `css/`: Modular styling (`base.css`, `flashcards.css`, `quiz.css`).
-  - `data/flashcards.js`: The vocabulary dataset.
+  - `data/flashcards.js`: The vocabulary dataset (managed via UUIDs).
   - `js/`: Application logic and modules.
+
+## 🏆 Scoring & Progress
+
+The app features a **Mastered Flashcards** system:
+-   **Marking Cards:** Click the checkmark icon in the top-left of any card to mark it as mastered.
+-   **Progress Tracking:** A real-time counter in the stats bar shows your mastered words for the current category.
+-   **Persistence:** Your progress is saved locally in your browser, so you can pick up where you left off.
+
+## 🛠️ Data Management
+
+The vocabulary dataset (`docs/data/flashcards.js`) uses **UUIDs** for unique identification. This allows for:
+-   **Easy Expansion:** Add new words anywhere in the file without worrying about ID conflicts.
+-   **Stable Mastered Lists:** Persistence relies on these UUIDs, ensuring your progress is maintained even as the dictionary grows.
 
 ## 🚀 Local Development
 

@@ -106,6 +106,42 @@
     font-weight: 600;
 }
 
+.mastered-btn {
+    position: absolute;
+    top: 15px;
+    left: 15px;
+    background: #ecf0f1;
+    color: #bdc3c7;
+    width: 35px;
+    height: 35px;
+    border-radius: 50%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    cursor: pointer;
+    border: none;
+    transition: all 0.3s ease;
+    z-index: 10;
+}
+
+.mastered-btn:hover {
+    transform: scale(1.1);
+}
+
+.mastered-btn.active {
+    background: #27ae60;
+    color: white;
+}
+
+.flashcard.mastered .flashcard-front {
+    border: 3px solid #27ae60;
+    background: #f1fcf4;
+}
+
+.flashcard.mastered .flashcard-back {
+    border: 3px solid #27ae60;
+}
+
 .english-text {
     font-size: 1.2rem;
     color: #2c3e50;

@@ -80,6 +80,33 @@ header p {
 
 .stat-item {
     text-align: center;
+    position: relative;
+    padding: 0 15px;
+}
+
+.reset-btn {
+    position: absolute;
+    top: 0;
+    right: 0;
+    background: rgba(231, 76, 60, 0.1);
+    color: #e74c3c;
+    border: none;
+    border-radius: 50%;
+    width: 24px;
+    height: 24px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    cursor: pointer;
+    transition: all 0.2s ease;
+    opacity: 0.6;
+}
+
+.reset-btn:hover {
+    opacity: 1;
+    background: #e74c3c;
+    color: white;
+    transform: rotate(-45deg);
 }
 
 .stat-value {
