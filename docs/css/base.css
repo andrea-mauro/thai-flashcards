@@ -67,7 +67,7 @@ header p {
 }
 
 .stats-bar {
-    background: rgba(255,255,255,0.2);
+    background: #535870; /* Original theme blue, now solid for contrast */
     border-radius: 15px;
     padding: 15px 25px;
     margin-bottom: 25px;
@@ -76,6 +76,11 @@ header p {
     flex-wrap: wrap;
     gap: 15px;
     color: white;
+    position: sticky;
+    top: 10px;
+    z-index: 100;
+    box-shadow: 0 10px 25px rgba(0, 0, 0, 0.2);
+    border: 1px solid rgba(255, 255, 255, 0.2);
 }
 
 .stat-item {
