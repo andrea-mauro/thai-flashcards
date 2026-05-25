@@ -5,10 +5,14 @@ const FLASHCARD_DATA = [
   {"id":"dd515a93-8237-4cfd-9bcd-fd6fdc0965a6","thai":"กระเป๋า","romanization":"grà-bpǎo","english":"Bag","category":"basic"},
   {"id":"a880fd0f-5cf7-4967-a4c0-5f930e559d76","thai":"ใหญ่","romanization":"yài","english":"Big","category":"basic"},
   {"id":"4f806a97-f6ec-4a5c-9ed8-ec6cf31cf03e","thai":"ดี","romanization":"dii","english":"Good","category":"basic"},
+  {"id":"e65f6868-b24c-4ce8-b74e-ef67c9115e89","thai":"ใหม่","romanization":"mài","english":"New","category":"basic"},
+  {"id":"16e906e3-366e-4e62-aeb6-4883ee9b0d39","thai":"ข่าว","romanization":"khàao","english":"News","category":"basic"},
   {"id":"73a53a08-a25d-4827-9dde-eee0d5d319a4","thai":"ไม่","romanization":"mâi","english":"No","category":"basic"},
   {"id":"de45f8b2-d7b0-4944-a6be-267107b6650c","thai":"ตกลง","romanization":"dtòk-long","english":"Okay","category":"basic"},
+  {"id":"5a4e9d57-e4d0-48fa-a3a1-c2932e5149fa","thai":"ผู้เล่น","romanization":"phûu-lên","english":"Player","category":"basic"},
   {"id":"76bc3704-ae6c-447c-a5f8-f6fc2dccd94b","thai":"กรุณา / ได้โปรด","romanization":"gà-rú-naa / dâi-bpròot","english":"Please","category":"basic"},
   {"id":"439d0a56-b830-460a-833d-042c8aa6a030","thai":"เล็ก","romanization":"lék","english":"Small","category":"basic"},
+  {"id":"b2ca473d-41d7-4eac-ad74-c674e02c0af0","thai":"ร่ม","romanization":"rôm","english":"Umbrella","category":"basic"},
   {"id":"764e5b06-e3dc-4a79-8ae1-6dfb6ac4cca3","thai":"ใช่","romanization":"châi","english":"Yes","category":"basic"},
 
   // Bathroom
@@ -215,14 +219,19 @@ const FLASHCARD_DATA = [
   {"id":"4c798d1a-4e0d-4d1a-88f2-cde9cc21c071","thai":"ที่ตีไข่","romanization":"tîi dtìi kài","english":"Whisk","category":"kitchen"},
 
   // Nature
+  {"id":"b73328ca-3a9d-4fd3-8184-0d35c3d2955f","thai":"คลอง","romanization":"khlɔɔng","english":"Canal","category":"nature"},
   {"id":"05008603-c80b-45ba-8031-57965a771390","thai":"เมฆ","romanization":"mêek","english":"Cloud","category":"nature"},
+  {"id":"88fcaa46-400f-45b4-9d6a-c9676bd8ce59","thai":"สุนัข / หมา","romanization":"sù-nák / mǎa","english":"Dog","category":"nature"},
   {"id":"4c4c4d60-a548-4f11-9622-6d69852c2cd0","thai":"ปลา","romanization":"bplaa","english":"Fish","category":"nature"},
   {"id":"26456544-dd03-48d8-b84d-c8834aef0c7d","thai":"ดอกไม้","romanization":"dɔ̀ɔk-mái","english":"Flower","category":"nature"},
   {"id":"08c14c04-1e9c-4e88-bd3c-899c42ca71c4","thai":"ผลไม้","romanization":"pǒn-lá-mái","english":"Fruit","category":"nature"},
+  {"id":"612bfe05-8b15-4875-98f6-c63678fd2acc","thai":"ม้า","romanization":"máa","english":"Horse","category":"nature"},
   {"id":"24bffb39-f3f6-471a-ac54-678d13f89bd2","thai":"พระจันทร์","romanization":"phrá-jan","english":"Moon","category":"nature"},
   {"id":"ac360e6f-1607-432f-8790-663091d0d8dc","thai":"ภูเขา","romanization":"phuu-khǎo","english":"Mountain","category":"nature"},
   {"id":"a898ef36-2059-44f1-b3aa-c0b7fa07cd81","thai":"ฝน","romanization":"fǒn","english":"Rain","category":"nature"},
   {"id":"08325b3d-e35e-47a1-81b4-046bd7e362fc","thai":"แม่น้ำ","romanization":"mɛ̂ɛ-náam","english":"River","category":"nature"},
+  {"id":"e94cedc1-267f-4d92-b8e2-e3d912fd49ca","thai":"แม่น้ำ","romanization":"mɛ̂ɛ-náam","english":"River","category":"nature"},
+  {"id":"25cfc881-4137-4b6c-9279-d98153723067","thai":"ลำน้ำ","romanization":"lam náam","english":"River (small)","category":"nature"},
   {"id":"40198d8e-606b-4692-9521-efa48fe27302","thai":"ท้องฟ้า","romanization":"thóong-fáa","english":"Sky","category":"nature"},
   {"id":"69e89be0-e99a-4646-9c2d-67b7453c250b","thai":"ดาว","romanization":"daao","english":"Star","category":"nature"},
   {"id":"6cceec3a-6d8d-43fa-b8e1-495652240465","thai":"พระอาทิตย์","romanization":"phrá-aa-thít","english":"Sun","category":"nature"},
@@ -257,6 +266,7 @@ const FLASHCARD_DATA = [
   {"id":"37c645ba-dcc5-40fd-9a25-2e9c506a7105","thai":"โรงเรียน","romanization":"roong-rian","english":"School","category":"school"},
   {"id":"99de91ca-7b43-4780-b287-e3eaa17af176","thai":"นักเรียน","romanization":"nák-rian","english":"Student","category":"school"},
   {"id":"4d13c5ef-b08b-431b-b481-b4be995032fb","thai":"ครู","romanization":"khruu","english":"Teacher","category":"school"},
+  {"id":"d372e91e-ea04-4f37-96ee-4f746c9ac29c","thai":"นักเขียน","romanization":"nák-khǐan","english":"Writer","category":"school"},
 
   // Taste
   {"id":"de792c8c-f9da-41d2-aaa4-b32c2c1c6c47","thai":"ขม","romanization":"kǒm","english":"Bitter","category":"taste"},
