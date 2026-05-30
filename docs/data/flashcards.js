@@ -66,7 +66,7 @@ const FLASHCARD_DATA = [
 
   // Colors
   {"id":"ae2a4f99-1e61-45f7-97a2-284c85e513dd","thai":"สีดำ","romanization":"sǐi dam","english":"Black","category":"colors"},
-  {"id":"3dfe554e-8bc1-4c17-b994-5d88b12476cf","thai":"สีน้ำเงิน","romanization":"sǐi náam-ngən","english":"Blue","category":"colors"},
+  {"id":"3dfe554e-8bc1-4c17-b994-5d88b12476cf","thai":"สีฟ้า","romanization":"sǐi fáa","english":"Blue","category":"colors"},
   {"id":"cdb5a92c-6821-4f77-8a2d-e4924460969f","thai":"สีน้ำตาล","romanization":"sǐi náam-dtaan","english":"Brown","category":"colors"},
   {"id":"ea82099f-636f-4b46-8daa-c67d8b6e44b9","thai":"สีเขียว","romanization":"sǐi kǐiao","english":"Green","category":"colors"},
   {"id":"5605a8b1-115d-4ab1-963d-96e01504ea59","thai":"สีส้ม","romanization":"sǐi sôm","english":"Orange","category":"colors"},
