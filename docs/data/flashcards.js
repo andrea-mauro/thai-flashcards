@@ -169,8 +169,8 @@ const FLASHCARD_DATA = [
   {"id":"0cd23618-8feb-4e95-bc4d-0ffdb0676995","thai":"ฉันทำงานที่ธนาคาร","romanization":"chǎn tam-ngaan tîi tá-naa-kaan","english":"I work at a bank","category":"introduction"},
   {"id":"dba8392a-757b-4907-b362-c11108ad6453","thai":"ฉันทำงานที่บ้าน","romanization":"chǎn tam-ngaan tîi bâan","english":"I work from home","category":"introduction"},
   {"id":"95d1e33b-5a5e-4965-a4db-fdd6282981a7","thai":"ฉันทำงานด้านไอที","romanization":"chǎn tam-ngaan dâan ai-tîi","english":"I work in IT","category":"introduction"},
-  {"id":"a2eeb77a-f800-4e75-a075-5dfabda92b8a","thai":"ฉันมาจากประเทศไทย","romanization":"chǎn maa jàak bprà-têet tai","english":"I'm from Thailand","category":"introduction"},
-  {"id":"11b5b088-4a27-4de8-88d0-fee3f93a91dd","thai":"ฉันชื่อ","romanization":"chǎn chûu","english":"My name is (your name)","category":"introduction"},
+  {"id":"a2eeb77a-f800-4e75-a075-5dfabda92b8a","thai":"ฉันมาจากประเทศไทย","romanization":"chǎn maa jàak bprà-têet tai","english":"I'm from Thailand","category":"introduction"}
+,
 
   // Kitchen
   {"id":"dfe04249-a74a-4822-8804-6a4f6113535f","thai":"ฟอยล์ห่ออาหาร","romanization":"fɔɔi hɔ̀o aa-hǎan","english":"Aluminum foil","category":"kitchen"},
@@ -229,7 +229,6 @@ const FLASHCARD_DATA = [
   {"id":"24bffb39-f3f6-471a-ac54-678d13f89bd2","thai":"พระจันทร์","romanization":"phrá-jan","english":"Moon","category":"nature"},
   {"id":"ac360e6f-1607-432f-8790-663091d0d8dc","thai":"ภูเขา","romanization":"phuu-khǎo","english":"Mountain","category":"nature"},
   {"id":"a898ef36-2059-44f1-b3aa-c0b7fa07cd81","thai":"ฝน","romanization":"fǒn","english":"Rain","category":"nature"},
-  {"id":"08325b3d-e35e-47a1-81b4-046bd7e362fc","thai":"แม่น้ำ","romanization":"mɛ̂ɛ-náam","english":"River","category":"nature"},
   {"id":"e94cedc1-267f-4d92-b8e2-e3d912fd49ca","thai":"แม่น้ำ","romanization":"mɛ̂ɛ-náam","english":"River","category":"nature"},
   {"id":"25cfc881-4137-4b6c-9279-d98153723067","thai":"ลำน้ำ","romanization":"lam náam","english":"River (small)","category":"nature"},
   {"id":"40198d8e-606b-4692-9521-efa48fe27302","thai":"ท้องฟ้า","romanization":"thóong-fáa","english":"Sky","category":"nature"},
