@@ -59,6 +59,7 @@ const FLASHCARD_DATA = [
   {"id":"36f1939e-a3fc-49e9-87f2-1e69331f9e08","thai":"หมวก","romanization":"mùak","english":"Hat","category":"clothing"},
   {"id":"34412932-a322-4e18-9b27-027375e79cac","thai":"เสื้อแจ็คเก็ต","romanization":"sûea jàek-gèt","english":"Jacket","category":"clothing"},
   {"id":"b15f2297-edcf-4ebe-854f-c6ff2f016481","thai":"กางเกง","romanization":"gaang-geeng","english":"Pants","category":"clothing"},
+  {"id":"5f043b64-b2a3-4210-879a-2d52b6fb2d53","thai":"เสื้อกันฝน","romanization":"sûea gan fǒn","english":"Rain coat","category":"clothing"},
   {"id":"6ef61655-b232-4e9e-ba8b-0ff13249c5a8","thai":"เสื้อเชิ้ต/เสื้อยืด","romanization":"sûea chə̂ət / sûea yʉ̂at","english":"Shirt","category":"clothing"},
   {"id":"f982189f-b6ca-4c5d-aa25-0586978a9c77","thai":"รองเท้า","romanization":"rɔɔng-táao","english":"Shoes","category":"clothing"},
   {"id":"1d23ad47-3004-46c9-98e1-aa4571118bc2","thai":"กระโปรง","romanization":"grà-bproong","english":"Skirt","category":"clothing"},
