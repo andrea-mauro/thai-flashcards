@@ -276,9 +276,11 @@ const FLASHCARD_DATA = [
   {"id":"9572a9a3-54b2-4358-acd4-36a67fa7cae1","thai":"รสชาติ","romanization":"rót-châat","english":"Taste / Flavor","category":"taste"},
 
   // Verbs
+  {"id":"e95af99b-a032-4237-b3dd-b8fbdf241007","thai":"ปิด","romanization":"bpìt","english":"Close","category":"verbs"},
   {"id":"60a33b4d-250e-48ca-a763-c4be6615b815","thai":"มา","romanization":"maa","english":"Come","category":"verbs"},
   {"id":"c3a7083e-da86-4c90-a576-dea8c6b5805a","thai":"ไป","romanization":"bpai","english":"Go","category":"verbs"},
   {"id":"15c2cdd6-afd7-4b74-bd8b-cd8eab6a490e","thai":"ฟัง","romanization":"fang","english":"Listen","category":"verbs"},
+  {"id":"d241bc63-f7e0-4255-a92d-983441f5ce72","thai":"เปิด","romanization":"bpə̀et","english":"Open","category":"verbs"},
   {"id":"9b94905a-bfcc-4ba3-8fc4-cead380a77e8","thai":"เล่น","romanization":"lên","english":"Play","category":"verbs"},
   {"id":"a2d986cc-0fcd-4b85-ba14-c7d45143484b","thai":"อ่าน","romanization":"àan","english":"Read","category":"verbs"},
   {"id":"16c0e338-0290-4493-a563-6a10e9e41604","thai":"วิ่ง","romanization":"wîng","english":"Run","category":"verbs"},
