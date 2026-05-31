@@ -299,7 +299,7 @@ const FLASHCARD_DATA = [
   // Weather
   {"id":"768a1f63-ab83-4b16-985d-2a822ca721c0","thai":"หนาว","romanization":"nǎao","english":"Cold","category":"weather"},
   {"id":"c91abe31-4988-4574-a7f0-0ee5e750ad2e","thai":"เย็น","romanization":"yen","english":"Cool","category":"weather"},
-  {"id":"428eaa72-654a-413e-a07a-58b5cc3a78f0","thai":"ร้อน","romanization":"rɔ́๑n","english":"Hot","category":"weather"},
+  {"id":"428eaa72-654a-413e-a07a-58b5cc3a78f0","thai":"ร้อน","romanization":"rɔ́ɔn","english":"Hot","category":"weather"},
   {"id":"b5939a77-8160-4f57-9fbc-c9523a3c138e","thai":"อุ่น","romanization":"ùn","english":"Warm","category":"weather"},
   {"id":"2979e575-2546-4e1c-a92d-05f350bb59ae","thai":"อากาศ","romanization":"aa-gàat","english":"Weather","category":"weather"}
 ];
