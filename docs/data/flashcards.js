@@ -169,8 +169,7 @@ const FLASHCARD_DATA = [
   {"id":"0cd23618-8feb-4e95-bc4d-0ffdb0676995","thai":"ฉันทำงานที่ธนาคาร","romanization":"chǎn tam-ngaan tîi tá-naa-kaan","english":"I work at a bank","category":"introduction"},
   {"id":"dba8392a-757b-4907-b362-c11108ad6453","thai":"ฉันทำงานที่บ้าน","romanization":"chǎn tam-ngaan tîi bâan","english":"I work from home","category":"introduction"},
   {"id":"95d1e33b-5a5e-4965-a4db-fdd6282981a7","thai":"ฉันทำงานด้านไอที","romanization":"chǎn tam-ngaan dâan ai-tîi","english":"I work in IT","category":"introduction"},
-  {"id":"a2eeb77a-f800-4e75-a075-5dfabda92b8a","thai":"ฉันมาจากประเทศไทย","romanization":"chǎn maa jàak bprà-têet tai","english":"I'm from Thailand","category":"introduction"}
-,
+  {"id":"a2eeb77a-f800-4e75-a075-5dfabda92b8a","thai":"ฉันมาจากประเทศไทย","romanization":"chǎn maa jàak bprà-têet tai","english":"I'm from Thailand","category":"introduction"},
 
   // Kitchen
   {"id":"dfe04249-a74a-4822-8804-6a4f6113535f","thai":"ฟอยล์ห่ออาหาร","romanization":"fɔɔi hɔ̀o aa-hǎan","english":"Aluminum foil","category":"kitchen"},
@@ -199,7 +198,7 @@ const FLASHCARD_DATA = [
   {"id":"176048e1-dd8e-4ac4-8cff-7078c85d8ab5","thai":"ไมโครเวฟ","romanization":"mai-kroh-wéf","english":"Microwave","category":"kitchen"},
   {"id":"77b41a5c-b343-4210-879a-2d52b6fb2d53","thai":"ครก","romanization":"krók","english":"Mortar","category":"kitchen"},
   {"id":"9097bbea-b0a9-4224-a398-7ed0650dd6eb","thai":"เตาอบ","romanization":"dtao òp","english":"Oven","category":"kitchen"},
-  {"id":"ccb8ffb2-01ce-449b-9646-c70e46acf125","thai":"ถุงมือกันร้อน","romanization":"tǔng-mʉu gan rɔ́ɔn","english":"Oven mitt","category":"kitchen"},
+  {"id":"ccb8ffb2-01ce-449b-9646-c70e46acf125","thai":"ถุงมือกันร้อน","romanization":"tǔng-mʉu gan rɔ́๑n","english":"Oven mitt","category":"kitchen"},
   {"id":"2a102385-9baa-45fd-a5a0-02f4c5967da0","thai":"ที่ปอกเปลือก","romanization":"tîi bpòk bpùeak","english":"Peeler","category":"kitchen"},
   {"id":"06255143-016c-4298-a6a0-b5a8803660e6","thai":"สาก","romanization":"sàak","english":"Pestle","category":"kitchen"},
   {"id":"e9b86399-9745-49fa-a725-500809907d54","thai":"ฟิล์มห่ออาหาร","romanization":"fím hɔ̀o aa-hǎan","english":"Plastic wrap","category":"kitchen"},
