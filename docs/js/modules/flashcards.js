@@ -3,12 +3,13 @@
     let currentCategory = 'all';
     let currentCards = [...FLASHCARD_DATA];
     let masteredCards = new Set();
+    let hideMastered = false;
 
     function init() {
         loadMasteredCards();
+        hideMastered = document.getElementById('hideMasteredToggle')?.checked || false;
         populateCategories();
-        renderFlashcards();
-        updateStats();
+        filterCards(); // Use filterCards instead of renderFlashcards to respect hideMastered
         setupEventListeners();
     }
 
@@ -37,8 +38,7 @@
             masteredCards.add(id);
         }
         saveMasteredCards();
-        renderFlashcards();
-        updateStats();
+        filterCards();
     }
 
     function resetProgress() {
@@ -47,9 +47,11 @@
             return;
         }
 
-        const cardsToReset = currentCategory === 'all' 
-            ? [...masteredCards] 
-            : currentCards.filter(card => masteredCards.has(card.id)).map(card => card.id);
+        const categoryCards = currentCategory === 'all' 
+            ? FLASHCARD_DATA 
+            : FLASHCARD_DATA.filter(card => card.category.includes(currentCategory));
+
+        const cardsToReset = categoryCards.filter(card => masteredCards.has(card.id)).map(card => card.id);
 
         if (cardsToReset.length === 0) {
             showToast(`No progress to reset in ${currentCategory}!`);
@@ -63,8 +65,7 @@
         if (confirm(msg)) {
             cardsToReset.forEach(id => masteredCards.delete(id));
             saveMasteredCards();
-            renderFlashcards();
-            updateStats();
+            filterCards();
             showToast('Progress reset!');
         }
     }
@@ -106,14 +107,26 @@
 
         const resetBtn = document.getElementById('resetProgressBtn');
         if (resetBtn) resetBtn.addEventListener('click', resetProgress);
+
+        const hideMasteredToggle = document.getElementById('hideMasteredToggle');
+        if (hideMasteredToggle) {
+            hideMasteredToggle.addEventListener('change', (e) => {
+                hideMastered = e.target.checked;
+                filterCards();
+            });
+        }
     }
 
     function filterCards() {
-        if (currentCategory === 'all') {
-            currentCards = [...FLASHCARD_DATA];
-        } else {
-            currentCards = FLASHCARD_DATA.filter(card => card.category.includes(currentCategory));
+        let cards = currentCategory === 'all' 
+            ? [...FLASHCARD_DATA]
+            : FLASHCARD_DATA.filter(card => card.category.includes(currentCategory));
+            
+        if (hideMastered) {
+            cards = cards.filter(card => !masteredCards.has(card.id));
         }
+        
+        currentCards = cards;
         renderFlashcards();
         updateStats();
     }
@@ -179,13 +192,17 @@
 
     function updateStats() {
         const totalEl = document.getElementById('totalCards');
-        if (totalEl) totalEl.textContent = currentCards.length;
-        
         const masteredEl = document.getElementById('masteredCards');
+        
+        const categoryCards = currentCategory === 'all' 
+            ? FLASHCARD_DATA 
+            : FLASHCARD_DATA.filter(card => card.category.includes(currentCategory));
+
+        if (totalEl) totalEl.textContent = categoryCards.length;
+        
         if (masteredEl) {
-            const currentSet = currentCards.map(c => c.id);
-            const masteredInView = [...masteredCards].filter(id => currentSet.includes(id)).length;
-            masteredEl.textContent = masteredInView;
+            const masteredCount = categoryCards.filter(card => masteredCards.has(card.id)).length;
+            masteredEl.textContent = masteredCount;
         }
     }
 
