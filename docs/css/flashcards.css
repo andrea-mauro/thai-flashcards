@@ -157,6 +157,56 @@
     text-align: center;
 }
 
+/* Compound Token Styles */
+.compound-token {
+    border-bottom: 1px dashed rgba(142, 68, 173, 0.4);
+    cursor: help;
+    transition: all 0.2s ease;
+    display: inline-block;
+    position: relative;
+}
+
+.compound-token:hover {
+    border-bottom-color: #f39c12;
+    color: #f39c12;
+}
+
+/* Instant Custom Tooltip */
+.compound-token::after {
+    content: attr(data-tooltip);
+    position: absolute;
+    bottom: 120%;
+    left: 50%;
+    transform: translateX(-50%);
+    background: #2c3e50;
+    color: white;
+    padding: 6px 10px;
+    border-radius: 6px;
+    font-size: 0.85rem;
+    font-style: normal;
+    white-space: nowrap;
+    opacity: 0;
+    visibility: hidden;
+    transition: opacity 0.1s ease;
+    z-index: 100;
+    box-shadow: 0 4px 15px rgba(0,0,0,0.3);
+    pointer-events: none;
+}
+
+.compound-token:hover::after {
+    opacity: 1;
+    visibility: visible;
+}
+
+.flashcard.mastered .compound-token {
+    border-bottom-color: rgba(39, 174, 96, 0.4);
+}
+
+.flashcard.mastered .compound-token:hover {
+    border-bottom-color: #27ae60;
+    color: #27ae60;
+}
+
 .audio-btn {
     background: #27ae60;
     color: white;

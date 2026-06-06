@@ -4,13 +4,65 @@
     let currentCards = [...FLASHCARD_DATA];
     let masteredCards = new Set();
     let hideMastered = false;
+    let lookupMap = new Map();
 
     function init() {
         loadMasteredCards();
+        buildLookupMap();
         hideMastered = document.getElementById('hideMasteredToggle')?.checked || false;
         populateCategories();
         filterCards(); // Use filterCards instead of renderFlashcards to respect hideMastered
         setupEventListeners();
+    }
+
+    function buildLookupMap() {
+        lookupMap = new Map();
+        FLASHCARD_DATA.forEach(card => {
+            const roman = card.romanization.toLowerCase();
+            // Only split by " / " or "/" which indicate synonyms/alternatives
+            const variants = roman.split(/\s*\/\s*/);
+            
+            variants.forEach(variant => {
+                const part = variant.trim();
+                if (part.length < 2) return; 
+                
+                if (lookupMap.has(part)) {
+                    const existing = lookupMap.get(part);
+                    const existingArray = existing.split('; ');
+                    if (!existingArray.includes(card.english)) {
+                        lookupMap.set(part, existing + "; " + card.english);
+                    }
+                } else {
+                    lookupMap.set(part, card.english);
+                }
+            });
+        });
+    }
+
+    function generateRomanizationHtml(romanization, currentEnglish) {
+        // Regex to match words (including special phonetic characters) vs non-word characters
+        // We include common Thai romanization characters: ɛ, ɔ, ə, ʉ and various tone marks
+        const parts = romanization.split(/([a-zA-Zɛɔəʉàáâǎèéêěìíîǐòóôǒùúûǔɛ̀ɛ́ɛ̂ɛ̌ɔ̀ɔ́ɔ̂ɔ̌ə̀ə́ə̂ə̌ʉ̀ʉ́ʉ̂ʉ̌]+)/g);
+        
+        return parts.map(part => {
+            const lowerPart = part.toLowerCase();
+            if (lookupMap.has(lowerPart)) {
+                let meaning = lookupMap.get(lowerPart);
+                
+                // If we know the current card's English meaning, filter it out to avoid circular/redundant tooltips
+                if (currentEnglish) {
+                    const currentLower = currentEnglish.toLowerCase();
+                    const meanings = meaning.split('; ');
+                    const filtered = meanings.filter(m => m.toLowerCase() !== currentLower);
+                    
+                    if (filtered.length === 0) return part; // Don't highlight if it's the exact same meaning
+                    meaning = filtered.join('; ');
+                }
+
+                return `<span class="compound-token" data-tooltip="${meaning}">${part}</span>`;
+            }
+            return part;
+        }).join('');
     }
 
     function loadMasteredCards() {
@@ -151,6 +203,8 @@
             const tooltip = isMastered ? 'Unmark as mastered' : 'Mark as mastered';
             const flashcard = document.createElement('div');
             const categoryDisplay = card.category.join(', ');
+            const romanizationHtml = generateRomanizationHtml(card.romanization, card.english);
+            
             flashcard.className = `flashcard ${isMastered ? 'mastered' : ''}`;
             flashcard.innerHTML = `
                 <div class="flashcard-inner">
@@ -168,7 +222,7 @@
                         </button>
                         <span class="card-category">${categoryDisplay}</span>
                         <div class="thai-text">${card.thai}</div>
-                        <div class="romanization">${card.romanization}</div>
+                        <div class="romanization">${romanizationHtml}</div>
                         <button class="audio-btn" onclick="playAudio('${card.thai}', this)"><svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="lucide lucide-volume2-icon lucide-volume-2"><path d="M11 4.702a.705.705 0 0 0-1.203-.498L6.413 7.587A1.4 1.4 0 0 1 5.416 8H3a1 1 0 0 0-1 1v6a1 1 0 0 0 1 1h2.416a1.4 1.4 0 0 1 .997.413l3.383 3.384A.705.705 0 0 0 11 19.298z"/><path d="M16 9a5 5 0 0 1 0 6"/><path d="M19.364 18.364a9 9 0 0 0 0-12.728"/></svg></button>
                     </div>
                 </div>
