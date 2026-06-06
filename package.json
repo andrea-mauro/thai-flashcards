@@ -6,7 +6,9 @@
   "scripts": {
     "start": "npm run serve",
     "serve": "http-server docs -p 5566",
-    "test": "start-server-and-test serve http://localhost:5566 cypress:run",
+    "test:e2e": "start-server-and-test serve http://localhost:5566 cypress:run",
+    "test:unit": "jest",
+    "test": "npm run test:unit && npm run test:e2e",
     "test:open": "start-server-and-test serve http://localhost:5566 cypress:open",
     "cypress:run": "cypress run",
     "cypress:open": "cypress open"
@@ -18,6 +20,7 @@
   "devDependencies": {
     "cypress": "^15.14.0",
     "http-server": "^14.1.1",
+    "jest": "^30.4.2",
     "start-server-and-test": "^3.0.2"
   }
 }
