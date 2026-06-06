@@ -303,5 +303,26 @@ const FLASHCARD_DATA = [
   {"id":"c91abe31-4988-4574-a7f0-0ee5e750ad2e","thai":"เย็น","romanization":"yen","english":"Cool","category":["weather"]},
   {"id":"428eaa72-654a-413e-a07a-58b5cc3a78f0","thai":"ร้อน","romanization":"rɔ́ɔn","english":"Hot","category":["weather","feelings"]},
   {"id":"b5939a77-8160-4f57-9fbc-c9523a3c138e","thai":"อุ่น","romanization":"ùn","english":"Warm","category":["weather"]},
-  {"id":"2979e575-2546-4e1c-a92d-05f350bb59ae","thai":"อากาศ","romanization":"aa-gàat","english":"Weather","category":["weather"]}
+  {"id":"2979e575-2546-4e1c-a92d-05f350bb59ae","thai":"อากาศ","romanization":"aa-gàat","english":"Weather","category":["weather"]},
+
+  // Components (Building Blocks)
+  {"id":"f374faa6-9489-4144-98e3-c11984d4fd9f","thai":"เสื้อ","romanization":"sûea","english":"Shirt / Clothes","category":["clothing", "basic", "components"]},
+  {"id":"7dcf121c-ac2e-442e-8751-f4eaee2bee09","thai":"ผ้า","romanization":"pâa","english":"Cloth / Fabric","category":["basic", "components"]},
+  {"id":"7dc89476-f2b8-4fa8-bd0a-4828a93334c8","thai":"เครื่อง","romanization":"krûeang","english":"Machine / Device","category":["basic", "components"]},
+  {"id":"38057411-8990-45f9-8827-a3384c55941e","thai":"ที่","romanization":"tîi","english":"Place / That / Which","category":["basic", "components"]},
+  {"id":"8317931f-616d-455c-ac74-29bb14e7804d","thai":"อาบ","romanization":"àap","english":"To bathe","category":["verbs", "basic", "components"]},
+  {"id":"62ef3882-6ce4-4037-a534-9091195443c3","thai":"เช็ด","romanization":"chét","english":"To wipe","category":["verbs", "basic", "components"]},
+  {"id":"ed8efa58-799f-4d3c-8bd8-6e682be75ae8","thai":"ล้าง","romanization":"láang","english":"To wash","category":["verbs", "basic", "components"]},
+  {"id":"58b8e4ab-bece-486a-b03a-cfc81cba9ab0","thai":"ทำ","romanization":"tam","english":"To do / To make","category":["verbs", "basic", "components"]},
+  {"id":"f3a275e5-9969-4082-8cc6-99838d8ca574","thai":"เท้า","romanization":"táao","english":"Foot","category":["nature", "basic", "components"]},
+  {"id":"487eaaf7-8727-4b66-a515-1556db39bd69","thai":"ไม้","romanization":"mái","english":"Wood / Stick","category":["nature", "basic", "components"]},
+  {"id":"2e10f1b5-8ec9-4e6c-b2c6-231306e31c32","thai":"หน้า","romanization":"nâa","english":"Face / Front","category":["nature", "basic", "components"]},
+  {"id":"b2467f75-3a36-4c37-a4b7-d7946dceb4d5","thai":"มือ","romanization":"mʉu","english":"Hand","category":["nature", "basic", "components"]},
+  {"id":"c08001a9-f567-4323-921a-23324ed56661","thai":"วัน","romanization":"wan","english":"Day","category":["time", "basic", "components"]},
+  {"id":"7c170503-b51d-445b-b6c3-f3ecf48166bb","thai":"งาน","romanization":"ngaan","english":"Work / Job","category":["basic", "components"]},
+  {"id":"45c4fe29-be7a-4b5f-a295-a988939a7922","thai":"หัว","romanization":"hǔa","english":"Head","category":["nature", "basic", "components"]},
+  {"id":"363742ed-bc1f-4e75-be15-0820a6f5eeeb","thai":"นัก","romanization":"nák","english":"Person who... (prefix)","category":["basic", "components"]},
+  {"id":"416804bc-7a96-4921-87c5-91ea14778688","thai":"ยา","romanization":"yaa","english":"Medicine / Chemical","category":["basic", "components"]},
+  {"id":"7cff6857-e5cb-475a-8308-e056f1ae7e44","thai":"ปาก","romanization":"bpàak","english":"Mouth","category":["nature", "basic", "components"]},
+  {"id":"5f2edddb-de1d-48de-b7ee-c2387d1c31b0","thai":"ตัก","romanization":"dtàk","english":"To scoop / dip","category":["verbs", "basic", "components"]}
 ];
