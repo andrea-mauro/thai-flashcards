@@ -1,6 +1,4 @@
 const FLASHCARD_DATA = [
-
-  // Basic
   {"id":"d535fd25-307f-44ac-8617-10ffcb60adf0","thai":"แย่","romanization":"yɛ̂ɛ","english":"Bad","category":["basic"]},
   {"id":"dd515a93-8237-4cfd-9bcd-fd6fdc0965a6","thai":"กระเป๋า","romanization":"grà-bpǎo","english":"Bag","category":["basic", "clothing"]},
   {"id":"a880fd0f-5cf7-4967-a4c0-5f930e559d76","thai":"ใหญ่","romanization":"yài","english":"Big","category":["basic"]},
@@ -14,8 +12,6 @@ const FLASHCARD_DATA = [
   {"id":"439d0a56-b830-460a-833d-042c8aa6a030","thai":"เล็ก","romanization":"lék","english":"Small","category":["basic"]},
   {"id":"b2ca473d-41d7-4eac-ad74-c674e02c0af0","thai":"ร่ม","romanization":"rôm","english":"Umbrella","category":["basic","weather"]},
   {"id":"764e5b06-e3dc-4a79-8ae1-6dfb6ac4cca3","thai":"ใช่","romanization":"châi","english":"Yes","category":["basic"]},
-
-  // Bathroom
   {"id":"79baef07-78bb-4545-9aa0-23f324aba031","thai":"พรมเช็ดเท้า","romanization":"prom chét táo","english":"Bath mat","category":["bathroom"]},
   {"id":"7bb0965f-c86d-4586-81bf-587f43788847","thai":"ฟองน้ำอาบน้ำ","romanization":"fɔɔng náam àap náam","english":"Bath sponge","category":["bathroom"]},
   {"id":"bd7d577d-db46-473d-950b-9b90506f6985","thai":"เสื้อคลุมอาบน้ำ","romanization":"sûea klum àap náam","english":"Bathrobe","category":["bathroom","clothing"]},
@@ -52,8 +48,6 @@ const FLASHCARD_DATA = [
   {"id":"a7ebdb3a-b574-4083-b7ab-18e0682d61d4","thai":"ผ้าเช็ดตัว","romanization":"pâa chét dtua","english":"Towel","category":["bathroom"]},
   {"id":"a44a75bc-8c3f-4580-b57f-3f68e4d3fd71","thai":"ถังขยะ","romanization":"tǎng kà-yà","english":"Trash can","category":["bathroom"]},
   {"id":"0e37a849-47d6-4980-96cb-7ceb2cd18266","thai":"เครื่องทำน้ำอุ่น","romanization":"krûeang tam náam ùn","english":"Water heater","category":["bathroom"]},
-
-  // Clothing
   {"id":"1fb17826-d1a3-48db-85e5-2d3372533676","thai":"เสื้อโค้ท/เสื้อคลุม","romanization":"sûea kóot / sûea klum","english":"Coat","category":["clothing"]},
   {"id":"32bef964-e87a-40aa-912d-167b1298be89","thai":"ชุดกระโปรง","romanization":"chút grà-bproong","english":"Dress","category":["clothing"]},
   {"id":"36f1939e-a3fc-49e9-87f2-1e69331f9e08","thai":"หมวก","romanization":"mùak","english":"Hat","category":["clothing"]},
@@ -64,8 +58,6 @@ const FLASHCARD_DATA = [
   {"id":"f982189f-b6ca-4c5d-aa25-0586978a9c77","thai":"รองเท้า","romanization":"rɔɔng-táao","english":"Shoes","category":["clothing"]},
   {"id":"1d23ad47-3004-46c9-98e1-aa4571118bc2","thai":"กระโปรง","romanization":"grà-bproong","english":"Skirt","category":["clothing"]},
   {"id":"ee384d28-db75-4d1b-9cec-460a54d4c4cb","thai":"ถุงเท้า","romanization":"tǔng-táao","english":"Socks","category":["clothing"]},
-
-  // Colors
   {"id":"ae2a4f99-1e61-45f7-97a2-284c85e513dd","thai":"สีดำ","romanization":"sǐi dam","english":"Black","category":["colors"]},
   {"id":"3dfe554e-8bc1-4c17-b994-5d88b12476cf","thai":"สีฟ้า","romanization":"sǐi fáa","english":"Blue","category":["colors"]},
   {"id":"cdb5a92c-6821-4f77-8a2d-e4924460969f","thai":"สีน้ำตาล","romanization":"sǐi náam-dtaan","english":"Brown","category":["colors"]},
@@ -76,8 +68,6 @@ const FLASHCARD_DATA = [
   {"id":"60ebcfd9-8f5d-4c2e-8662-1dabf1a32bff","thai":"สีแดง","romanization":"sǐi daeng","english":"Red","category":["colors"]},
   {"id":"7edc83cf-cc3c-4af5-8f07-f951d8475aa8","thai":"สีขาว","romanization":"sǐi kǎao","english":"White","category":["colors"]},
   {"id":"f4a97186-7133-44a0-9f2d-aa57eccc662b","thai":"สีเหลือง","romanization":"sǐi lʉ̌ang","english":"Yellow","category":["colors"]},
-
-  // Eating
   {"id":"c143afb4-6871-4da4-a903-338e8a772acc","thai":"ขนมปัง","romanization":"kà-nǒm-bpang","english":"Bread","category":["eating"]},
   {"id":"f78ad68d-e599-44a1-9e02-a39eb28eee28","thai":"น้ำมะพร้าว","romanization":"náam má-práao","english":"Coconut water","category":["eating"]},
   {"id":"d3ad3aec-d8d6-4cfe-afe6-bf2730be62b5","thai":"กาแฟ","romanization":"gaa-fae","english":"Coffee","category":["eating"]},
@@ -98,8 +88,6 @@ const FLASHCARD_DATA = [
   {"id":"a49fd80f-aa43-4aec-be59-6317ab1aabcb","thai":"อยาก","romanization":"yàak","english":"To want (to do something)","category":["eating","verbs","feelings"]},
   {"id":"cc72f504-cc91-442b-956a-33cfa0e24041","thai":"น้ำ","romanization":"náam","english":"Water","category":["eating", "nature"]},
   {"id":"94de5b84-7475-4081-9303-c9ded64648c8","thai":"น้ำแตงโม","romanization":"náam dtaeng-moo","english":"Watermelon juice","category":["eating"]},
-
-  // Family
   {"id":"7755a435-b777-4a4c-872c-9ecb177b5f96","thai":"ทารก","romanization":"thaa-rók","english":"Baby","category":["family"]},
   {"id":"3e564811-d149-486f-ac86-8893fb821bd7","thai":"พี่ชาย/น้องชาย","romanization":"phîi-chaai / nɔ́ɔng-chaai","english":"Brother","category":["family"]},
   {"id":"a2d054ea-8c63-4063-9803-dc48b9f1ecd2","thai":"ลูกสาว","romanization":"lûuk-sǎao","english":"Daughter","category":["family"]},
@@ -113,8 +101,6 @@ const FLASHCARD_DATA = [
   {"id":"05d66fa0-56d8-4571-9d2f-97bd27bbb0db","thai":"ผู้ปกครอง","romanization":"phûu-bpòk-khroong","english":"Parent","category":["family"]},
   {"id":"72c13416-c4b7-496f-9daf-34e16717cff5","thai":"พี่สาว/น้องสาว","romanization":"phîi-sǎao / nɔ́ɔng-sǎao","english":"Sister","category":["family"]},
   {"id":"3bd30e99-8615-4dcc-922c-95ece197447a","thai":"ลูกชาย","romanization":"lûuk-chaai","english":"Son","category":["family"]},
-
-  // Feelings
   {"id":"fddb76ae-3d81-4300-ab99-7e5496542e50","thai":"สบายดี","romanization":"sà-baai dii","english":"Feeling good / Well","category":["feelings"]},
   {"id":"730f26fa-10a0-46f7-b181-8b1b88e8c3a0","thai":"อิ่ม","romanization":"ìm","english":"Full (after eating)","category":["feelings"]},
   {"id":"7d3eda66-00a5-4ea5-95f5-244abe020b8e","thai":"หิว","romanization":"hǐu","english":"Hungry","category":["feelings"]},
@@ -123,8 +109,6 @@ const FLASHCARD_DATA = [
   {"id":"6a625fed-c643-4b79-88cf-fdd9415a1aed","thai":"ง่วงนอน","romanization":"ngûuang noon","english":"Sleepy","category":["feelings"]},
   {"id":"d308ab0c-7fba-407b-8b27-c24b7e5770ad","thai":"เหนื่อย","romanization":"nʉ̀ai","english":"Tired","category":["feelings"]},
   {"id":"41bc4c68-0da5-4d01-bb5e-a2479643b2d4","thai":"รู้สึก","romanization":"rúu-sʉ̀k","english":"To feel","category":["feelings","verbs"]},
-
-  // Greetings
   {"id":"a0be4814-f6d3-4586-9e8f-33f109d321f2","thai":"สวัสดีตอนบ่าย","romanization":"sà-wàt-dii dton bàai","english":"Good afternoon","category":["greetings"]},
   {"id":"c571a0e1-4a6d-4c04-bfdc-fa9de7abbc2e","thai":"สวัสดีตอนเย็น","romanization":"sà-wàt-dii dton yen","english":"Good evening","category":["greetings"]},
   {"id":"3f2f1458-7f0c-4d06-a88b-ee212787efd3","thai":"สวัสดีตอนสาย","romanization":"sà-wàt-dii dton sǎai","english":"Good late morning","category":["greetings"]},
@@ -136,8 +120,6 @@ const FLASHCARD_DATA = [
   {"id":"b9dbe54a-1a37-43ce-916e-4d26a55c1491","thai":"ไม่เป็นไร","romanization":"mâi bpen rai","english":"No problem / You're welcome","category":["greetings"]},
   {"id":"8b700af7-09d5-41e5-80fb-307a14d50390","thai":"ขอบคุณ","romanization":"khòp-khun","english":"Thank you","category":["greetings"]},
   {"id":"ee17d8f4-3c87-4afe-a9c7-e6336fb392ff","thai":"ขอบคุณมาก","romanization":"kòp kun mâak","english":"Thank you very much","category":["greetings"]},
-
-  // House
   {"id":"34497816-8455-42c5-95da-cfe7591d33fd","thai":"ห้องน้ำ","romanization":"hɔ̂ng-náam","english":"Bathroom","category":["house","bathroom"]},
   {"id":"65a2ef68-e4fe-42a7-8142-ec16dbca7e2a","thai":"เตียง","romanization":"dtiang","english":"Bed","category":["house"]},
   {"id":"d2f51b68-2bbf-4f06-9afa-4fee3a6dc933","thai":"ผ้าห่ม","romanization":"pâa-hòm","english":"Blanket","category":["house"]},
@@ -153,8 +135,6 @@ const FLASHCARD_DATA = [
   {"id":"d36e978e-8057-472c-9ef8-9c24adf9f844","thai":"โต๊ะ","romanization":"dtó","english":"Table","category":["house"]},
   {"id":"ce6e9668-77fe-435b-99b5-728c1cecaf7e","thai":"กำแพง/ผนัง","romanization":"gam-phaeng / phà-nǎng","english":"Wall","category":["house"]},
   {"id":"17770cc8-5af1-4248-b910-e8581b6378d","thai":"หน้าต่าง","romanization":"nâa-dtàang","english":"Window","category":["house"]},
-
-  // Introduction
   {"id":"09d3b069-260b-43d0-8bcf-a8dedb5b6ca6","thai":"ฉันชื่อ","romanization":"chǎn chûu","english":"I am (your name)","category":["introduction"]},
   {"id":"65be54a3-46ca-4f8a-86c2-0654fdb98c2f","thai":"ฉันอายุ 25 ปี","romanization":"chǎn aa-yú sɔ̌ɔng-sìp hâa bpii","english":"I am 25 years old","category":["introduction"]},
   {"id":"9f7d8e22-3ba7-4246-b7be-de5ae98b864e","thai":"ฉันเป็นหมอ","romanization":"chǎn bpen mɔ̌อ","english":"I am a doctor","category":["introduction"]},
@@ -174,8 +154,6 @@ const FLASHCARD_DATA = [
   {"id":"dba8392a-757b-4907-b362-c11108ad6453","thai":"ฉันทำงานที่บ้าน","romanization":"chǎn tam-ngaan tîi bâan","english":"I work from home","category":["introduction"]},
   {"id":"95d1e33b-5a5e-4965-a4db-fdd6282981a7","thai":"ฉันทำงานด้านไอที","romanization":"chǎn tam-ngaan dâan ai-tîi","english":"I work in IT","category":["introduction"]},
   {"id":"a2eeb77a-f800-4e75-a075-5dfabda92b8a","thai":"ฉันมาจากประเทศไทย","romanization":"chǎn maa jàak bprà-têet tai","english":"I'm from Thailand","category":["introduction"]},
-
-  // Kitchen
   {"id":"dfe04249-a74a-4822-8804-6a4f6113535f","thai":"ฟอยล์ห่ออาหาร","romanization":"fɔɔi hɔ̀o aa-hǎan","english":"Aluminum foil","category":["kitchen"]},
   {"id":"37a3fb66-436a-45b8-aa57-509cc645e7f8","thai":"ผ้ากันเปื้อน","romanization":"pâa gan bpʉ̀euan","english":"Apron","category":["kitchen"]},
   {"id":"e9699625-26e5-4e9b-835f-40108a421859","thai":"เครื่องปั่น","romanization":"krûeang bpàn","english":"Blender","category":["kitchen"]},
@@ -220,8 +198,6 @@ const FLASHCARD_DATA = [
   {"id":"43150f1d-93bd-49ac-980b-9862f4872568","thai":"ที่คีบอาหาร","romanization":"tîi kîip aa-hǎan","english":"Tongs","category":["kitchen"]},
   {"id":"b53def0b-9ca4-480f-88aa-c15c777daaef","thai":"ถาด","romanization":"tàat","english":"Tray","category":["kitchen"]},
   {"id":"4c798d1a-4e0d-4d1a-88f2-cde9cc21c071","thai":"ที่ตีไข่","romanization":"tîi dtìi kài","english":"Whisk","category":["kitchen"]},
-
-  // Nature
   {"id":"b73328ca-3a9d-4fd3-8184-0d35c3d2955f","thai":"คลอง","romanization":"khlɔɔng","english":"Canal","category":["nature"]},
   {"id":"05008603-c80b-45ba-8031-57965a771390","thai":"เมฆ","romanization":"mêek","english":"Cloud","category":["nature"]},
   {"id":"88fcaa46-400f-45b4-9d6a-c9676bd8ce59","thai":"สุนัข / หมา","romanization":"sù-nák / mǎa","english":"Dog","category":["nature"]},
@@ -238,8 +214,6 @@ const FLASHCARD_DATA = [
   {"id":"69e89be0-e99a-4646-9c2d-67b7453c250b","thai":"ดาว","romanization":"daao","english":"Star","category":["nature"]},
   {"id":"6cceec3a-6d8d-43fa-b8e1-495652240465","thai":"พระอาทิตย์","romanization":"phrá-aa-thít","english":"Sun","category":["nature"]},
   {"id":"b1e33d11-24ca-48ab-aa95-2384f1c04932","thai":"ต้นไม้","romanization":"dtôn-mái","english":"Tree","category":["nature"]},
-
-  // Phrases
   {"id":"6452ab30-cb3b-4aff-9c5b-f97c8e65b368","thai":"สบายดีไหม","romanization":"sà-baai dii mǎi","english":"How are you?","category":["phrases"]},
   {"id":"c82ac403-fec2-4ac0-b7e4-041d1828bc6f","thai":"ทั้งหมดเท่าไหร่","romanization":"táng mòt tâo-rài","english":"How much for everything?","category":["phrases"]},
   {"id":"3c08a01d-dd0f-4225-a7bb-57fb241d5a15","thai":"ราคาเท่าไหร่","romanization":"raa-kaa tâo-rài","english":"How much is it?","category":["phrases"]},
@@ -249,8 +223,6 @@ const FLASHCARD_DATA = [
   {"id":"84109c10-1d55-4353-9f69-881cabfbfc9e","thai":"พรุ่งนี้","romanization":"phrûng-níi","english":"Tomorrow","category":["phrases"]},
   {"id":"0cfcd6bd-fd17-47e3-bb8f-a96a4493bc78","thai":"คุณชื่ออะไร","romanization":"kun chʉ̂ʉ à-rai","english":"What is your name?","category":["phrases"]},
   {"id":"56ea1d9a-8007-46da-a174-618fb94cc423","thai":"เมื่อวาน","romanization":"mʉ̂a-waan","english":"Yesterday","category":["phrases"]},
-
-  // Pronouns
   {"id":"70dc6aea-5735-402a-8c52-1e1bc5cb85e4","thai":"เขา","romanization":"kǎo","english":"He / She / Him / Her","category":["pronouns"]},
   {"id":"00270bc2-6a67-495b-a70b-dae48ff0ceeb","thai":"ดิฉัน","romanization":"dì-chǎn","english":"I / Me (Female - formal)","category":["pronouns"]},
   {"id":"5a240f1f-e4b4-4448-abd1-b744a830a04a","thai":"ผม","romanization":"pǒm","english":"I / Me (Male)","category":["pronouns"]},
@@ -259,8 +231,6 @@ const FLASHCARD_DATA = [
   {"id":"55b8e218-0c09-4035-9623-624d98ccf8ce","thai":"เรา","romanization":"rao","english":"We","category":["pronouns"]},
   {"id":"0ef3514e-2925-4edb-8724-d40c550011f7","thai":"คุณ","romanization":"kun","english":"You","category":["pronouns"]},
   {"id":"27c2115e-4c7a-4d12-a23e-103d011ef7c7","thai":"พวกคุณ","romanization":"pûak kun","english":"You (plural)","category":["pronouns"]},
-
-  // School
   {"id":"a1b1f6cb-026d-42f5-9b29-8635c770dcee","thai":"หนังสือ","romanization":"năng-sʉ̌ʉ","english":"Book","category":["school"]},
   {"id":"95ba062f-13e5-4387-8701-caec3f9b4f5a","thai":"ห้องเรียน","romanization":"hɔ̂ng-rian","english":"Class","category":["school"]},
   {"id":"5f7399fa-1aac-4ba7-805f-f11cddc1f8c1","thai":"โต๊ะเรียน","romanization":"dtó-rian","english":"Desk","category":["school"]},
@@ -271,16 +241,12 @@ const FLASHCARD_DATA = [
   {"id":"99de91ca-7b43-4780-b287-e3eaa17af176","thai":"นักเรียน","romanization":"nák-rian","english":"Student","category":["school","introduction"]},
   {"id":"4d13c5ef-b08b-431b-b481-b4be995032fb","thai":"ครู","romanization":"khruu","english":"Teacher","category":["school","introduction"]},
   {"id":"d372e91e-ea04-4f37-96ee-4f746c9ac29c","thai":"นักเขียน","romanization":"nák-khǐan","english":"Writer","category":["school"]},
-
-  // Taste
   {"id":"de792c8c-f9da-41d2-aaa4-b32c2c1c6c47","thai":"ขม","romanization":"kǒm","english":"Bitter","category":["taste"]},
   {"id":"8d93947f-1a57-4420-8b11-313d923c4030","thai":"เค็ม","romanization":"kem","english":"Salty","category":["taste"]},
   {"id":"edc64802-2437-4ea1-9c4e-1f013946f404","thai":"เปรี้ยว","romanization":"bprîao","english":"Sour","category":["taste"]},
   {"id":"8c793054-4ca6-461a-9909-f9d9e007e1cf","thai":"เผ็ด","romanization":"pèt","english":"Spicy","category":["taste"]},
   {"id":"017fecd2-e31d-4e41-a9dd-5ece8781b9cd","thai":"หวาน","romanization":"wǎan","english":"Sweet","category":["taste"]},
   {"id":"9572a9a3-54b2-4358-acd4-36a67fa7cae1","thai":"รสชาติ","romanization":"rót-châat","english":"Taste / Flavor","category":["taste"]},
-
-  // Verbs
   {"id":"e95af99b-a032-4237-b3dd-b8fbdf241007","thai":"ปิด","romanization":"bpìt","english":"Close","category":["verbs"]},
   {"id":"60a33b4d-250e-48ca-a763-c4be6615b815","thai":"มา","romanization":"maa","english":"Come","category":["verbs"]},
   {"id":"c3a7083e-da86-4c90-a576-dea8c6b5805a","thai":"ไป","romanization":"bpai","english":"Go","category":["verbs"]},
@@ -297,15 +263,11 @@ const FLASHCARD_DATA = [
   {"id":"b5489f0e-ba68-42aa-8817-56789cb65c00","thai":"เดิน","romanization":"deen","english":"Walk","category":["verbs"]},
   {"id":"fb13ac7e-3f13-4ccd-9c13-936170abb4be","thai":"ทำงาน","romanization":"tham-ngaan","english":"Work","category":["verbs","introduction"]},
   {"id":"4de2058c-7de3-4e7e-9324-94b04a6685d3","thai":"เขียน","romanization":"khǐan","english":"Write","category":["verbs"]},
-
-  // Weather
   {"id":"768a1f63-ab83-4b16-985d-2a822ca721c0","thai":"หนาว","romanization":"nǎao","english":"Cold","category":["weather"]},
   {"id":"c91abe31-4988-4574-a7f0-0ee5e750ad2e","thai":"เย็น","romanization":"yen","english":"Cool","category":["weather"]},
   {"id":"428eaa72-654a-413e-a07a-58b5cc3a78f0","thai":"ร้อน","romanization":"rɔ́ɔn","english":"Hot","category":["weather","feelings"]},
   {"id":"b5939a77-8160-4f57-9fbc-c9523a3c138e","thai":"อุ่น","romanization":"ùn","english":"Warm","category":["weather"]},
   {"id":"2979e575-2546-4e1c-a92d-05f350bb59ae","thai":"อากาศ","romanization":"aa-gàat","english":"Weather","category":["weather"]},
-
-  // Components (Building Blocks)
   {"id":"f374faa6-9489-4144-98e3-c11984d4fd9f","thai":"เสื้อ","romanization":"sûea","english":"Shirt / Clothes","category":["clothing", "basic", "components"]},
   {"id":"7dcf121c-ac2e-442e-8751-f4eaee2bee09","thai":"ผ้า","romanization":"pâa","english":"Cloth / Fabric","category":["basic", "components"]},
   {"id":"7dc89476-f2b8-4fa8-bd0a-4828a93334c8","thai":"เครื่อง","romanization":"krûeang","english":"Machine / Device","category":["basic", "components"]},
@@ -326,3 +288,7 @@ const FLASHCARD_DATA = [
   {"id":"7cff6857-e5cb-475a-8308-e056f1ae7e44","thai":"ปาก","romanization":"bpàak","english":"Mouth","category":["nature", "basic", "components"]},
   {"id":"5f2edddb-de1d-48de-b7ee-c2387d1c31b0","thai":"ตัก","romanization":"dtàk","english":"To scoop / dip","category":["verbs", "basic", "components"]}
 ];
+
+if (typeof module !== 'undefined' && module.exports) {
+    module.exports = { FLASHCARD_DATA };
+}
