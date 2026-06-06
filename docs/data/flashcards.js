@@ -245,6 +245,8 @@ const FLASHCARD_DATA = [
   {"id":"3c08a01d-dd0f-4225-a7bb-57fb241d5a15","thai":"ราคาเท่าไหร่","romanization":"raa-kaa tâo-rài","english":"How much is it?","category":"phrases"},
   {"id":"7eb41982-19d5-4210-9c9a-71ca4246a801","thai":"ขอโทษ","romanization":"kɔ̌ɔ tôot","english":"I'm sorry / Excuse me","category":"phrases"},
   {"id":"07986f4e-31e0-475d-98e0-d333a068adf8","thai":"ยินดีที่ได้รู้จัก","romanization":"yin-dii tîi dâi rúu-jàk","english":"Nice to meet you","category":"phrases"},
+  {"id":"05bf8c66-5234-49cf-b1ea-342d86393bf1","thai":"วันนี้","romanization":"wan-níi","english":"Today","category":"phrases"},
+  {"id":"84109c10-1d55-4353-9f69-881cabfbfc9e","thai":"พรุ่งนี้","romanization":"phrûng-níi","english":"Tomorrow","category":"phrases"},
   {"id":"0cfcd6bd-fd17-47e3-bb8f-a96a4493bc78","thai":"คุณชื่ออะไร","romanization":"kun chʉ̂ʉ à-rai","english":"What is your name?","category":"phrases"},
   {"id":"56ea1d9a-8007-46da-a174-618fb94cc423","thai":"เมื่อวาน","romanization":"mʉ̂a-waan","english":"Yesterday","category":"phrases"},
 
