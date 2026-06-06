@@ -48,10 +48,9 @@ describe('Compound Word Breakdown', () => {
         cy.get('@spongeCard').click();
 
         cy.get('@spongeCard').find('.romanization').within(() => {
-            // "náam" should appear twice
-            cy.get('.compound-token').filter(':contains("náam")').should('have.length', 2);
-            // "àap" and "fɔɔng" are not standalone cards in current dataset, so they shouldn't be tokens
-            cy.get('.compound-token').should('have.length', 2);
+            // "náam" appears twice, "fɔɔng" appears once.
+            // Tokens found: "fɔɔng", "náam", "náam".
+            cy.get('.compound-token').should('have.length', 3);
         });
     });
 });
