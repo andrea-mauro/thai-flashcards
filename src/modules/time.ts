@@ -1,5 +1,7 @@
+import { playAudio } from '../utils';
+import { NumbersQuiz } from './numbers';
+
 // Time Module
-(function() {
     let currentCorrectTime = null;
     let quizMode = 'visual';
 
@@ -165,8 +167,7 @@
         nextBtn.style.display = 'inline-block';
     }
 
-    window.TimeQuiz = {
+    export const TimeQuiz = {
         init: init,
         generate: generateQuestion
     };
-})();

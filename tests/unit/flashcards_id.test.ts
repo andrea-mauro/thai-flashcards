@@ -1,4 +1,4 @@
-const { FLASHCARD_DATA } = require('../../docs/data/flashcards');
+import { FLASHCARD_DATA } from '../../src/data/flashcards';
 
 describe('Flashcard Data Integrity', () => {
     test('all flashcard IDs should be unique', () => {

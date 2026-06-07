@@ -6,7 +6,7 @@ describe('Storage Integrity and Robustness', () => {
   it('ignores non-existent IDs in localStorage and maintains correct counter', () => {
     // 1. Setup localStorage with one valid ID and one fake (orphaned) ID
     // We'll pick the first card's ID as the valid one
-    cy.readFile('docs/data/flashcards.js').then((content) => {
+    cy.readFile('src/data/flashcards.ts').then((content) => {
       // Regex to grab the first ID from the file
       const idMatch = content.match(/"id":"([^"]+)"/);
       const validId = idMatch[1];

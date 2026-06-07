@@ -1,12 +1,17 @@
+import { Flashcards } from './modules/flashcards';
+import { NumbersQuiz } from './modules/numbers';
+import { TimeQuiz } from './modules/time';
+import { DaysQuiz } from './modules/days';
+import { TonesGuide } from './modules/tones';
+import { showToast } from './utils';
 
-        // Main Application Orchestrator
-        (function() {
-            let currentView = 'flashcards';
+// Main Application Orchestrator
+let currentView = 'flashcards';
 
             function init() {
                 try {
                     // Initial route
-                    const startingView = window.INITIAL_VIEW || 'flashcards';
+                    const startingView = (window as any).INITIAL_VIEW || 'flashcards';
                     switchView(startingView);
 
                     // Global components
@@ -68,9 +73,3 @@
             }
 
             document.addEventListener('DOMContentLoaded', init);
-
-            window.App = {
-                switchView: switchView
-            };
-        })();
-    

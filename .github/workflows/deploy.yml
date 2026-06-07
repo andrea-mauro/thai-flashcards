@@ -6,9 +6,12 @@ on:
   push:
     branches: ["main"]
     paths:
-      - 'docs/**'
+      - 'src/**'
+      - 'index.html'
       - 'package.json'
       - 'package-lock.json'
+      - 'tsconfig.json'
+      - 'vite.config.ts'
       - 'cypress/**'
       - 'cypress.config.js'
       - '.github/workflows/deploy.yml'
@@ -59,6 +62,15 @@ jobs:
     steps:
       - name: Checkout
         uses: actions/checkout@v4
+      - name: Setup Node
+        uses: actions/setup-node@v4
+        with:
+          node-version: 20
+          cache: 'npm'
+      - name: Install dependencies
+        run: npm ci
+      - name: Build project
+        run: npm run build
       - name: Setup Pages
         uses: actions/configure-pages@v4
       - name: Upload artifact

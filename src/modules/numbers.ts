@@ -1,5 +1,6 @@
+import { playAudio, showToast } from '../utils';
+
 // Numbers Module
-(function() {
     let currentNumberRange = 10;
     let currentCorrectNumber = null;
     let quizMode = 'visual';
@@ -197,9 +198,8 @@
         nextBtn.style.display = 'inline-block';
     }
 
-    window.NumbersQuiz = {
+    export const NumbersQuiz = {
         init: init,
         toThai: toThai,
         generate: generateQuestion
     };
-})();

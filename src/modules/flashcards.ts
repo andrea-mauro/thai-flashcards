@@ -1,5 +1,7 @@
+import { FLASHCARD_DATA } from '../data/flashcards';
+import { playAudio, showToast } from '../utils';
+
 // Flashcard Module
-(function() {
     let currentCategory = 'all';
     let currentCards = [...FLASHCARD_DATA];
     let masteredCards = new Set();
@@ -260,9 +262,8 @@
         }
     }
 
-    window.Flashcards = {
+    export const Flashcards = {
         init: init,
         render: renderFlashcards,
         updateStats: updateStats
     };
-})();

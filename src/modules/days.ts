@@ -1,5 +1,7 @@
+import { playAudio, showToast } from '../utils';
+import { NumbersQuiz } from './numbers';
+
 // Days & Months Module
-(function() {
     let currentQuizMode = 'days'; // 'days', 'months', 'both'
     let currentCorrectItem = null;
     let quizType = 'visual';
@@ -177,8 +179,7 @@
         nextBtn.style.display = 'inline-block';
     }
 
-    window.DaysQuiz = {
+    export const DaysQuiz = {
         init: init,
         generate: generateQuestion
     };
-})();

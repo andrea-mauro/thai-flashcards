@@ -1,5 +1,5 @@
 // Shared Utility Functions
-function playAudio(text, btn) {
+export function playAudio(text: string, btn?: HTMLElement | null) {
     if (!text) return;
     
     if ('speechSynthesis' in window) {
@@ -27,8 +27,10 @@ function playAudio(text, btn) {
         showToast('Text-to-speech not supported in this browser');
     }
 }
+(window as any).playAudio = playAudio;
 
-function showToast(message) {
+
+export function showToast(message: string) {
     const toast = document.getElementById('toast');
     if (toast) {
         toast.textContent = message;
