@@ -5,3 +5,20 @@ export interface Flashcard {
     english: string;
     category: string[];
 }
+
+export interface ThaiItem {
+    id: number;
+    english: string;
+    thai: string;
+    roman: string;
+}
+
+export interface ThaiResult {
+    thai: string;
+    roman: string;
+}
+
+export interface Time {
+    h: number;
+    m: number;
+}

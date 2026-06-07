@@ -1,9 +1,14 @@
-// Shared Utility Functions
+declare global {
+    interface Window {
+        playAudio: (text: string, btn?: HTMLElement | null) => void;
+        INITIAL_VIEW: string;
+    }
+}
+
 export function playAudio(text: string, btn?: HTMLElement | null) {
     if (!text) return;
-    
+
     if ('speechSynthesis' in window) {
-        // Cancel any ongoing speech
         window.speechSynthesis.cancel();
 
         const utterance = new SpeechSynthesisUtterance(text);
@@ -27,8 +32,7 @@ export function playAudio(text: string, btn?: HTMLElement | null) {
         showToast('Text-to-speech not supported in this browser');
     }
 }
-(window as any).playAudio = playAudio;
-
+window.playAudio = playAudio;
 
 export function showToast(message: string) {
     const toast = document.getElementById('toast');
