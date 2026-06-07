@@ -4,12 +4,13 @@
   "description": "A lightweight, standalone web application for learning Thai vocabulary and phrases. It features category filtering, progress tracking (learned vs. hard cards), daily streaks, and text-to-speech audio.",
   "main": "app.js",
   "scripts": {
-    "start": "npm run serve",
-    "serve": "http-server docs -p 5566",
-    "test:e2e": "start-server-and-test serve http://localhost:5566 cypress:run",
+    "start": "vite",
+    "build": "vite build",
+    "serve": "npm run build && vite preview --port 5566",
     "test:unit": "jest",
+    "test:e2e": "start-server-and-test serve http://localhost:5566 cypress:run",
+    "test:e2e:open": "start-server-and-test serve http://localhost:5566 cypress:open",
     "test": "npm run test:unit && npm run test:e2e",
-    "test:open": "start-server-and-test serve http://localhost:5566 cypress:open",
     "cypress:run": "cypress run",
     "cypress:open": "cypress open"
   },
@@ -18,9 +19,13 @@
   "license": "MIT",
   "type": "commonjs",
   "devDependencies": {
+    "@types/jest": "^30.0.0",
     "cypress": "^15.14.0",
     "http-server": "^14.1.1",
     "jest": "^30.4.2",
-    "start-server-and-test": "^3.0.2"
+    "start-server-and-test": "^3.0.2",
+    "ts-jest": "^29.4.11",
+    "typescript": "^6.0.3",
+    "vite": "^8.0.16"
   }
 }

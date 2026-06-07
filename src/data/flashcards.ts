@@ -1,4 +1,6 @@
-const FLASHCARD_DATA = [
+import { Flashcard } from '../types';
+
+export const FLASHCARD_DATA: Flashcard[] = [
   {"id":"d535fd25-307f-44ac-8617-10ffcb60adf0","thai":"แย่","romanization":"yɛ̂ɛ","english":"Bad","category":["basic"]},
   {"id":"dd515a93-8237-4cfd-9bcd-fd6fdc0965a6","thai":"กระเป๋า","romanization":"grà-bpǎo","english":"Bag","category":["basic", "clothing"]},
   {"id":"a880fd0f-5cf7-4967-a4c0-5f930e559d76","thai":"ใหญ่","romanization":"yài","english":"Big","category":["basic"]},
@@ -288,7 +290,3 @@ const FLASHCARD_DATA = [
   {"id":"7cff6857-e5cb-475a-8308-e056f1ae7e44","thai":"ปาก","romanization":"bpàak","english":"Mouth","category":["nature", "basic", "components"]},
   {"id":"5f2edddb-de1d-48de-b7ee-c2387d1c31b0","thai":"ตัก","romanization":"dtàk","english":"To scoop / dip","category":["verbs", "basic", "components"]}
 ];
-
-if (typeof module !== 'undefined' && module.exports) {
-    module.exports = { FLASHCARD_DATA };
-}

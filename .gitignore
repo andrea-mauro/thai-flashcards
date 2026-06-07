@@ -11,7 +11,7 @@ ui-debug.log
 Thumbs.db
 
 # Build output
-dist/
+docs/
 
 # Node
 node_modules/
