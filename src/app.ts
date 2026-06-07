@@ -28,6 +28,7 @@ function init() {
 
 function handleRouting() {
     const hash = window.location.hash.replace('#', '');
+
     switchView(hash || 'flashcards');
 }
 
