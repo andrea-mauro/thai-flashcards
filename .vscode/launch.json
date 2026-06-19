@@ -26,10 +26,10 @@
             "runtimeArgs": ["Cypress UI opened."]
         },
         {
-            "name": "🏃 Serve App",
+            "name": "🏃 Start App",
             "type": "node",
             "request": "launch",
-            "preLaunchTask": "Serve App Locally",
+            "preLaunchTask": "Start App",
         }
     ]
 }

@@ -37,9 +37,9 @@
             }
         },
         {
-            "label": "Serve App Locally",
+            "label": "Start App",
             "type": "shell",
-            "command": "npm run serve",
+            "command": "npm run start",
             "isBackground": true,
             "presentation": {
                 "reveal": "always",
