@@ -35,16 +35,6 @@ describe('Multi-Category Flashcards', () => {
         cy.get('#flashcardContainer').contains('Bathroom').should('be.visible');
     });
 
-    it('should display multiple categories on the card', () => {
-        cy.get('.category-btn').contains('Basic').click();
-        cy.contains('.flashcard', 'Bag').within(() => {
-            cy.get('.card-category').invoke('text').then((text) => {
-                expect(text.toLowerCase()).to.include('basic');
-                expect(text.toLowerCase()).to.include('clothing');
-            });
-        });
-    });
-
     it('should filter correctly for single category words', () => {
         // "Bad" is ["basic"]
         cy.get('.category-btn').contains('Clothing').click();

@@ -1,12 +1,13 @@
 {
   "name": "thai-flashcards",
   "version": "1.0.0",
-  "description": "A lightweight, standalone web application for learning Thai vocabulary and phrases. It features category filtering, progress tracking (learned vs. hard cards), daily streaks, and text-to-speech audio.",
+  "description": "A lightweight, standalone web application for learning Thai vocabulary and phrases. It features category filtering, progress tracking (learned vs. hard cards), and text-to-speech audio.",
   "main": "app.js",
   "scripts": {
     "start": "vite",
+    "clean": "rm -rf docs",
     "build": "vite build",
-    "serve": "npm run build && vite preview --port 5566",
+    "serve": "npm run clean && npm run build && vite preview --port 5566 --strictPort",
     "test:unit": "jest",
     "test:e2e": "start-server-and-test serve http://localhost:5566 cypress:run",
     "test:e2e:open": "start-server-and-test serve http://localhost:5566 cypress:open",
@@ -14,8 +15,8 @@
     "cypress:run": "cypress run",
     "cypress:open": "cypress open"
   },
-  "keywords": [],
-  "author": "",
+  "keywords": ["thai", "flashcards", "language learning", "web application", "vocabulary", "phrases", "text-to-speech"],
+  "author": "Andrea Mauro",
   "license": "MIT",
   "type": "commonjs",
   "devDependencies": {

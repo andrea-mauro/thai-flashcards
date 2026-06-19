@@ -4,6 +4,7 @@ export interface Flashcard {
     romanization: string;
     english: string;
     category: string[];
+    gif?: string;
 }
 
 export interface ThaiItem {
