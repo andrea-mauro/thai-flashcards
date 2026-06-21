@@ -43,8 +43,8 @@ describe('Mastered Cards Feature', () => {
     // Reload the page
     cy.reload();
 
-    // Status should still be there
-    cy.get('.flashcard').first().should('have.class', 'mastered');
+    // Status should still be there (order may differ due to shuffle)
+    cy.get('.flashcard.mastered').should('have.length', 1);
     cy.get('#masteredCards').should('have.text', '1');
   });
 

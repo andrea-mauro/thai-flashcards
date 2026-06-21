@@ -94,8 +94,10 @@ function toggleMastered(id: string, el: HTMLElement) {
         btn.setAttribute('title', nowMastered ? 'Unmark as mastered' : 'Mark as mastered');
     });
 
-    if (hideMastered) {
-        el.style.display = nowMastered ? 'none' : '';
+    if (hideMastered && nowMastered) {
+        el.remove();
+        updateStats();
+        return;
     }
 
     updateStats();

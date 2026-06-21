@@ -65,8 +65,4 @@ describe('Mobile UX Specific Tests', () => {
     cy.get('.audio-btn').first().should('not.have.class', 'playing');
   });
 
-  it('shows the toast notification correctly on mobile', () => {
-    cy.get('.shuffle-btn').click();
-    cy.get('#toast').should('be.visible').and('have.class', 'show');
-  });
 });

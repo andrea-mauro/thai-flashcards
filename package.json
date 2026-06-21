@@ -4,7 +4,7 @@
   "description": "A lightweight, standalone web application for learning Thai vocabulary and phrases. It features category filtering, progress tracking (learned vs. hard cards), and text-to-speech audio.",
   "main": "app.js",
   "scripts": {
-    "start": "vite",
+    "start": "vite --host",
     "clean": "rm -rf docs",
     "build": "vite build",
     "serve": "npm run clean && npm run build && vite preview --port 5566 --strictPort",

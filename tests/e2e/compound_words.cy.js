@@ -8,7 +8,7 @@ describe('Compound Word Breakdown', () => {
         cy.get('.category-btn').contains('Nature').click();
 
         // 2. Find the River card (Mae-Nam)
-        cy.get('.flashcard').contains('River').parents('.flashcard').as('riverCard');
+        cy.contains('.english-text', /^River$/).parents('.flashcard').as('riverCard');
         
         // 3. Reveal the back
         cy.get('@riverCard').click();
@@ -32,7 +32,7 @@ describe('Compound Word Breakdown', () => {
     it('should not highlight the word itself on its own card', () => {
         // "Water" -> "náam"
         cy.get('.category-btn').contains('Eating').click();
-        cy.get('.flashcard').contains('Water').parents('.flashcard').as('waterCard');
+        cy.contains('.english-text', /^Water$/).parents('.flashcard').as('waterCard');
         cy.get('@waterCard').click();
 
         // Should NOT have any compound tokens if it's a perfect match with the card meaning
@@ -44,7 +44,7 @@ describe('Compound Word Breakdown', () => {
     it('should show compound breakdown for "Bath sponge" precisely', () => {
         // "fɔɔng náam àap náam"
         cy.get('.category-btn').contains('Bathroom').click();
-        cy.get('.flashcard').contains('Bath sponge').parents('.flashcard').as('spongeCard');
+        cy.contains('.english-text', /^Bath sponge$/).parents('.flashcard').as('spongeCard');
         cy.get('@spongeCard').click();
 
         cy.get('@spongeCard').find('.romanization').within(() => {
