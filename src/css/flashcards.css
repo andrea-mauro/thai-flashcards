@@ -109,23 +109,30 @@
     position: absolute;
     top: 15px;
     right: 15px;
-    background: #27ae60;
-    color: white;
+    background: none;
     border: none;
     width: 35px;
     height: 35px;
-    border-radius: 50%;
-    cursor: pointer;
-    transition: all 0.3s ease;
     display: flex;
     align-items: center;
     justify-content: center;
+    cursor: pointer;
+    transition: all 0.3s ease;
     z-index: 10;
 }
 
+.audio-btn svg {
+    stroke: #bdc3c7;
+    transition: stroke 0.3s ease;
+}
+
 .audio-btn:hover {
-    background: #219a52;
     transform: scale(1.1);
+}
+
+.audio-btn:hover svg,
+.audio-btn.playing svg {
+    stroke: #27ae60;
 }
 
 .audio-btn.playing {
@@ -136,11 +143,10 @@
     position: absolute;
     top: 15px;
     left: 15px;
-    background: #ecf0f1;
+    background: none;
     color: #bdc3c7;
     width: 35px;
     height: 35px;
-    border-radius: 50%;
     display: flex;
     align-items: center;
     justify-content: center;
@@ -152,11 +158,11 @@
 
 .mastered-btn:hover {
     transform: scale(1.1);
+    color: #27ae60;
 }
 
 .mastered-btn.active {
-    background: #27ae60;
-    color: white;
+    color: #27ae60;
 }
 
 .flashcard.mastered .flashcard-front {
