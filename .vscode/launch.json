@@ -29,7 +29,10 @@
             "name": "🏃 Serve App",
             "type": "node",
             "request": "launch",
-            "preLaunchTask": "Serve App Locally",
+            "preLaunchTask": "Build",
+            "runtimeExecutable": "${workspaceFolder}/node_modules/.bin/vite",
+            "runtimeArgs": ["--port", "5173", "--strictPort"],
+            "console": "integratedTerminal"
         }
     ]
 }
