@@ -79,15 +79,26 @@ function saveMasteredCards() {
     localStorage.setItem('thai_flashcards_mastered', JSON.stringify([...masteredCards]));
 }
 
-function toggleMastered(id: string, e: MouseEvent) {
-    e.stopPropagation();
-    if (masteredCards.has(id)) {
-        masteredCards.delete(id);
-    } else {
+function toggleMastered(id: string, el: HTMLElement) {
+    const nowMastered = !masteredCards.has(id);
+    if (nowMastered) {
         masteredCards.add(id);
+    } else {
+        masteredCards.delete(id);
     }
     saveMasteredCards();
-    filterCards();
+
+    el.classList.toggle('mastered', nowMastered);
+    el.querySelectorAll('.mastered-btn').forEach(btn => {
+        btn.classList.toggle('active', nowMastered);
+        btn.setAttribute('title', nowMastered ? 'Unmark as mastered' : 'Mark as mastered');
+    });
+
+    if (hideMastered) {
+        el.style.display = nowMastered ? 'none' : '';
+    }
+
+    updateStats();
 }
 
 function resetProgress() {
@@ -220,13 +231,15 @@ function renderFlashcards() {
             </div>
         `;
 
+        flashcard.querySelectorAll('.mastered-btn').forEach(btn => {
+            btn.addEventListener('click', (e) => {
+                e.stopPropagation();
+                toggleMastered(card.id, flashcard);
+            });
+        });
+
         flashcard.addEventListener('click', (e) => {
             const target = e.target as HTMLElement;
-            if (target.closest('.mastered-btn')) {
-                toggleMastered(card.id, e);
-                return;
-            }
-
             if (!target.closest('.audio-btn')) {
                 flashcard.classList.toggle('flipped');
             }
