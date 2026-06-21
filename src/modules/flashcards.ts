@@ -160,9 +160,6 @@ function setupEventListeners() {
         });
     }
 
-    const shuffleBtn = document.getElementById('shuffleBtn');
-    if (shuffleBtn) shuffleBtn.addEventListener('click', shuffleCards);
-
     const resetBtn = document.getElementById('resetProgressBtn');
     if (resetBtn) resetBtn.addEventListener('click', resetProgress);
 
@@ -184,19 +181,13 @@ function filterCards() {
         cards = cards.filter(card => !masteredCards.has(card.id));
     }
 
+    for (let i = cards.length - 1; i > 0; i--) {
+        const j = Math.floor(Math.random() * (i + 1));
+        [cards[i], cards[j]] = [cards[j], cards[i]];
+    }
     currentCards = cards;
     renderFlashcards();
     updateStats();
-}
-
-function shuffleCards() {
-    for (let i = currentCards.length - 1; i > 0; i--) {
-        const j = Math.floor(Math.random() * (i + 1));
-        [currentCards[i], currentCards[j]] = [currentCards[j], currentCards[i]];
-    }
-    renderFlashcards();
-    updateStats();
-    showToast('Cards shuffled!');
 }
 
 function renderFlashcards() {

@@ -245,15 +245,6 @@
     50% { transform: scale(1.15); }
 }
 
-.shuffle-btn {
-    background: #f39c12;
-    border-color: #f39c12;
-}
-
-.shuffle-btn:hover {
-    color: white;
-}
-
 @media (max-width: 768px) {
     .flashcard-container {
         grid-template-columns: 1fr;
