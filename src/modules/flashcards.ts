@@ -218,7 +218,6 @@ function renderFlashcards() {
                         <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round" class="lucide lucide-check"><path d="M20 6 9 17l-5-5"/></svg>
                     </button>
                     <div class="english-text" style="font-size: 1.3rem;">${card.english}</div>
-                    <div style="color: #7f8c8d; font-size: 0.9rem; margin-top: 15px;">Click to reveal Thai</div>
                 </div>
                 <div class="flashcard-back">
                     <button class="mastered-btn ${isMastered ? 'active' : ''}" title="${tooltip}">
